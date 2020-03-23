@@ -12,9 +12,9 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="m-auto">
-          <b-nav-item to='#' style="font-size: 18pt;" class="mx-4">Home</b-nav-item>
-          <b-nav-item to='#' style="font-size: 18pt;" class="mx-4">Products</b-nav-item>
-          <b-nav-item to='#' style="font-size: 18pt;" class="ml-4">About</b-nav-item>
+          <b-nav-item to='#' style="font-size: 15pt;" class="mx-4">Home</b-nav-item>
+          <b-nav-item to='#' style="font-size: 15pt;" class="mx-4">Products</b-nav-item>
+          <b-nav-item to='#' style="font-size: 15pt;" class="ml-4">About</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -75,7 +75,7 @@ export default {
   border-radius: 1.6rem;
   border: 3px solid #8BE2BC;
   transition: .5 all ease-in;
-  font-size: 14pt;
+  font-size: 12pt;
 }
 
 .login {
@@ -85,7 +85,7 @@ export default {
   padding: 8px 24px;
   border: none;
   transition: .5 all ease-in;
-  font-size: 14pt;
+  font-size: 12pt;
 }
 
 .login:hover {

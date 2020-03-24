@@ -9,9 +9,9 @@
           <p class="hero-text">
             Go Deep through Our Website and Find Everything you are Looking For! <br />
           </p> 
-          <button class="shop-now">
+          <b-button class="shop-now">
             <i class="fas fa-shopping-cart" /><span class="ml-3">Shop Now</span>
-          </button>
+          </b-button>
         </div>
       </b-col>
       <b-col lg="7" md="6">
@@ -71,13 +71,22 @@ export default {
 }
 
 .shop-now {
+  color: #000;
   margin: 20px 0px;
   font-size: 20pt;
   word-spacing: 1px;
   padding: 4px 26px !important;
   border: 3px solid #000;
   border-radius: 1.6rem;
+  transition: .5 all ease-in;
   background-color: #fff;
+}
+
+.shop-now:hover {
+  color: black;
+  background-color: #8be2bc;
+  border: 3px solid #8be3bc;
+  outline: none;
 }
 
 .div-img {

@@ -12,8 +12,8 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="m-auto">
-          <b-nav-item to='#' style="font-size: 15pt;" class="mx-4">Home</b-nav-item>
-          <b-nav-item to='#' style="font-size: 15pt;" class="mx-4">Products</b-nav-item>
+          <b-nav-item to='/' style="font-size: 15pt;" class="mx-4">Home</b-nav-item>
+          <b-nav-item to='/products' style="font-size: 15pt;" class="mx-4">Products</b-nav-item>
           <b-nav-item to='#' style="font-size: 15pt;" class="ml-4">About</b-nav-item>
         </b-navbar-nav>
 

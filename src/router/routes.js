@@ -1,5 +1,6 @@
 import Home from '@/pages/Home';
 import Products from '@/pages/Products';
+import Product from '@/pages/Product';
 
 const routes = [
   {
@@ -10,8 +11,20 @@ const routes = [
   {
     path: '/products',
     name: 'Products',
-    component: Products
+    component: Products,
+    children: [
+      {
+        path: ':category',
+        name: 'Category',
+        component: Products
+      }
+    ]
   },
+  {
+    path: '/p/:id',
+    name: 'Product',
+    component: Product
+  }
 ]
 
 export default routes;

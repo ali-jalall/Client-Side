@@ -12,9 +12,9 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="m-auto">
-          <b-nav-item to='/' style="font-size: 15pt;" class="mx-4">Home</b-nav-item>
-          <b-nav-item to='/products' style="font-size: 15pt;" class="mx-4">Products</b-nav-item>
-          <b-nav-item to='#' style="font-size: 15pt;" class="ml-4">About</b-nav-item>
+          <b-nav-item to='/' style="font-size: 14pt;" class="mx-4">Home</b-nav-item>
+          <b-nav-item to='/products' style="font-size: 14pt;" class="mx-4">Products</b-nav-item>
+          <b-nav-item to='#' style="font-size: 14pt;" class="ml-4">About</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-// import '../assets/img/bg29'
 export default {
   name: "NavBar"
 };
@@ -67,6 +66,19 @@ export default {
   color: black
 }
 
+.btn-secondary {
+  color: black !important;
+  border: none;
+  background-color: #8be2bc !important;
+  box-shadow: none !important;
+}
+
+.btn-secondary:hover {
+  color: black !important;
+  border: none;
+  background-color: #85d6b3 !important;
+  box-shadow: none !important;
+}
 
 .signup {
   background-color: #fff;

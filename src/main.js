@@ -10,7 +10,6 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 // import NavBar from './components/NavBar'
 // import Footer from './components/Footer'
-import '../globalComponents'
 
 Vue.use(BootstrapVue)
 // Vue.use($)

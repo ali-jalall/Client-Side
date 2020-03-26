@@ -32,7 +32,7 @@
 </template>
 
 <script>
-// import NavBar from "@/components/NavBar";
+import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 
 const API_GET = "http://localhost:3000/products";

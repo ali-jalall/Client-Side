@@ -89,7 +89,7 @@
 </template>
 
 <script>
-// import NavBar from "@/components/NavBar";
+import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 // const faker = require("faker");
 // const API_POST = "http://localhost:3000/products/add";

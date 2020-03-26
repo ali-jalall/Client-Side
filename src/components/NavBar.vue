@@ -31,9 +31,11 @@
 
           <b-button
             class="signup mx-2"
+            to="/signup"
             >Signup</b-button
           >
           <b-button
+            to="/login"
             class="login mx-2"
             >Login</b-button
           >
@@ -72,13 +74,6 @@ export default {
   background-color: #8be2bc !important;
   box-shadow: none !important;
 }
-
-/* .btn-secondary:hover {
-  color: black !important;
-  border: none;
-  background-color: #85d6b3 !important;
-  box-shadow: none !important;
-} */
 
 .signup {
   background-color: #fff !important;

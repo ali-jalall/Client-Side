@@ -12,9 +12,9 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="m-auto">
-          <b-nav-item to='/' style="font-size: 14pt;" class="mx-4">Home</b-nav-item>
-          <b-nav-item to='/products' style="font-size: 14pt;" class="mx-4">Products</b-nav-item>
-          <b-nav-item to='#' style="font-size: 14pt;" class="ml-4">About</b-nav-item>
+          <b-nav-item to='/' style="font-size: 15pt;" class="mx-4">Home</b-nav-item>
+          <b-nav-item to='/products' style="font-size: 15pt;" class="mx-4">Products</b-nav-item>
+          <b-nav-item to='#' style="font-size: 15pt;" class="ml-4">About</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -73,21 +73,23 @@ export default {
   box-shadow: none !important;
 }
 
-.btn-secondary:hover {
+/* .btn-secondary:hover {
   color: black !important;
   border: none;
   background-color: #85d6b3 !important;
   box-shadow: none !important;
-}
+} */
 
 .signup {
-  background-color: #fff;
+  background-color: #fff !important;
   color: black;
   padding: 6px 20px;
   border-radius: 1.6rem;
-  border: 3px solid #8BE2BC;
+  border: 3px solid #8BE2BC !important;
   transition: .5 all ease-in;
   font-size: 12pt;
+  box-shadow: none !important;
+
 }
 
 .login {
@@ -101,13 +103,13 @@ export default {
 }
 
 .login:hover {
-  background-color: #57DFA4;
+  background-color: rgb(94, 197, 152) !important;
   color: black;
 }
 
 .signup:hover {
-  background-color: #8BE2BC;
-  color: black;
-  border: 3px solid #8BE2BC;
+  background-color: #8BE2BC !important;
+  color: black !important;
+  /* border: 3px solid #8BE2BC !important; */
 }
 </style>

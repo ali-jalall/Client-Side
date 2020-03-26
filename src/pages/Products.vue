@@ -89,10 +89,9 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar";
+// import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 // const faker = require("faker");
-const axios = require("axios");
 // const API_POST = "http://localhost:3000/products/add";
 const API_GET = "http://localhost:3000/products";
 
@@ -115,7 +114,7 @@ export default {
     changeCategory(e) {
       if (e.target.text === "All") {
         this.$router.push(`products`);
-        axios
+        this.$http
           .get(API_GET)
           .then(({ data }) => {
             if (!data) {
@@ -130,7 +129,7 @@ export default {
           });
       } else {
         this.$router.push(`products/${e.target.text.toLowerCase()}`);
-        axios
+        this.$http
           .get(`${API_GET}/${e.target.text.toLowerCase()}`)
           .then(({ data }) => {
             if (!data) {
@@ -157,10 +156,14 @@ export default {
 
     //       let obj = { name, price, description, category, product_img };
     // axios.post(API_POST, obj).then(() => {
-    axios.get(API_GET).then(({ data }) => {
-      console.log(data);
-      this.result = data.result;
-    });
+    this.$http
+      .get(API_GET).then(({ data }) => {
+        console.log(data);
+        this.result = data.result;
+      })
+      .catch(err => {
+        console.log(err)
+      })
     // });
     // }
   }

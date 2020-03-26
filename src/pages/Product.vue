@@ -32,9 +32,8 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar";
+// import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import axios from "axios";
 
 const API_GET = "http://localhost:3000/products";
 
@@ -51,7 +50,7 @@ export default {
   },
   mounted() {
     const id = this.$route.params.id;
-    axios
+    this.$http
       .get(`${API_GET}/p/${id}`)
       .then(({ data }) => {
         this.product = data.product;

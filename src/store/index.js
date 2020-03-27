@@ -8,12 +8,15 @@ const debug = process.env.NODE_ENV !== "production";
 
 // Mutations
 const mutations = {
-  [types.ADD_TO_CART] (state, { id }) {
-    const record = state.cart.find(p => p.id === id);
+  [types.ADD_TO_CART] (state, product) {
+    const record = state.cart.find(p => p.id === product.id);
+    console.log(product)
 
     if (!record) {
       state.cart.push({
-        id,
+        id: product.id,
+        name: product.name,
+        price: product.price,
         quantity: 1
       });
     } else {
@@ -52,11 +55,11 @@ const getters = {
   allProducts: state => state.all, 
   getNumberOfProducts: state => (state.all ? state.all.length : 0),
   cartProducts: state => {
-    return state.cart.map(({ id, quantity }) => {
-      const product = state.all.find(p => p.id === id);
+    return state.cart.map(({ name, price, quantity }) => {
+      // const product = state.all.find(p => p.id === id);
       return {
-        name: product.name,
-        price: product.price,
+        name,
+        price,
         quantity
       };
     });
@@ -66,8 +69,11 @@ const getters = {
 // actions
 const actions = {
   addToCart({ commit }, product) {
+    console.log(product)
     commit(types.ADD_TO_CART, {
-      id: product.id
+      id: product.id,
+      name: product.name,
+      price: product.price
     });
   }
 };

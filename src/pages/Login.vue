@@ -76,6 +76,7 @@ export default {
           if ( data.auth ) {
             this.$cookie.set('X-auth', data.token);
             this.$cookie.set('auth', true);
+            this.$cookie.set('Username', data.username);
             this.$router.push('/');
           } else {
             this.errorMessage = 'User Unauthorized';

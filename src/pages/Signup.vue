@@ -72,14 +72,15 @@ export default {
         .post(API_SIGNUP, userData)
         .then(({ data }) => {
           if ( data.errMsg ) {
-            if ( data.errMsg.includes('Must') ) {
-              return this.errorMessage = data.errMsg;
-            } else {
-              return console.log(data);
-            }
+            return data.errMsg.includes('Must')
+            ?
+              this.errorMessage = data.errMsg
+            :
+              console.log(data);
           }
           this.$cookie.set('X-auth', data.token);
           this.$cookie.set('auth', true);
+          this.$cookie.set('Username', data.username);
           this.$router.push('/');
         })
         .catch(err => {

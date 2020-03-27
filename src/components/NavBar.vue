@@ -29,12 +29,24 @@
             >
           </b-nav-form> -->
 
+          <!-- <h5 :show="!!user">{{user}}</h5> -->
+          <div v-if="!!user">
+            <b-link to='/profile'>
+              <i class="fas fa-user" style="font-size: 16pt; margin: 0 5px;" />
+            </b-link> 
+            <b-link @click="logout" class="logout">
+              <i class="fas fa-sign-out-alt ml-4 mr-3" style="font-size: 18pt"/> 
+            </b-link> 
+          </div>
+
           <b-button
+            v-if="!user"
             class="signup mx-2"
             to="/signup"
             >Signup</b-button
           >
           <b-button
+            v-if="!user"
             to="/login"
             class="login mx-2"
             >Login</b-button
@@ -46,7 +58,25 @@
 
 <script>
 export default {
-  name: "NavBar"
+  name: "NavBar",
+  data () {
+    return {
+      user: null
+    }
+  },
+  mounted () {
+    let user = this.$cookie.get('Username')
+    console.log(user)
+    user ? this.user = user : null 
+  },
+  methods: {
+    logout () {
+      this.$cookie.delete('X-auth');  
+      this.$cookie.delete('auth');
+      this.$cookie.delete('Username');
+      this.user = null;
+    }
+  }
 };
 </script>
 
@@ -55,8 +85,16 @@ export default {
   color:black !important
 }
 
-.nav-link:active {
-  color: red;
+a {
+  color: black !important
+}
+
+a:hover {
+  color: rgb(87, 53, 53) !important;
+}
+
+.logout:hover {
+  color: red !important;
 }
 
 .navbar-dark .navbar-nav .nav-link.active {

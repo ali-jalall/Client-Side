@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavBar />
     <div class="p-2">
       <b-card title="Card Title" no-body>
         <b-card-header header-tag="nav" style="background-color: #8be2bc;">
@@ -74,23 +73,24 @@
                     <i class="fas fa-info-circle" />
                     More Info</b-button
                   >
-                  <b-button class="add-to-cart w-100 font" >
-                    <i class="fas fa-cart-plus" />
-                    Add to Cart</b-button
+                  <b-button 
+                    @click="addProduct"
+                    :accesskey="product.id"
+                    class="add-to-cart w-100 font"
                   >
+                    <i class="fas fa-cart-plus" /> Add to Cart
+                  </b-button>
                 </b-card>
             </div>
           </b-col>
         </b-row>
       </b-card>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
+import { mapActions } from "vuex";
 // const faker = require("faker");
 // const API_POST = "http://localhost:3000/products/add";
 const API_GET = "http://localhost:3000/products";
@@ -99,14 +99,21 @@ export default {
   name: "Products",
   data() {
     return {
-      result: []
+      result: [],
+      tab: null
     };
   },
-  components: {
-    NavBar,
-    Footer
-  },
+  components: {},
   methods: {
+    ...mapActions(["addToCart"]),
+    addProduct (e) {
+      this.$http
+        .get(`${API_GET}/p/${e.target.accessKey}`)
+        .then(({ data }) => {
+          // this.$store.commit('ADD_TO_CART', data.product)
+          this.addToCart(data.product)
+        })
+    },
     productDetails(e) {
       this.$router.push({ path: `/p/${e.target.accessKey}` })
     },
@@ -157,7 +164,6 @@ export default {
     // axios.post(API_POST, obj).then(() => {
     this.$http
       .get(API_GET).then(({ data }) => {
-        console.log(data);
         this.result = data.result;
       })
       .catch(err => {

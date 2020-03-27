@@ -38,11 +38,14 @@
       >
         Checkout
       </b-button>
+      <b-button @click="clearState">
+        Clear Store
+      </b-button>
     </p>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
     ...mapGetters({
@@ -56,8 +59,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions([ 'resetState' ]),
     checkout() {
       alert("Pay us $" + this.total);
+    },
+    clearState () {
+      this.resetState()
     }
   }
 };

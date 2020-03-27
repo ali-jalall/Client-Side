@@ -8,6 +8,12 @@ Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== "production";
 
+const getDefaultState = () => {
+  return  {
+    cart: []
+  }
+}
+
 // Mutations
 const mutations = {
   [types.ADD_TO_CART] (state, { id, name, price }) {
@@ -22,13 +28,14 @@ const mutations = {
     } else {
       record.quantity++;
     }
+  },
+  [types.RESET_STATE] (state) {
+    Object.assign(state, getDefaultState())
   }
 };
 
 // initial state
-const state = {
-  cart: []
-};
+const state = getDefaultState()
 
 // getters
 const getters = {
@@ -49,6 +56,9 @@ const getters = {
 const actions = {
   addToCart({ commit }, { id, name, price }) {
     commit(types.ADD_TO_CART, { id, name, price });
+  },
+  resetState({ commit }) {
+    commit(types.RESET_STATE)
   }
 };
 

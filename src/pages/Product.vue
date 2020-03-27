@@ -49,9 +49,8 @@ export default {
     };
   },
   mounted() {
-    const id = this.$route.params.id;
     this.$http
-      .get(`${API_GET}/p/${id}`)
+      .get(`${API_GET}/p/${this.$route.params.id}`)
       .then(({ data }) => {
         this.product = data.product;
       })

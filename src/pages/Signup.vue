@@ -4,45 +4,41 @@
       <h5 class="auth-logo text-center" style="margin: 34px 0;">
         <i class="fa fa-circle text-gray" />
         Beta Vibes
-        <i class="fa fa-circle text-warning" />
+        <i class="fa fa-circle" style="color: #85d6b3" />
       </h5>
       <Widget
         class="widget-auth mx-auto p-5"
-        title="<h2 style='margin: 0 !important;'>Create Your Free Account Now</h2>"
+        title="<h2 class='pb-4 header-font'>Create Your Free Account</h2>"
         custom-header
       >
-        <p class="widget-auth-nfo text-center py-3">
-          
-        </p>
-        <form class="mt" @submit.prevent="signup">
+        <form class=" font" @submit.prevent="signup">
           <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
             {{ errorMessage }}
           </b-alert>
-          <div class="form-group">
+          <div class="form-group text-left pt-4">
+            <label  for="username">Username</label>
             <input
               ref="username"
               class="form-control no-border"
               required
               type="text"
               name="username"
-              placeholder="Username"
             />
           </div>
-          <div class="form-group">
+          <div class="form-group text-left pt-3">
+            <label for="password">Password</label>
             <input
               ref="password"
               class="form-control no-border"
               required
               type="password"
               name="password"
-              placeholder="Password"
             />
           </div>
           <b-button
             type="submit"
-            size="sm"
-            class="auth-btn mb-3"
-            variant="primary"
+            size="md"
+            class="auth-btn mt-4 signup font mb-4"
           >
             Signup
           </b-button>
@@ -67,16 +63,17 @@ export default {
   },
   methods: {
     signup () {
-      const username = this.$refs.username.value;
-      const password = this.$refs.password.value;
-
-      const userData = { username, password }
+      let userData = { 
+        username: this.$refs.username.value,
+        password: this.$refs.password.value,
+      }
 
       this.$http
         .post(API_SIGNUP, userData)
         .then(({ data }) => {
-          data.errMsg 
+          data.errMsg.includes('Must')
           ?
+
           this.errorMessage = data.errMsg 
           :
           console.log(data)
@@ -90,4 +87,46 @@ export default {
 </script>
 
 <style scoped>
+.font {
+  font-family: "Roboto", sans-serif;
+}
+
+.header-font {
+  font-family: "Montserrat", sans-serif;
+}
+
+.signup {
+  background-color: #8be2bc;
+  border: none;
+  color: black;
+  font-size: 14pt;
+}
+
+.btn-secondary:hover {
+  color: black !important;
+  border: none;
+  background-color: #85d6b3 !important;
+  box-shadow: none !important;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: #85d6b3;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+  outline: 0 none;
+}
 </style>

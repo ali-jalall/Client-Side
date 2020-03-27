@@ -108,8 +108,7 @@ export default {
   },
   methods: {
     productDetails(e) {
-      const productId = e.target.accessKey;
-      this.$router.push({ path: `/p/${productId}` })
+      this.$router.push({ path: `/p/${e.target.accessKey}` })
     },
     changeCategory(e) {
       if (e.target.text === "All") {

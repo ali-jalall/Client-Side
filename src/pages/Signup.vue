@@ -15,7 +15,7 @@
           <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
             {{ errorMessage }}
           </b-alert>
-          <div class="form-group text-left pt-4">
+          <div class="form-group text-left pt-3">
             <label  for="username">Username</label>
             <input
               ref="username"
@@ -38,7 +38,7 @@
           <b-button
             type="submit"
             size="md"
-            class="auth-btn mt-4 signup font mb-4"
+            class="auth-btn my-3 signup font"
           >
             Signup
           </b-button>
@@ -71,12 +71,16 @@ export default {
       this.$http
         .post(API_SIGNUP, userData)
         .then(({ data }) => {
-          data.errMsg.includes('Must')
-          ?
-
-          this.errorMessage = data.errMsg 
-          :
-          console.log(data)
+          if ( data.errMsg ) {
+            if ( data.errMsg.includes('Must') ) {
+              return this.errorMessage = data.errMsg;
+            } else {
+              return console.log(data);
+            }
+          }
+          this.$cookie.set('X-auth', data.token);
+          this.$cookie.set('auth', true);
+          this.$router.push('/');
         })
         .catch(err => {
           console.log(err)

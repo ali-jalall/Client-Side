@@ -3,12 +3,18 @@ import Products from '@/pages/Products';
 import Product from '@/pages/Product';
 import Signup from '@/pages/Signup';
 import Login from '@/pages/Login';
+import Cart from '@/components/Cart';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   },
   {
     path: '/signup',

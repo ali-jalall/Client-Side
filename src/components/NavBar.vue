@@ -37,10 +37,15 @@
 
         <!-- <h5 :show="!!user">{{user}}</h5> -->
         <div v-if="!!user">
-          <b-link to="/cart">
-            <span style="font-size: 14pt;" class="mr-2"> {{ itemsInCart }}</span>
+          <b-link v-b-modal.modal-1>
+            <b-modal id="modal-1" title="Shopping Cart" ok-only >
+              <Cart />
+            </b-modal>
+            <span style="font-size: 14pt;" class="mr-2">
+              {{ itemsInCart }}</span
+            >
             <span class="icon">
-              <i class="fa fa-shopping-cart mr-4" style="font-size: 16pt;"/>
+              <i class="fa fa-shopping-cart mr-4" style="font-size: 16pt;" />
             </span>
           </b-link>
           <b-link to="/profile">
@@ -61,15 +66,21 @@
 </template>
 
 <script>
+import Cart from '../components/Cart'
 export default {
   name: "NavBar",
+  components: {
+    Cart
+  },
   data() {
     return {
       user: null
     };
   },
   mounted() {
-    this.$cookie.get("Username") ? (this.user = this.$cookie.get("Username")) : null;
+    this.$cookie.get("Username")
+      ? (this.user = this.$cookie.get("Username"))
+      : null;
   },
   methods: {
     logout() {
@@ -80,9 +91,9 @@ export default {
     }
   },
   computed: {
-    itemsInCart(){
+    itemsInCart() {
       let cart = this.$store.getters.cartProducts;
-      return cart.reduce((accum, item) => accum + item.quantity, 0)
+      return cart.reduce((accum, item) => accum + item.quantity, 0);
     }
   }
 };

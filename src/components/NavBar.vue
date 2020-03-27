@@ -12,13 +12,19 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="m-auto">
-          <b-nav-item to='/' style="font-size: 15pt;" class="mx-4">Home</b-nav-item>
-          <b-nav-item to='/products' style="font-size: 15pt;" class="mx-4">Products</b-nav-item>
-          <b-nav-item to='#' style="font-size: 15pt;" class="ml-4">About</b-nav-item>
+          <b-nav-item to="/" style="font-size: 15pt;" class="mx-4"
+            >Home</b-nav-item
+          >
+          <b-nav-item to="/products" style="font-size: 15pt;" class="mx-4"
+            >Products</b-nav-item
+          >
+          <b-nav-item to="#" style="font-size: 15pt;" class="ml-4"
+            >About</b-nav-item
+          >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-          <!-- <b-nav-form class="mr-5">
+        <!-- <b-nav-form class="mr-5">
             <b-form-input
               size="sm"
               class="mr-sm-2"
@@ -29,28 +35,26 @@
             >
           </b-nav-form> -->
 
-          <!-- <h5 :show="!!user">{{user}}</h5> -->
-          <div v-if="!!user">
-            <b-link to='/profile'>
-              <i class="fas fa-user" style="font-size: 16pt; margin: 0 5px;" />
-            </b-link> 
-            <b-link @click="logout" class="logout">
-              <i class="fas fa-sign-out-alt ml-4 mr-3" style="font-size: 18pt"/> 
-            </b-link> 
-          </div>
+        <!-- <h5 :show="!!user">{{user}}</h5> -->
+        <div v-if="!!user">
+          <b-link to="/cart">
+            <span style="font-size: 14pt;" class="mr-2"> {{ itemsInCart }}</span>
+            <span class="icon">
+              <i class="fa fa-shopping-cart mr-4" style="font-size: 16pt;"/>
+            </span>
+          </b-link>
+          <b-link to="/profile">
+            <i class="fas fa-user" style="font-size: 16pt; margin: 0 5px;" />
+          </b-link>
+          <b-link @click="logout" class="logout">
+            <i class="fas fa-sign-out-alt ml-4 mr-3" style="font-size: 18pt" />
+          </b-link>
+        </div>
 
-          <b-button
-            v-if="!user"
-            class="signup mx-2"
-            to="/signup"
-            >Signup</b-button
-          >
-          <b-button
-            v-if="!user"
-            to="/login"
-            class="login mx-2"
-            >Login</b-button
-          >
+        <b-button v-if="!user" class="signup mx-2" to="/signup"
+          >Signup</b-button
+        >
+        <b-button v-if="!user" to="/login" class="login mx-2">Login</b-button>
       </b-collapse>
     </b-navbar>
   </div>
@@ -59,34 +63,39 @@
 <script>
 export default {
   name: "NavBar",
-  data () {
+  data() {
     return {
       user: null
-    }
+    };
   },
-  mounted () {
-    let user = this.$cookie.get('Username')
-    console.log(user)
-    user ? this.user = user : null 
+  mounted() {
+    this.$cookie.get("Username") ? (this.user = this.$cookie.get("Username")) : null;
   },
   methods: {
-    logout () {
-      this.$cookie.delete('X-auth');  
-      this.$cookie.delete('auth');
-      this.$cookie.delete('Username');
+    logout() {
+      this.$cookie.delete("X-auth");
+      this.$cookie.delete("auth");
+      this.$cookie.delete("Username");
       this.user = null;
+    }
+  },
+  computed: {
+    itemsInCart(){
+      let cart = this.$store.getters.cartProducts;
+      return cart.reduce((accum, item) => accum + item.quantity, 0)
     }
   }
 };
 </script>
 
 <style scoped>
-.navbar-dark .navbar-nav .nav-link{
-  color:black !important
+.navbar-dark .navbar-nav .nav-link {
+  color: black !important;
 }
 
 a {
-  color: black !important
+  color: black !important;
+  text-decoration: none !important;
 }
 
 a:hover {
@@ -98,12 +107,12 @@ a:hover {
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
-    color: red !important;
+  color: red !important;
 }
 
 .navbar-toggler {
-  background-color: #8BE2BC;
-  color: black
+  background-color: #8be2bc;
+  color: black;
 }
 
 .btn-secondary {
@@ -118,20 +127,19 @@ a:hover {
   color: black;
   padding: 6px 20px;
   border-radius: 1.6rem;
-  border: 3px solid #8BE2BC !important;
-  transition: .5 all ease-in;
+  border: 3px solid #8be2bc !important;
+  transition: 0.5 all ease-in;
   font-size: 12pt;
   box-shadow: none !important;
-
 }
 
 .login {
-  background-color: #8BE2BC;
+  background-color: #8be2bc;
   color: black;
   border-radius: 1.6rem;
   padding: 8px 24px;
   border: none;
-  transition: .5 all ease-in;
+  transition: 0.5 all ease-in;
   font-size: 12pt;
 }
 
@@ -141,7 +149,7 @@ a:hover {
 }
 
 .signup:hover {
-  background-color: #8BE2BC !important;
+  background-color: #8be2bc !important;
   color: black !important;
   /* border: 3px solid #8BE2BC !important; */
 }

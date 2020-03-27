@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavBar />
     <div class="mt-2 mb-5 p-2">
       <b-card
         style="position: relative;"
@@ -27,22 +26,16 @@
         >
       </b-card>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
 
 const API_GET = "http://localhost:3000/products";
 
 export default {
   name: "Product",
-  components: {
-    NavBar,
-    Footer
-  },
+  components: {},
   data() {
     return {
       product: {}

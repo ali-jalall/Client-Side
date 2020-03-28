@@ -79,13 +79,13 @@ export default {
   border: 3px solid #000;
   border-radius: 1.6rem;
   transition: .5 all ease-in;
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 .shop-now:hover {
   color: black;
-  background-color: #8be2bc;
-  border: 3px solid #8be3bc;
+  background-color: #8be3bc !important;
+  /* border: 1px solid #8be3bc; */
   outline: none;
 }
 
@@ -102,6 +102,13 @@ export default {
 
 .hero-img {
   width: 700px;
+}
+
+.btn-secondary {
+  color: black !important;
+  border: 3px solid #8be3bc !important;
+  background-color: white !important;
+  box-shadow: none !important;
 }
 
  

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NavBar />
     <div class="mt-2 mb-5 p-2">
       <b-card
         style="position: relative;"
@@ -20,22 +21,30 @@
         <b-card-text class="product-price font">
           <strong>${{ product.price }}</strong>
         </b-card-text>
-        <b-button class="add-to-cart font">
-          <i class="fas fa-cart-plus" />
-          Add to Cart</b-button
+        <b-button
+          @click="addProductToCart"
+          class="add-to-cart font"
         >
+          <i class="fas fa-cart-plus" /> Add to Cart
+        </b-button>
       </b-card>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
-
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
+import { mapActions } from "vuex";
 const API_GET = "http://localhost:3000/products";
 
 export default {
   name: "Product",
-  components: {},
+  components: {
+    NavBar,
+    Footer
+  },
   data() {
     return {
       product: {}
@@ -50,6 +59,21 @@ export default {
       .catch(err => {
         console.error(err);
       });
+  },
+  computed: {
+    currentUser () {
+      return this.$cookie.get('Username') ? true : false
+    }
+  },
+  methods: {
+    ...mapActions([ 'addToCart' ]),
+    addProductToCart () {
+      this.currentUser 
+      ?
+        this.addToCart(this.product)
+      :
+        alert('You need to login')
+    },
   }
 };
 </script>

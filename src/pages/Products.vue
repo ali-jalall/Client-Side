@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NavBar />
     <div class="p-2">
       <b-card title="Card Title" no-body>
         <b-card-header header-tag="nav" style="background-color: #8be2bc;">
@@ -44,52 +45,55 @@
           </b-col>
           <b-col lg="10">
             <div class="pt-3">
-                <b-card
-                  v-for="product in result"
-                  :key="product.id"
-                  :img-src="product.product_img"
-                  img-alt="Image"
-                  img-top
-                  tag="article"
-                  class="mb-4 pb-3 mx-3 main-card"
+              <b-card
+                v-for="product in result"
+                :key="product.id"
+                :img-src="product.product_img"
+                img-alt="Image"
+                img-top
+                tag="article"
+                class="mb-4 pb-3 mx-3 main-card"
+              >
+                <b-card-title class="product-title">
+                  {{ product.name }}
+                </b-card-title>
+                <b-card-text class="product-category font">
+                  {{ product.category }}
+                </b-card-text>
+                <b-card-text class="product-description font">
+                  {{ product.description }}
+                </b-card-text>
+                <b-card-text class="product-price font">
+                  <strong>${{ product.price }}</strong>
+                </b-card-text>
+                <b-button
+                  class="mt-3 product-details font"
+                  @click="productDetails"
+                  :accesskey="product.id"
                 >
-                  <b-card-title class="product-title">
-                    {{ product.name }}
-                  </b-card-title>
-                  <b-card-text class="product-category font">
-                    {{ product.category }}
-                  </b-card-text>
-                  <b-card-text class="product-description font">
-                    {{ product.description }}
-                  </b-card-text>
-                  <b-card-text class="product-price font">
-                    <strong>${{ product.price }}</strong>
-                  </b-card-text>
-                  <b-button
-                    class="mt-3 product-details font"
-                    @click="productDetails"
-                    :accesskey="product.id"
-                  >
-                    <i class="fas fa-info-circle" />
-                    More Info</b-button
-                  >
-                  <b-button 
-                    @click="addProduct"
-                    :accesskey="product.id"
-                    class="add-to-cart w-100 font"
-                  >
-                    <i class="fas fa-cart-plus" /> Add to Cart
-                  </b-button>
-                </b-card>
+                  <i class="fas fa-info-circle" />
+                  More Info</b-button
+                >
+                <b-button
+                  @click="addProductToCart"
+                  :accesskey="product.id"
+                  class="add-to-cart w-100 font"
+                >
+                  <i class="fas fa-cart-plus" /> Add to Cart
+                </b-button>
+              </b-card>
             </div>
           </b-col>
         </b-row>
       </b-card>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 import { mapActions } from "vuex";
 // const faker = require("faker");
 // const API_POST = "http://localhost:3000/products/add";
@@ -103,19 +107,25 @@ export default {
       tab: null
     };
   },
-  components: {},
+  components: {
+    NavBar,
+    Footer
+  },
   methods: {
-    ...mapActions(["addToCart"]),
-    addProduct (e) {
+    ...mapActions([ 'addToCart' ]),
+    addProductToCart(e) {
+      this.currentUser
+      ?
       this.$http
         .get(`${API_GET}/p/${e.target.accessKey}`)
         .then(({ data }) => {
-          // this.$store.commit('ADD_TO_CART', data.product)
-          this.addToCart(data.product)
+          this.addToCart(data.product);
         })
+      :
+      alert('Noooo')
     },
     productDetails(e) {
-      this.$router.push({ path: `/p/${e.target.accessKey}` })
+      this.$router.push({ path: `/p/${e.target.accessKey}` });
     },
     changeCategory(e) {
       if (e.target.text === "All") {
@@ -127,7 +137,6 @@ export default {
               // TODO: Show something to tell user 'There's no products'
               return;
             }
-
             this.result = data.result;
           })
           .catch(err => {
@@ -147,7 +156,7 @@ export default {
           })
           .catch(err => {
             console.error(err);
-          })
+          });
       }
     }
   },
@@ -163,14 +172,20 @@ export default {
     //       let obj = { name, price, description, category, product_img };
     // axios.post(API_POST, obj).then(() => {
     this.$http
-      .get(API_GET).then(({ data }) => {
+      .get(API_GET)
+      .then(({ data }) => {
         this.result = data.result;
       })
       .catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
     // });
     // }
+  },
+  computed: {
+    currentUser () {
+      return this.$cookie.get('Username') ? true : false
+    }
   }
 };
 </script>
@@ -266,5 +281,4 @@ export default {
   margin-top: 6px;
   /* margin-bottom: 8px; */
 }
-
 </style>

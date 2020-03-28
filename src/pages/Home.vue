@@ -1,19 +1,25 @@
 <template>
   <div id="main">
+    <NavBar />
     <Hero />
     <Features />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 export default {
   name: "Home",
   components: {
     Hero,
     Features,
+    NavBar,
+    Footer
   }
 };
 </script>

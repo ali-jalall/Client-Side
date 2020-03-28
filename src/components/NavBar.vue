@@ -36,7 +36,7 @@
           </b-nav-form> -->
 
         <!-- <h5 :show="!!user">{{user}}</h5> -->
-        <div v-if="!!user">
+        <div v-if="!!currentUser">
           <b-link v-b-modal.modal-1>
             <b-modal id="modal-1" title="Shopping Cart" ok-only >
               <Cart />
@@ -56,10 +56,10 @@
           </b-link>
         </div>
 
-        <b-button v-if="!user" class="signup mx-2" to="/signup"
+        <b-button v-if="!currentUser" class="signup mx-2" to="/signup"
           >Signup</b-button
         >
-        <b-button v-if="!user" to="/login" class="login mx-2">Login</b-button>
+        <b-button v-if="!currentUser" to="/login" class="login mx-2">Login</b-button>
       </b-collapse>
     </b-navbar>
   </div>
@@ -74,20 +74,23 @@ export default {
   },
   data() {
     return {
-      user: null
+      currentUser: null
     };
   },
   mounted() {
-    this.$cookie.get("Username")
-      ? (this.user = this.$cookie.get("Username"))
-      : null;
+    let user = this.$cookie.get("Username");
+    user
+    ?
+      (this.currentUser = user)
+    :
+      null;
   },
   methods: {
     logout() {
       this.$cookie.delete("X-auth");
       this.$cookie.delete("auth");
       this.$cookie.delete("Username");
-      this.user = null;
+      this.currentUser = null;
     }
   },
   computed: {

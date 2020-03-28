@@ -112,17 +112,15 @@ export default {
     Footer
   },
   methods: {
-    ...mapActions([ 'addToCart' ]),
+    ...mapActions(["addToCart"]),
     addProductToCart(e) {
       this.currentUser
-      ?
-      this.$http
-        .get(`${API_GET}/p/${e.target.accessKey}`)
-        .then(({ data }) => {
-          this.addToCart(data.product);
-        })
-      :
-      alert('Noooo')
+        ? this.$http
+            .get(`${API_GET}/p/${e.target.accessKey}`)
+            .then(({ data }) => {
+              this.addToCart(data.product);
+            })
+        : alert("Noooo");
     },
     productDetails(e) {
       this.$router.push({ path: `/p/${e.target.accessKey}` });
@@ -161,30 +159,30 @@ export default {
     }
   },
   mounted() {
-    // for (let i = 0; i <= 20; i++) {
-    //     let name = faker.commerce.productName();
-    //     let price = faker.commerce.price();
-    //     let description = faker.lorem.paragraph();
-    //     let category = faker.commerce.productAdjective();
-    //     let product_img = faker.image.imageUrl();
-    //     console.log(product_img)
+    // for (let i = 0; i <= 10; i++) {
+    //   let name = faker.commerce.productName();
+    //   let price = faker.commerce.price();
+    //   let description = faker.lorem.paragraph();
+    //   let category = faker.commerce.productAdjective();
+    //   let product_img = faker.image.imageUrl();
+    //   console.log(product_img);
 
-    //       let obj = { name, price, description, category, product_img };
-    // axios.post(API_POST, obj).then(() => {
-    this.$http
-      .get(API_GET)
-      .then(({ data }) => {
-        this.result = data.result;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    // });
+    //   let obj = { name, price, description, category, product_img };
+    //   this.$http.post(API_POST, obj).then(() => {
+        this.$http
+          .get(API_GET)
+          .then(({ data }) => {
+            this.result = data.result;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    //   });
     // }
   },
   computed: {
-    currentUser () {
-      return this.$cookie.get('Username') ? true : false
+    currentUser() {
+      return this.$cookie.get("Username") ? true : false;
     }
   }
 };

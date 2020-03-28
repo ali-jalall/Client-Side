@@ -1,2 +1,3 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const RESET_STATE = 'RESET_STATE';
+export const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART';

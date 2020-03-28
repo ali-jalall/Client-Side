@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import * as types from "./mutation-types";
 
-
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== "production";
@@ -31,6 +30,10 @@ const mutations = {
   },
   [types.RESET_STATE] (state) {
     Object.assign(state, getDefaultState())
+  },
+  [types.REMOVE_ITEM_FROM_CART] (state, id) {
+    state.cart = state.cart.filter(p => p.id !== Number(id))
+    console.log(state.cart)
   }
 };
 
@@ -41,9 +44,10 @@ const state = getDefaultState()
 const getters = {
   getNumberOfCartProducts: state => (state.cart ? state.cart.length : 0),
   cartProducts: state => {
-    return state.cart.map(({ name, price, quantity }) => {
+    return state.cart.map(({ id, name, price, quantity }) => {
       // const product = state.all.find(p => p.id === id);
       return {
+        id,
         name,
         price,
         quantity
@@ -59,6 +63,9 @@ const actions = {
   },
   resetState({ commit }) {
     commit(types.RESET_STATE)
+  },
+  removeProduct({ commit }, id) {
+    commit(types.REMOVE_ITEM_FROM_CART, id)
   }
 };
 

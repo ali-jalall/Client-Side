@@ -15,7 +15,7 @@
           <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
             {{ errorMessage }}
           </b-alert>
-          <div class="form-group text-left pt-3">
+          <div class="form-group text-left pt-1">
             <label for="username">Username</label>
             <input
               ref="username"
@@ -38,7 +38,7 @@
           <b-button
             type="submit"
             size="md"
-            class="auth-btn my-3 login font "
+            class="auth-btn mt-3 mb-2 login font "
           >
             Login
           </b-button> <br>

@@ -1,6 +1,21 @@
 <template>
   <div>
     <NavBar />
+    <template>
+      <div>
+        <b-modal ref="my-modal" hide-footer>
+          <div class="d-block text-center">
+            <h4 class="py-4">You Need To Login To add To Your Cart</h4>
+          </div>
+          <b-button to="/login" class="mt-3" variant="outline-success" block
+            >Login</b-button
+          >
+          <b-button to="/signup" class="mt-2" variant="outline-warning" block
+            >Signup</b-button
+          >
+        </b-modal>
+      </div>
+    </template>
     <div class="p-2">
       <b-card title="Card Title" no-body>
         <b-card-header header-tag="nav" style="background-color: #8be2bc;">
@@ -120,7 +135,7 @@ export default {
             .then(({ data }) => {
               this.addToCart(data.product);
             })
-        : alert("Noooo");
+        : this.$refs["my-modal"].show();
     },
     productDetails(e) {
       this.$router.push({ path: `/p/${e.target.accessKey}` });
@@ -169,14 +184,14 @@ export default {
 
     //   let obj = { name, price, description, category, product_img };
     //   this.$http.post(API_POST, obj).then(() => {
-        this.$http
-          .get(API_GET)
-          .then(({ data }) => {
-            this.result = data.result;
-          })
-          .catch(err => {
-            console.log(err);
-          });
+    this.$http
+      .get(API_GET)
+      .then(({ data }) => {
+        this.result = data.result;
+      })
+      .catch(err => {
+        console.log(err);
+      });
     //   });
     // }
   },

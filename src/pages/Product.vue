@@ -1,6 +1,21 @@
 <template>
   <div>
     <NavBar />
+    <template>
+      <div>
+        <b-modal ref="my-modal" hide-footer>
+          <div class="d-block text-center">
+            <h4 class="py-4">You Need To Login To add To Your Cart</h4>
+          </div>
+          <b-button to="/login" class="mt-3" variant="outline-success" block
+            >Login</b-button
+          >
+          <b-button to="/signup" class="mt-2" variant="outline-warning" block
+            >Signup</b-button
+          >
+        </b-modal>
+      </div>
+    </template>
     <div class="mt-2 mb-5 p-2">
       <b-card
         style="position: relative;"
@@ -21,10 +36,7 @@
         <b-card-text class="product-price font">
           <strong>${{ product.price }}</strong>
         </b-card-text>
-        <b-button
-          @click="addProductToCart"
-          class="add-to-cart font"
-        >
+        <b-button @click="addProductToCart" class="add-to-cart font">
           <i class="fas fa-cart-plus" /> Add to Cart
         </b-button>
       </b-card>
@@ -61,19 +73,17 @@ export default {
       });
   },
   computed: {
-    currentUser () {
-      return this.$cookie.get('Username') ? true : false
+    currentUser() {
+      return this.$cookie.get("Username") ? true : false;
     }
   },
   methods: {
-    ...mapActions([ 'addToCart' ]),
-    addProductToCart () {
-      this.currentUser 
-      ?
-        this.addToCart(this.product)
-      :
-        alert('You need to login')
-    },
+    ...mapActions(["addToCart"]),
+    addProductToCart() {
+      this.currentUser
+        ? this.addToCart(this.product)
+        : this.$refs["my-modal"].show();
+    }
   }
 };
 </script>
@@ -105,7 +115,7 @@ export default {
 }
 
 .product-price {
-  position:absolute;
+  position: absolute;
   right: 20px;
   font-size: 20pt;
   bottom: 60px;
@@ -125,5 +135,4 @@ export default {
   background-color: #85d6b3 !important;
   box-shadow: none !important;
 }
-
 </style>

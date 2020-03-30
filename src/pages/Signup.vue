@@ -51,7 +51,7 @@
 <script>
 import Widget from '@/components/Widget/Widget';
 
-const API_SIGNUP = 'http://localhost:3000/users/add';
+const API_SIGNUP = 'https://tranquil-everglades-67262.herokuapp.com/users/add';
 
 export default {
   name: "Signup",

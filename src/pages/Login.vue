@@ -51,7 +51,7 @@
 
 <script>
 import Widget from "@/components/Widget/Widget";
-const API_LOGIN = 'http://localhost:3000/users/login';
+const API_LOGIN = 'https://tranquil-everglades-67262.herokuapp.com/users/login';
 
 export default {
   name: "Login",

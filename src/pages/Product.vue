@@ -49,7 +49,7 @@
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { mapActions } from "vuex";
-const API_GET = "http://localhost:3000/products";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/products";
 
 export default {
   name: "Product",

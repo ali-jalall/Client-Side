@@ -56,13 +56,13 @@
 
         <b-row>
           <b-col lg="2">
-            I am left ... Cool
+            UNDER PROCCESS
           </b-col>
           <b-col lg="10">
             <div class="pt-3">
               <b-card
                 v-for="product in result"
-                :key="product.id"
+                :key="product._id"
                 :img-src="product.product_img"
                 img-alt="Image"
                 img-top
@@ -84,14 +84,14 @@
                 <b-button
                   class="mt-3 product-details font"
                   @click="productDetails"
-                  :accesskey="product.id"
+                  :accesskey="product._id"
                 >
                   <i class="fas fa-info-circle" />
                   More Info</b-button
                 >
                 <b-button
                   @click="addProductToCart"
-                  :accesskey="product.id"
+                  :accesskey="product._id"
                   class="add-to-cart w-100 font"
                 >
                   <i class="fas fa-cart-plus" /> Add to Cart
@@ -110,9 +110,8 @@
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { mapActions } from "vuex";
-// const faker = require("faker");
-// const API_POST = "http://localhost:3000/products/add";
-const API_GET = "http://localhost:3000/products";
+// const faker = require("faker");scts/add";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/products";
 
 export default {
   name: "Products",

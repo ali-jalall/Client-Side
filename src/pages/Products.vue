@@ -183,13 +183,14 @@ export default {
     //   let obj = { name, price, description, category, product_img };
     //   this.$http.post(API_POST, obj).then(() => {
       this.$http
-      .get(API_GET)
-      .then(data => {
-        this.result = data.data.result;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        .get(API_GET)
+        .then(data => {
+          console.log('sdfsdsf')
+          this.result = data.data.result;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     //   });
     // }
   },

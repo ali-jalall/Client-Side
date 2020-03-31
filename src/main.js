@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import store from './store/index';
 import router from "./router/index";
-// import Axios from 'axios';
+import Axios from 'axios';
 // import $ from 'jquery'
 import VueCookie from 'vue-cookie'
 import { BootstrapVue } from 'bootstrap-vue';
@@ -15,7 +15,7 @@ Vue.use(BootstrapVue)
 Vue.use(VueCookie)
 // Vue.use($)
 
-// Vue.prototype.$http = Axios;
+Vue.prototype.$http = Axios;
 Vue.config.productionTip = false
 
 new Vue({

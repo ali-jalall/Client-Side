@@ -52,7 +52,7 @@
 <script>
 import Widget from "@/components/Widget/Widget";
 // const API_LOGIN = 'https://tranquil-everglades-67262.herokuapp.com/users/login';
-import axios from 'axios'
+
 
 export default {
   name: "Login",
@@ -68,7 +68,7 @@ export default {
         username: this.$refs.username.value,
         password: this.$refs.password.value
       }
-      axios
+      this.$http
         .post('https://tranquil-everglades-67262.herokuapp.com/users/login', user)
         .then(({ data }) => {
           if ( data.err ) {

@@ -183,9 +183,8 @@ export default {
 
     //   let obj = { name, price, description, category, product_img };
     //   this.$http.post(API_POST, obj).then(() => {
-    // this.$http
-      fetch(API_GET)
-      .then(res => res.json())
+    this.$http
+      .get(API_GET)
       .then(({ data }) => {
         this.result = data.result;
       })

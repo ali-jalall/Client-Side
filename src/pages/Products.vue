@@ -175,8 +175,14 @@ export default {
   mounted () {
     // for (let i = 0; i <= 10; i++) {
     //   let name = faker.commerce.productName();
-
-    this.$http
+    //   let price = faker.commerce.price();
+    //   let description = faker.lorem.paragraph();
+    //   let category = faker.commerce.productAdjective();
+    //   let product_img = faker.image.imageUrl();
+    //   console.log(product_img);
+    //   let obj = { name, price, description, category, product_img };
+    //   this.$http.post(API_POST, obj).then(() => {
+      this.$http
       .get(API_GET)
       .then(data => {
         this.result = data.data.result;
@@ -184,14 +190,6 @@ export default {
       .catch(err => {
         console.log(err);
       });
-    //   let price = faker.commerce.price();
-
-    //   let description = faker.lorem.paragraph();
-    //   let category = faker.commerce.productAdjective();
-    //   let product_img = faker.image.imageUrl();
-    //   console.log(product_img);
-    //   let obj = { name, price, description, category, product_img };
-    //   this.$http.post(API_POST, obj).then(() => {
     //   });
     // }
   },

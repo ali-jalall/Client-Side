@@ -185,8 +185,9 @@ export default {
     //   this.$http.post(API_POST, obj).then(() => {
     this.$http
       .get(API_GET)
-      .then(({ data }) => {
-        this.result = data.result;
+      .then(( data ) => {
+        console.log(data.data.result)
+        this.result = data.data.result;
       })
       .catch(err => {
         console.log(err);

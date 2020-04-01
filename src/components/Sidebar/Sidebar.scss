@@ -5,11 +5,16 @@
   left: 0;
   top: 0;
   bottom: 0;
-  background-color: $sidebar-bg-color;
+  background-color: #002B49;
   color: $sidebar-color;
   overflow-y: auto;
 
   @include scroll-bar($sidebar-scrollbar-bg);
+}
+
+.collapse ul[data-v-15d90710], .collapsing ul[data-v-15d90710] {
+  background: #042338 !important;
+  padding: 1rem;
 }
 
 .logo {

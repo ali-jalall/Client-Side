@@ -1,142 +1,76 @@
 <template>
   <div class="auth-page">
     <b-container>
-      <h5 class="auth-logo text-center" style="margin: 34px 0;">
-        <i class="fa fa-circle text-gray" />
-        Beta Vibes
-        <i class="fa fa-circle" style="color: #85d6b3" />
+      <h5 class="auth-logo">
+        <i class="fa fa-circle text-primary"></i>
+        Sing App
+        <i class="fa fa-circle text-danger"></i>
       </h5>
-      <Widget
-        class="widget-auth mx-auto p-5"
-        title="<h2 class='pb-4 header-font'>Login to Your Account</h2>"
-        custom-header
-      >
-        <form class=" font" @submit.prevent="login">
+      <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>
+        <p class="widget-auth-info">
+            Use your email to sign in.
+        </p>
+        <form class="mt" @submit.prevent="login">
           <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-            {{ errorMessage }}
+            {{errorMessage}}
           </b-alert>
-          <div class="form-group text-left pt-1">
-            <label for="username">Username</label>
-            <input
-              ref="username"
-              class="form-control no-border"
-              required
-              type="text"
-              name="username"
-            />
+          <div class="form-group">
+            <input class="form-control no-border" ref="email" required type="email" name="email" placeholder="Email" />
           </div>
-          <div class="form-group text-left pt-3">
-            <label for="password">Password</label>
-            <input
-              ref="password"
-              class="form-control no-border"
-              required
-              type="password"
-              name="password"
-            />
+          <div class="form-group">
+            <input class="form-control no-border" ref="password" required type="password" name="password" placeholder="Password" />
           </div>
-          <b-button
-            type="submit"
-            size="md"
-            class="auth-btn mt-3 mb-2 login font "
-          >
-            Login
-          </b-button> <br>
-          <b-link to="/signup">don't have an account</b-link>
+          <b-button type="submit" size="sm" class="auth-btn mb-3" variant="primary">Login</b-button>
+          <p class="widget-auth-info">or sign in with</p>
+          <div class="social-buttons">
+            <b-button variant="primary" class="social-button mb-2">
+              <i class="social-icon social-google"></i>
+              <p class="social-text">GOOGLE</p>
+            </b-button>
+            <b-button variant="success" class="social-button">
+              <i class="social-icon social-microsoft"></i>
+              <p class="social-text">MICROSOFT</p>
+            </b-button>
+          </div>
         </form>
+        <p class="widget-auth-info">
+          Don't have an account? Sign up now!
+        </p>
+        <router-link class="d-block text-center" to="login">Create an Account</router-link>
       </Widget>
     </b-container>
+    <footer class="auth-footer">
+      2019 &copy; Sing App Vue Admin Dashboard Template.
+    </footer>
   </div>
 </template>
 
 <script>
-import Widget from "@/components/Widget/Widget";
-// const API_LOGIN = 'https://tranquil-everglades-67262.herokuapp.com/users/login';
-
+import Widget from '@/components/Widget/Widget';
 
 export default {
-  name: "Login",
+  name: 'LoginPage',
   components: { Widget },
   data() {
     return {
-      errorMessage: null
-    }
+      errorMessage: null,
+    };
   },
   methods: {
-    login () {
-      let user = {
-        username: this.$refs.username.value,
-        password: this.$refs.password.value
+    login() {
+      const email = this.$refs.email.value;
+      const password = this.$refs.password.value;
+
+      if (email.length !== 0 && password.length !== 0) {
+        window.localStorage.setItem('authenticated', true);
+        this.$router.push('/app/dashboard');
       }
-      this.$http
-        .post('https://tranquil-everglades-67262.herokuapp.com/users/login', user)
-        .then(({ data }) => {
-          if ( data.err ) {
-            return this.errorMessage = data.err;
-          }
-          if ( data.auth ) {
-            this.$cookie.set('X-auth', data.token);
-            this.$cookie.set('auth', true);
-            this.$cookie.set('Username', data.username);
-            this.$router.push('/');
-          } else {
-            this.errorMessage = 'User Unauthorized';
-          }
-        })
-        .catch(err => {
-          err.message.includes(401)
-          ?
-          this.errorMessage = 'Please Enter Valid Data'
-          :
-          console.log(err)
-        })
+    },
+  },
+  created() {
+    if (window.localStorage.getItem('authenticated') === 'true') {
+      this.$router.push('/app/main/analytics');
     }
-  }
+  },
 };
 </script>
-
-<style scoped>
-.font {
-  font-family: "Roboto", sans-serif;
-}
-
-.header-font {
-  font-family: "Montserrat", sans-serif;
-}
-
-.login {
-  background-color: #8be2bc;
-  border: none;
-  color: black;
-  font-size: 14pt;
-}
-
-.btn-secondary:hover {
-  color: black !important;
-  border: none;
-  background-color: #85d6b3 !important;
-  box-shadow: none !important;
-}
-
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {
-  border-color: #85d6b3;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset,
-    0 0 8px rgba(126, 239, 104, 0.6);
-  outline: 0 none;
-}
-</style>

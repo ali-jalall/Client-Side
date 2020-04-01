@@ -1,6 +1,6 @@
 <template>
   <nav
-    :class="{sidebar: true, sidebarStatic, sidebarOpened}"
+    :class="{ sidebar: true, sidebarStatic, sidebarOpened }"
     @mouseenter="sidebarMouseEnter"
     @mouseleave="sidebarMouseLeave"
   >
@@ -11,114 +11,137 @@
     </header>
     <ul class="nav">
       <NavLink
-        header="Home"
+        :activeItem="activeItem"
+        header="Dashboard"
         link="/app/dashboard"
-        icon-name="flaticon-home"
+        iconName="flaticon-home"
         index="dashboard"
-        is-header
+        isHeader
       />
       <NavLink
-        header="Charts"
-        link="/app/charts"
-        icon-name="flaticon-list"
-        index="charts"
-        is-header
+        :activeItem="activeItem"
+        header="Inventory"
+        link="/app/inventory"
+        iconName="flaticon-folder-19"
+        index="inventory"
+        isHeader
+        :childrenLinks="[
+          { header: 'Add New Product', link: '/app/inventory/addnewproduct' },
+          { header: 'Products List', link: '/app/inventory/productslist' },
+          { header: 'Add New Category', link: '/app/inventory/addcategory' },
+          { header: 'Categories List', link: '/app/inventory/categorieslist' }
+        ]"
       />
       <NavLink
-        header="Probabilities"
-        link="/app/probabilities"
-        icon-name="flaticon-file-2"
-        index="probabilities"
-        is-header
+        :activeItem="activeItem"
+        header="Order Management"
+        link="/app/ordermanagment"
+        iconName="flaticon-list"
+        index="ordermanagment"
+        isHeader
+        :childrenLinks="[
+          { header: 'Add New Order', link: '/app/ordermanagment/addneworder' },
+          { header: 'Orders List', link: '/app/ordermanagment/orderslist' },
+          { header: 'Shipping Page', link: '/app/ordermanagment/shippingpage' },
+        ]"
       />
       <NavLink
-        header="Add New User"
-        link="/app/adduser"
-        icon-name="flaticon-add-1"
-        index="adduser"
-        is-header
+        :activeItem="activeItem"
+        header="Customers"
+        link="/app/customers"
+        iconName="flaticon-users"
+        index="customers"
+        isHeader
+        :childrenLinks="[
+          { header: 'Add New Customer', link: '/app/customers/addnewcustomer' },
+          { header: 'Customers List', link: '/app/customers/customerslist' },
+          { header: 'Customers Group', link: '/app/customers/cutomersgroup' },
+        ]"
       />
       <NavLink
-        header="Download All Data"
-        link="/app/alldata"
-        icon-name="flaticon-download"
-        index="alldata"
-        is-header
+        :activeItem="activeItem"
+        header="Notifications"
+        link="/app/notifications"
+        iconName="flaticon-star"
+        index="notifications"
+        isHeader
       />
-      <!-- <NavLink
-        :active-item="activeItem"
+      <NavLink
+        :activeItem="activeItem"
         header="Components"
         link="/app/components"
-        icon-name="flaticon-network"
+        iconName="flaticon-network"
         index="components"
-        :children-links="[
+        :childrenLinks="[
+          { header: 'Charts', link: '/app/components/charts' },
           { header: 'Icons', link: '/app/components/icons' },
+          { header: 'Maps', link: '/app/components/maps' }
         ]"
-      /> -->
+      />
     </ul>
   </nav>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-import isScreen from '../../core/screenHelper.js';
-import NavLink from './NavLink/NavLink';
+import { mapState, mapActions } from "vuex";
+import isScreen from "../../core/screenHelper.js";
+import NavLink from "./NavLink/NavLink";
 
 export default {
-  name: 'Sidebar',
+  name: "Sidebar",
   components: { NavLink },
   data() {
     return {
       alerts: [
         {
           id: 0,
-          title: 'Sales Report',
+          title: "Sales Report",
           value: 15,
-          footer: 'Calculating x-axis bias... 65%',
-          color: 'info',
+          footer: "Calculating x-axis bias... 65%",
+          color: "info"
         },
         {
           id: 1,
-          title: 'Personal Responsibility',
+          title: "Personal Responsibility",
           value: 20,
-          footer: 'Provide required notes',
-          color: 'danger',
-        },
-      ],
+          footer: "Provide required notes",
+          color: "danger"
+        }
+      ]
     };
   },
   methods: {
-    ...mapActions('layout', ['changeSidebarActive', 'switchSidebar']),
+    ...mapActions("layout", ["changeSidebarActive", "switchSidebar"]),
     setActiveByRoute() {
-      const paths = this.$route.fullPath.split('/');
+      const paths = this.$route.fullPath.split("/");
       paths.pop();
-      this.changeSidebarActive(paths.join('/'));
+      this.changeSidebarActive(paths.join("/"));
     },
     sidebarMouseEnter() {
-      if (!this.sidebarStatic && (isScreen('lg') || isScreen('xl'))) {
+      if (!this.sidebarStatic && (isScreen("lg") || isScreen("xl"))) {
         this.switchSidebar(false);
         this.setActiveByRoute();
       }
     },
     sidebarMouseLeave() {
-      if (!this.sidebarStatic && (isScreen('lg') || isScreen('xl'))) {
+      if (!this.sidebarStatic && (isScreen("lg") || isScreen("xl"))) {
         this.switchSidebar(true);
         this.changeSidebarActive(null);
       }
-    },
+    }
   },
   created() {
     this.setActiveByRoute();
   },
   computed: {
-    ...mapState('layout', {
+    ...mapState("layout", {
       sidebarStatic: state => state.sidebarStatic,
       sidebarOpened: state => !state.sidebarClose,
-      activeItem: state => state.sidebarActiveElement,
-    }),
-  },
+      activeItem: state => state.sidebarActiveElement
+    })
+  }
 };
 </script>
 
 <!-- Sidebar styles should be scoped -->
-<style src="./Sidebar.scss" lang="scss" scoped/>
+<style src="./Sidebar.scss" lang="scss" scoped />

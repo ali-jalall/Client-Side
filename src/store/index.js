@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import * as types from "./mutation-types";
+import layout from './layout';
 
 Vue.use(Vuex);
 
@@ -71,6 +72,9 @@ const actions = {
 
 // store
 export default new Vuex.Store({
+  modules: {
+    layout,
+  },
   plugins: [createPersistedState()],
   state,
   strict: debug,

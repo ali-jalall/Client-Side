@@ -61,9 +61,11 @@ export default {
       const email = this.$refs.email.value;
       const password = this.$refs.password.value;
 
+      //TODO: send post request to '/login' end point
+
       if (email.length !== 0 && password.length !== 0) {
         window.localStorage.setItem('authenticated', true);
-        this.$router.push('/app/dashboard');
+        // this.$router.push('/app/dashboard');
       }
     },
   },

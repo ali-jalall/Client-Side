@@ -55,9 +55,260 @@
         </b-card-header>
 
         <b-row>
-          <b-col lg="2">
-            UNDER PROCCESS
-          </b-col>
+          <div class="col-md-3">
+                    <div class="collapse-panel">
+                        <div class="card-body">
+                            <div class="card card-refine card-plain">
+                                <h4 class="card-title">
+                                    Refine
+                                    <button class="btn btn-default btn-icon btn-neutral pull-right" rel="tooltip" title="" data-original-title="Reset Filter">
+                                        <i class="arrows-1_refresh-69 now-ui-icons"></i>
+                                    </button>
+                                </h4>
+                           <div class="card-header" role="tab" id="headingOne">
+                             <h6 class="mb-0">
+                               <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                 Price Range
+
+                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
+                               </a>
+                           </h6>
+                           </div>
+
+                           <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                             <div class="card-body">
+                                 <span id="price-left" class="price-left pull-left" data-currency="€">€30</span>
+                                 <span id="price-right" class="price-right pull-right" data-currency="€">€900</span>
+                                 <div class="clearfix"></div>
+                                 <div id="sliderRefine" class="slider slider-refine noUi-target noUi-ltr noUi-horizontal"><div class="noUi-base"><div class="noUi-connects"><div class="noUi-connect" style="transform: translate(0%, 0px) scale(1, 1);"></div></div><div class="noUi-origin" style="transform: translate(-100%, 0px); z-index: 5;"><div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="30.0" aria-valuemax="900.0" aria-valuenow="30.0" aria-valuetext="30.00"><div class="noUi-touch-area"></div></div></div><div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;"><div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="30.0" aria-valuemax="900.0" aria-valuenow="900.0" aria-valuetext="900.00"><div class="noUi-touch-area"></div></div></div></div></div>
+                             </div>
+                           </div>
+                         </div>
+                         <div class="card card-refine card-plain">
+                           <div class="card-header" role="tab" id="headingTwo">
+                             <h6>
+                                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                     Clothing
+
+                                     <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                   </a>
+                               </h6>
+                           </div>
+                           <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                             <div class="card-body">
+
+                                 <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" checked="">
+                                    <span class="form-check-sign"></span>
+                                    Casual Shirts
+                                  </label>
+                                </div>
+
+                                <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input class="form-check-input" type="checkbox">
+                                   <span class="form-check-sign"></span>
+                                   Formal Shirts
+                                 </label>
+                               </div>
+
+                               <div class="form-check">
+                               <label class="form-check-label">
+                                 <input class="form-check-input" type="checkbox" checked="">
+                                 <span class="form-check-sign"></span>
+                                 Jeans
+                               </label>
+                             </div>
+
+                             <div class="form-check">
+                             <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox">
+                               <span class="form-check-sign"></span>
+                               Polos
+                             </label>
+                           </div>
+
+                           <div class="form-check">
+                           <label class="form-check-label">
+                             <input class="form-check-input" type="checkbox" checked="">
+                             <span class="form-check-sign"></span>
+                             Pijamas
+                           </label>
+                         </div>
+
+                         <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-sign"></span>
+                            Shorts
+                          </label>
+                        </div>
+
+                        <div class="form-check">
+                         <label class="form-check-label">
+                           <input class="form-check-input" type="checkbox">
+                           <span class="form-check-sign"></span>
+                           Blazers
+                         </label>
+                       </div>
+                             </div>
+                           </div>
+                         </div>
+                         <div class="card card-refine card-plain">
+                           <div class="card-header" role="tab" id="headingThree">
+                             <h6>
+                               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                 Designer
+
+                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
+                               </a>
+                           </h6>
+                           </div>
+                           <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                             <div class="card-body">
+                               <div class="form-check">
+                                <label class="form-check-label">
+                                  <input class="form-check-input" type="checkbox">
+                                  <span class="form-check-sign"></span>
+                                All
+                                </label>
+                              </div>
+                              <div class="form-check">
+                               <label class="form-check-label">
+                                 <input class="form-check-input" type="checkbox">
+                                 <span class="form-check-sign"></span>
+                                 Polo Ralph Lauren
+                               </label>
+                             </div>
+
+                             <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox">
+                                <span class="form-check-sign"></span>
+                                Wooyoungmi
+                              </label>
+                            </div>
+
+                            <div class="form-check">
+                             <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox">
+                               <span class="form-check-sign"></span>
+                               Alexander McQueen
+                             </label>
+                           </div>
+                           <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox">
+                              <span class="form-check-sign"></span>
+                              Tom Ford
+                            </label>
+                          </div>
+
+                          <div class="form-check">
+                           <label class="form-check-label">
+                             <input class="form-check-input" type="checkbox">
+                             <span class="form-check-sign"></span>
+                             AMI
+                           </label>
+                         </div>
+
+                         <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-sign"></span>
+                            Berena
+                          </label>
+                        </div>
+
+                        <div class="form-check">
+                         <label class="form-check-label">
+                           <input class="form-check-input" type="checkbox">
+                           <span class="form-check-sign"></span>
+                           Thom Sweeney
+                         </label>
+                       </div>
+
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox">
+                          <span class="form-check-sign"></span>
+                          Calvin Klein
+                        </label>
+                      </div>
+
+
+                             </div>
+                           </div>
+                         </div>
+                         <div class="card card-refine card-plain">
+                           <div class="card-header" role="tab" id="headingfour">
+                             <h6>
+                               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+                                 Colour
+
+                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
+                               </a>
+                           </h6>
+                           </div>
+                           <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingfour">
+                             <div class="card-body">
+
+                      <div class="form-check">
+                       <label class="form-check-label">
+                         <input class="form-check-input" type="checkbox">
+                         <span class="form-check-sign"></span>
+                         Black
+                       </label>
+                     </div>
+
+                     <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-sign"></span>
+                        Blue
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                     <label class="form-check-label">
+                       <input class="form-check-input" type="checkbox">
+                       <span class="form-check-sign"></span>
+                       Brown
+                     </label>
+                   </div>
+
+                   <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox">
+                      <span class="form-check-sign"></span>
+                      Gray
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                   <label class="form-check-label">
+                     <input class="form-check-input" type="checkbox">
+                     <span class="form-check-sign"></span>
+                     Green
+                   </label>
+                 </div>
+
+                 <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox">
+                    <span class="form-check-sign"></span>
+                    Purple
+                  </label>
+                </div>
+
+
+                             </div>
+                           </div>
+                         </div>
+                        </div>
+                    </div>
+                </div>
           <b-col lg="10">
             <div class="pt-3">
               <b-card
@@ -255,7 +506,7 @@ export default {
 
 .main-card {
   max-width: 20rem;
-  max-height: 32.5rem;
+  max-height: 33.5rem;
   float: right;
   text-align: left;
   padding-bottom: 20px;

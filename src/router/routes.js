@@ -1,4 +1,4 @@
-// import Home from "@/pages/Home";
+import Home from "@/pages/Home";
 import Products from "@/pages/Products";
 import Product from "@/pages/Product";
 import Signup from "@/pages/Signup";
@@ -29,7 +29,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Layout
+    component: Home
   },
   {
     path: "/cart",

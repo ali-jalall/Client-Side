@@ -6,7 +6,7 @@
   >
     <header class="logo">
       <router-link to="/app">
-        <span class="text-warning">Motus</span> App
+        <span class="text-warning">Motu</span> App
       </router-link>
     </header>
     <ul class="nav">

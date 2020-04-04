@@ -16,30 +16,217 @@
         </b-modal>
       </div>
     </template>
-    <div class="mt-2 mb-5 p-2">
-      <b-card
-        style="position: relative;"
-        :img-src="product.product_img"
-        img-alt="Card image"
-        img-left
-        class="mb-3"
-      >
-        <b-card-title class="product-title">
-          {{ product.name }}
-        </b-card-title>
-        <b-card-text class="product-category font">
-          {{ product.category }}
-        </b-card-text>
-        <b-card-text class="product-description font">
-          {{ product.description }}
-        </b-card-text>
-        <b-card-text class="product-price font">
-          <strong>${{ product.price }}</strong>
-        </b-card-text>
-        <b-button @click="addProductToCart" class="add-to-cart font">
-          <i class="fas fa-cart-plus" /> Add to Cart
-        </b-button>
-      </b-card>
+    <div class="wrapper">
+      <div class="page-header page-header-mini">
+        <div
+          class="page-header-image product-header"
+          data-parallax="true"
+        ></div>
+      </div>
+
+      <div class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5">
+              <div
+                id="productCarousel"
+                class="carousel slide"
+                data-ride="carousel"
+                data-interval="8000"
+              >
+                <ol class="carousel-indicators">
+                  <li
+                    data-target="#productCarousel"
+                    data-slide-to="0"
+                    class=""
+                  ></li>
+                  <li
+                    data-target="#productCarousel"
+                    data-slide-to="1"
+                    class=""
+                  ></li>
+                  <li
+                    data-target="#productCarousel"
+                    data-slide-to="2"
+                    class="active"
+                  ></li>
+                  <li data-target="#productCarousel" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item">
+                    <img
+                      class="d-block img-raised"
+                      :src="product.product_img"
+                      alt="First slide"
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      class="d-block img-raised"
+                      src="../assets/img/pp-2.jpg"
+                      alt="Second slide"
+                    />
+                  </div>
+                  <div class="carousel-item active">
+                    <img
+                      class="d-block img-raised"
+                      src="../assets/img/pp-3.jpg"
+                      alt="Third slide"
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      class="d-block img-raised"
+                      src="../assets/img/pp-4.jpg"
+                      alt="Third slide"
+                    />
+                  </div>
+                </div>
+                <a
+                  class="carousel-control-prev"
+                  href="#productCarousel"
+                  role="button"
+                  data-slide="prev"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-icon btn-round btn-sm"
+                    name="button"
+                  >
+                    <i class="now-ui-icons arrows-1_minimal-left"></i>
+                  </button>
+                </a>
+                <a
+                  class="carousel-control-next"
+                  href="#productCarousel"
+                  role="button"
+                  data-slide="next"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-icon btn-round btn-sm"
+                    name="button"
+                  >
+                    <i class="now-ui-icons arrows-1_minimal-right"></i>
+                  </button>
+                </a>
+              </div>
+
+              <p class="blockquote blockquote-primary">
+                "And thank you for turning my personal jean jacket into a
+                couture piece. Wear yours with mirrored sunglasses on
+                vacation."<br /><br />
+                <small>Kanye West</small>
+              </p>
+            </div>
+            <div class="col-md-6 ml-auto mr-auto">
+              <h2 class="title">{{ product.name }}</h2>
+              <h5 class="category">{{ product.category }}</h5>
+              <h2 class="main-price">$ {{ product.price }}</h2>
+
+              <div
+                id="accordion"
+                role="tablist"
+                aria-multiselectable="true"
+                class="card-collapse"
+              >
+                <div class="card card-plain">
+                  <div class="card-header" role="tab" id="headingOne">
+                    <a
+                      data-toggle="collapse"
+                      data-parent="#accordion"
+                      href="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                    >
+                      Description
+                      <i class="now-ui-icons arrows-1_minimal-down"></i>
+                    </a>
+                  </div>
+
+                  <div
+                    id="collapseOne"
+                    class="collapse show"
+                    role="tabpanel"
+                    aria-labelledby="headingOne"
+                  >
+                    <div class="card-body">
+                      <p>
+                        {{ product.description }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card card-plain">
+                  <div class="card-header" role="tab" id="headingTwo">
+                    <a
+                      class="collapsed"
+                      data-toggle="collapse"
+                      data-parent="#accordion"
+                      href="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo"
+                    >
+                      Designer Information
+
+                      <i class="now-ui-icons arrows-1_minimal-down"></i>
+                    </a>
+                  </div>
+                  <div
+                    id="collapseTwo"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="headingTwo"
+                  >
+                    <div class="card-body">
+                      <p>
+                        Sample Text if you want to put in case you wanna show
+                        something.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card card-plain">
+                  <div class="card-header" role="tab" id="headingThree">
+                    <a
+                      class="collapsed"
+                      data-toggle="collapse"
+                      data-parent="#accordion"
+                      href="#collapseThree"
+                      aria-expanded="false"
+                      aria-controls="collapseThree"
+                    >
+                      Details and Care
+
+                      <i class="now-ui-icons arrows-1_minimal-down"></i>
+                    </a>
+                  </div>
+                  <div
+                    id="collapseThree"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="headingThree"
+                  >
+                    <div class="card-body">
+                      <ul>
+                        Sample Text if you want to put in case you wanna show
+                        something.
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="row justify-content-end">
+                  <button @click="addProductToCart" class="btn btn-primary mr-3">
+                    Add to Cart &nbsp;<i
+                      class="now-ui-icons shopping_cart-simple"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <Footer />
   </div>
@@ -89,50 +276,16 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Montserrat:600&display=swap");
-
-.card-img-left {
-  width: 30vw !important;
-  height: 70vh !important;
-}
-
-.font {
-  font-family: "Roboto", sans-serif;
-  word-spacing: 0;
-}
-
-.product-title {
-  font-family: "Montserrat", sans-serif;
-}
-
-.add-to-cart {
-  margin: 10px;
+.page-header:after,
+.page-header:before {
+  background-image: url("../assets/img/pp-cov.jpg");
   position: absolute;
-  padding: 10px 0;
-  width: 67.7%;
-  right: 0;
-  bottom: 0;
-}
-
-.product-price {
   position: absolute;
-  right: 20px;
-  font-size: 20pt;
-  bottom: 60px;
-  margin-top: 23px;
-}
-
-.btn-secondary {
-  color: black !important;
-  border: none;
-  background-color: #8be2bc !important;
-  box-shadow: none !important;
-}
-
-.btn-secondary:hover {
-  color: black !important;
-  border: none;
-  background-color: #85d6b3 !important;
-  box-shadow: none !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 </style>

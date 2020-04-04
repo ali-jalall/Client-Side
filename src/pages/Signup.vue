@@ -1,137 +1,233 @@
 <template>
-  <div class="auth-page">
-    <b-container>
-      <h5 class="auth-logo text-center" style="margin: 34px 0;">
-        <i class="fa fa-circle text-gray" />
-        Beta Vibes
-        <i class="fa fa-circle" style="color: #85d6b3" />
-      </h5>
-      <Widget
-        class="widget-auth mx-auto p-5"
-        title="<h2 class='pb-4 header-font'>Create Your Free Account</h2>"
-        custom-header
-      >
-        <form class=" font" @submit.prevent="signup">
-          <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-            {{ errorMessage }}
-          </b-alert>
-          <div class="form-group text-left pt-3">
-            <label  for="username">Username</label>
-            <input
-              ref="username"
-              class="form-control no-border"
-              required
-              type="text"
-              name="username"
-            />
+  <div class="signup-page sidebar-collapse">
+    <div class="page-header header-filter" filter-color="black">
+      <div
+        class="page-header-image main-img"
+      ></div>
+      <div class="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 ml-auto mr-auto">
+              <div class="info info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="now-ui-icons media-2_sound-wave"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Marketing</h5>
+                  <p class="description">
+                    We've created the marketing campaign of the website. It was
+                    a very interesting collaboration.
+                  </p>
+                </div>
+              </div>
+
+              <div class="info info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="now-ui-icons media-1_button-pause"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Fully Coded in HTML5</h5>
+                  <p class="description">
+                    We've developed the website with HTML5 and CSS3. The client
+                    has access to the code using GitHub.
+                  </p>
+                </div>
+              </div>
+
+              <div class="info info-horizontal">
+                <div class="icon icon-info">
+                  <i class="now-ui-icons users_single-02"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Built Audience</h5>
+                  <p class="description">
+                    There is also a Fully Customizable CMS Admin Dashboard for
+                    this product.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mr-auto">
+              <div class="card card-signup">
+                <div class="card-body">
+                  <h4 class="card-title text-center">Register</h4>
+                  <div class="social text-center">
+                    <button class="btn btn-icon btn-round btn-twitter">
+                      <i class="fab fa-twitter"></i>
+                    </button>
+                    <button class="btn btn-icon btn-round btn-dribbble">
+                      <i class="fab fa-dribbble"></i>
+                    </button>
+                    <button class="btn btn-icon btn-round btn-facebook">
+                      <i class="fab fa-facebook"> </i>
+                    </button>
+                    <h5 class="card-description">or be classical</h5>
+                  </div>
+
+                  <form class="form" method="" action="#">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="now-ui-icons users_circle-08"></i
+                        ></span>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="First Name..."
+                        autocomplete="fullname"
+                      />
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="now-ui-icons text_caps-small"></i
+                        ></span>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Last Name..."
+                        autocomplete="name"
+                      />
+                    </div>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="now-ui-icons ui-1_email-85"></i
+                        ></span>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Your Email..."
+                        autocomplete="email"
+                      />
+                    </div>
+
+                    <!-- If you want to add a checkbox to this form, uncomment this code -->
+
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" />
+                        <span class="form-check-sign"></span>
+                        I agree to the terms and
+                        <a href="#something">conditions</a>.
+                      </label>
+                    </div>
+
+                    <div class="card-footer text-center">
+                      <a href="#pablo" class="btn btn-primary btn-round btn-lg"
+                        >Get Started</a
+                      >
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group text-left pt-3">
-            <label for="password">Password</label>
-            <input
-              ref="password"
-              class="form-control no-border"
-              required
-              type="password"
-              name="password"
-            />
+        </div>
+      </div>
+      <footer class="footer">
+        <div class=" container ">
+          <nav>
+            <ul>
+              <li>
+                <a href="https://www.creative-tim.com/">
+                  Creative Tim
+                </a>
+              </li>
+              <li>
+                <a href="http://presentation.creative-tim.com/">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="http://blog.creative-tim.com/">
+                  Blog
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright" id="copyright">
+            ©
+            Ali Jalal
+            2020, Designed by
+            <a href="https://www.invisionapp.com/" target="_blank">Invision</a>.
+            Coded by
+            <a href="https://www.creative-tim.com/" target="_blank"
+              >Creative Tim</a
+            >.
           </div>
-          <b-button
-            type="submit"
-            size="md"
-            class="auth-btn my-3 signup font"
-          >
-            Signup
-          </b-button>
-        </form>
-      </Widget>
-    </b-container>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
 <script>
-import Widget from '@/components/Widget/Widget';
+// import Widget from "@/components/Widget/Widget";
 
-const API_SIGNUP = 'https://tranquil-everglades-67262.herokuapp.com/users/add';
+const API_SIGNUP = "https://tranquil-everglades-67262.herokuapp.com/users/add";
 
 export default {
   name: "Signup",
-  components: { Widget },
+  components: {},
   data() {
     return {
       errorMessage: null
-    }
+    };
   },
   methods: {
-    signup () {
-      let userData = { 
+    signup() {
+      let userData = {
         username: this.$refs.username.value,
-        password: this.$refs.password.value,
-      }
+        password: this.$refs.password.value
+      };
 
       this.$http
         .post(API_SIGNUP, userData)
         .then(({ data }) => {
-          if ( data.errMsg ) {
-            return data.errMsg.includes('Must')
-            ?
-              this.errorMessage = data.errMsg
-            :
-              console.log(data);
+          if (data.errMsg) {
+            return data.errMsg.includes("Must")
+              ? (this.errorMessage = data.errMsg)
+              : console.log(data);
           }
-          this.$cookie.set('X-auth', data.token);
-          this.$cookie.set('auth', true);
-          this.$cookie.set('Username', data.username);
-          this.$router.push('/');
+          this.$cookie.set("X-auth", data.token);
+          this.$cookie.set("auth", true);
+          this.$cookie.set("Username", data.username);
+          this.$router.push("/");
         })
         .catch(err => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     }
   }
 };
 </script>
 
 <style scoped>
-.font {
-  font-family: "Roboto", sans-serif;
+.main-img {
+  background-image:url('../assets/img/bg18.jpg')
 }
 
-.header-font {
-  font-family: "Montserrat", sans-serif;
+.page-header .page-header-image {
+    position: absolute;
+    background-size: cover;
+    background-position: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
-.signup {
-  background-color: #8be2bc;
-  border: none;
-  color: black;
-  font-size: 14pt;
+.content {
+  background: transparent;
 }
 
-.btn-secondary:hover {
-  color: black !important;
-  border: none;
-  background-color: #85d6b3 !important;
-  box-shadow: none !important;
-}
-
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {   
-  border-color: #85d6b3;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
-  outline: 0 none;
+.page-header>.content {
+    margin-top: 2%;
+    text-align: center;
+    margin-bottom: -90px;
 }
 </style>

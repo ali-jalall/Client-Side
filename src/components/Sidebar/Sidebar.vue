@@ -58,26 +58,6 @@
           { header: 'Customers Group', link: '/app/customers/cutomersgroup' },
         ]"
       />
-      <NavLink
-        :activeItem="activeItem"
-        header="Notifications"
-        link="/app/notifications"
-        iconName="flaticon-star"
-        index="notifications"
-        isHeader
-      />
-      <NavLink
-        :activeItem="activeItem"
-        header="Components"
-        link="/app/components"
-        iconName="flaticon-network"
-        index="components"
-        :childrenLinks="[
-          { header: 'Charts', link: '/app/components/charts' },
-          { header: 'Icons', link: '/app/components/icons' },
-          { header: 'Maps', link: '/app/components/maps' }
-        ]"
-      />
     </ul>
   </nav>
 </template>

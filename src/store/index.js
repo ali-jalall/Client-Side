@@ -6,7 +6,7 @@ import layout from './layout';
 
 Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== "production";
+// const debug = process.env.NODE_ENV !== "production";
 
 const getDefaultState = () => {
   return  {
@@ -77,7 +77,7 @@ export default new Vuex.Store({
   },
   plugins: [createPersistedState()],
   state,
-  strict: debug,
+  strict: false,
   getters,
   actions,
   mutations

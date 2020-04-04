@@ -4,21 +4,18 @@ import Product from "@/pages/Product";
 import Signup from "@/pages/Signup";
 import Login from "@/pages/Login";
 import Cart from "@/components/Cart";
-import Layout from '../components/Layout/Layout'
+import Layout from '@/components/Layout/Layout'
+import Contact from '@/pages/Contact';
+import About from '@/pages/About';
 
 import TypographyPage from '@/pages/Typography/Typography';
 
 // Tables
 import TablesBasicPage from '@/pages/Tables/Basic';
 
-// Maps
-// import GoogleMapPage from '@/pages/Maps/Google';
-
 // Main
 import AnalyticsPage from '@/pages/Dashboard/Dashboard';
 
-// Charts
-// import ChartsPage from '@/pages/Charts/Charts';
 
 // Ui
 import IconsPage from '@/pages/Icons/Icons';
@@ -40,6 +37,22 @@ const routes = [
     path: "/signup",
     name: "Signup",
     component: Signup,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/contact",
+    name: "Contact Us",
+    component: Contact,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/about",
+    name: "About Us",
+    component: About,
     meta: {
       guest: true
     }
@@ -84,7 +97,7 @@ const routes = [
       },
       {
         path: 'inventory',
-        name: 'AnalyticsPage',
+        name: 'Inventory',
         children: [
           {
             path: 'addnewproduct',

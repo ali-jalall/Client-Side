@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="ecommerce-page sidebar-collapse">
     <router-view></router-view>
   </div>
 </template>
@@ -10,5 +10,5 @@ export default {
 };
 </script>
 
-<style src="./styles/theme.scss" lang="scss">
+<style src='./styles/theme.scss' lang="scss">
 </style>

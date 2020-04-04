@@ -3,23 +3,32 @@
     <NavBar />
     <Hero />
     <Features />
+    <Project />
+    <Sales />
+    <Subscribe />
     <Footer />
   </div>
 </template>
 
 <script>
+import NavBar from "@/components/NavBar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
-import NavBar from "@/components/NavBar";
+import Project from "@/components/Project";
+import Sales from "@/components/Sales";
+import Subscribe from "@/components/Subscribe";
 import Footer from "@/components/Footer";
 
 export default {
   name: "Home",
   components: {
+    NavBar,
     Hero,
     Features,
-    NavBar,
-    Footer
+    Project,
+    Sales,
+    Subscribe,
+    Footer,
   }
 };
 </script>

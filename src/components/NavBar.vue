@@ -1,76 +1,86 @@
 <template>
-  <div>
-    <b-navbar class="py-3" toggleable="lg" type="dark">
-      <b-navbar-brand href="#">
-        <div class="text-center" style="word-spacing: 1000px;">
-          <strong style="font-size: 20pt" class="text-dark">BETA</strong><br />
-          <em style="color: grey">Vibes</em>
-        </div>
-      </b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="m-auto">
-          <b-nav-item to="/" style="font-size: 15pt;" class="mx-4"
-            >Home</b-nav-item
-          >
-          <b-nav-item to="/products" style="font-size: 15pt;" class="mx-4"
-            >Products</b-nav-item
-          >
-          <b-nav-item to="#" style="font-size: 15pt;" class="ml-4"
-            >About</b-nav-item
-          >
-        </b-navbar-nav>
-
-        <!-- Right aligned nav items -->
-        <!-- <b-nav-form class="mr-5">
-            <b-form-input
-              size="sm"
-              class="mr-sm-2"
-              placeholder="Search"
-            ></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit"
-              >Search</b-button
-            >
-          </b-nav-form> -->
-
-        <!-- <h5 :show="!!user">{{user}}</h5> -->
-        <div v-if="!!currentUser">
-          <b-link v-b-modal.modal-1>
-            <b-modal id="modal-1" title="Shopping Cart" ok-only >
-              <Cart />
-            </b-modal>
-            <span style="font-size: 14pt;" class="mr-2">
-              {{ itemsInCart }}</span
-            >
-            <span class="icon">
-              <i class="fa fa-shopping-cart mr-4" style="font-size: 16pt;" />
-            </span>
-          </b-link>
-          <b-link to="/profile">
-            <i class="fas fa-user" style="font-size: 16pt; margin: 0 5px;" />
-          </b-link>
-          <b-link @click="logout" class="logout">
-            <i class="fas fa-sign-out-alt ml-4 mr-3" style="font-size: 18pt" />
-          </b-link>
-        </div>
-
-        <b-button v-if="!currentUser" class="signup mx-2" to="/signup"
-          >Signup</b-button
+  <nav
+    class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent"
+    color-on-scroll="500"
+  >
+    <div class="container">
+      <div class="navbar-translate">
+        <a
+          class="navbar-brand"
+          href="../index.html"
+          rel="tooltip"
+          title=""
+          data-placement="bottom"
+          target="_blank"
+          data-original-title="Designed by Invision. Coded by Creative Tim"
         >
-        <b-button v-if="!currentUser" to="/login" class="login mx-2">Login</b-button>
-      </b-collapse>
-    </b-navbar>
-  </div>
+          Now Ui Kit Pro
+        </a>
+
+        <button
+          class="navbar-toggler toggled"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navigation"
+          aria-controls="navigation-index"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-bar top-bar"></span>
+          <span class="navbar-toggler-bar middle-bar"></span>
+          <span class="navbar-toggler-bar bottom-bar"></span>
+        </button>
+      </div>
+
+      <div
+        class="collapse navbar-collapse show"
+        data-color="orange"
+        style=""
+        data-nav-image="../assets/img/blurred-image-1.jpg"
+      >
+        <ul class="navbar-nav ml-auto" id="ceva">
+          <li class="nav-item m-auto">
+            <b-link class="nav-link nav-links" to="/">
+              <p>Home</p>
+            </b-link>
+          </li>
+          <li class="nav-item m-auto">
+            <b-link class="nav-link nav-links" to="/products">
+              <p>Products</p>
+            </b-link>
+          </li>
+          <li class="nav-item m-auto">
+            <b-link class="nav-link nav-links" to="/about">
+              <p>About Us</p>
+            </b-link>
+          </li>
+          <li class="nav-item m-auto">
+            <b-link class="nav-link nav-links" to="/contact">
+              <p>Contact Us</p>
+            </b-link>
+          </li>
+          <li class="nav-item" v-if="!currentUser">
+            <b-link class="nav-link btn btn-primary" to="/signup">
+              <p>Signup</p>
+            </b-link>
+          </li>
+          <li class="nav-item" v-if="!currentUser">
+            <b-link class="nav-link btn btn-primary" to="/login">
+              <p>Login</p>
+            </b-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
-import Cart from '../components/Cart'
+// import Cart from "../components/Cart";
 export default {
   name: "NavBar",
   components: {
-    Cart
+    // Cart
   },
   data() {
     return {
@@ -79,11 +89,7 @@ export default {
   },
   mounted() {
     let user = this.$cookie.get("Username");
-    user
-    ?
-      (this.currentUser = user)
-    :
-      null;
+    user ? (this.currentUser = user) : null;
   },
   methods: {
     logout() {
@@ -103,68 +109,15 @@ export default {
 </script>
 
 <style scoped>
-.navbar-dark .navbar-nav .nav-link {
+/* .navbar-dark .navbar-nav .nav-link {
   color: black !important;
-}
-
-a {
-  color: black !important;
-  text-decoration: none !important;
-}
-
-a:hover {
-  color: rgb(87, 53, 53) !important;
-}
-
+} */
 .logout:hover {
   color: red !important;
 }
 
-.navbar-dark .navbar-nav .nav-link.active {
-  color: red !important;
-}
-
-.navbar-toggler {
-  background-color: #8be2bc;
-  color: black;
-}
-
-.btn-secondary {
-  color: black !important;
-  border: none;
-  background-color: #8be2bc !important;
-  box-shadow: none !important;
-}
-
-.signup {
-  background-color: #fff !important;
-  color: black;
-  padding: 6px 20px;
-  border-radius: 1.6rem;
-  border: 3px solid #8be2bc !important;
-  transition: 0.5 all ease-in;
-  font-size: 12pt;
-  box-shadow: none !important;
-}
-
-.login {
-  background-color: #8be2bc;
-  color: black;
-  border-radius: 1.6rem;
-  padding: 8px 24px;
-  border: none;
-  transition: 0.5 all ease-in;
-  font-size: 12pt;
-}
-
-.login:hover {
-  background-color: rgb(94, 197, 152) !important;
-  color: black;
-}
-
-.signup:hover {
-  background-color: #8be2bc !important;
-  color: black !important;
-  /* border: 3px solid #8BE2BC !important; */
+.nav-links {
+  margin: 0 10px;
+  font-size: 10pt !important;
 }
 </style>

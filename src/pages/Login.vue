@@ -1,78 +1,158 @@
 <template>
-  <div class="auth-page">
-    <b-container>
-      <h5 class="auth-logo">
-        <i class="fa fa-circle text-primary"></i>
-        Sing App
-        <i class="fa fa-circle text-danger"></i>
-      </h5>
-      <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>
-        <p class="widget-auth-info">
-            Use your email to sign in.
-        </p>
-        <form class="mt" @submit.prevent="login">
-          <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-            {{errorMessage}}
-          </b-alert>
-          <div class="form-group">
-            <input class="form-control no-border" ref="email" required type="email" name="email" placeholder="Email" />
+  <div class="login-page sidebar-collapse">
+    <div class="page-header header-filter" filter-color="orange">
+      <div
+        class="page-header-image background"
+      ></div>
+      <div class="content">
+        <div class="container">
+          <div class="col-md-5 ml-auto mr-auto">
+            <div class="card card-login card-plain">
+              <form class="form" method="" action="#">
+                <div class="card-header text-center">
+                  <div class="logo-container">
+                    <img src="../assets/img/now-logo.png" alt="" />
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="input-group no-border input-lg">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i class="now-ui-icons users_circle-08"></i
+                      ></span>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="First Name..."
+                    />
+                  </div>
+                  <div class="input-group no-border input-lg">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i class="now-ui-icons text_caps-small"></i
+                      ></span>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Last Name..."
+                    />
+                  </div>
+                </div>
+                <div class="card-footer text-center">
+                  <a
+                    href="#pablo"
+                    class="btn btn-primary btn-round btn-lg btn-block"
+                    >Get Started</a
+                  >
+                </div>
+                <div class="pull-left">
+                  <h6>
+                    <b-link to="signup" class="link footer-link">Create Account</b-link>
+                  </h6>
+                </div>
+
+                <div class="pull-right">
+                  <h6>
+                    <a href="#pablo" class="link footer-link">Need Help?</a>
+                  </h6>
+                </div>
+              </form>
+            </div>
           </div>
-          <div class="form-group">
-            <input class="form-control no-border" ref="password" required type="password" name="password" placeholder="Password" />
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class=" container ">
+          <nav>
+            <ul>
+              <li>
+                <a href="https://www.creative-tim.com/">
+                  Creative Tim
+                </a>
+              </li>
+              <li>
+                <a href="http://presentation.creative-tim.com/">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="http://blog.creative-tim.com/">
+                  Blog
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright" id="copyright">
+            ©
+            Ali Jalal
+            2020, Designed by
+            <a href="https://www.invisionapp.com/" target="_blank">Invision</a>.
+            Coded by
+            <a href="https://www.creative-tim.com/" target="_blank"
+              >Creative Tim</a
+            >.
           </div>
-          <b-button type="submit" size="sm" class="auth-btn mb-3" variant="primary">Login</b-button>
-          <p class="widget-auth-info">or sign in with</p>
-          <div class="social-buttons">
-            <b-button variant="primary" class="social-button mb-2">
-              <i class="social-icon social-google"></i>
-              <p class="social-text">GOOGLE</p>
-            </b-button>
-            <b-button variant="success" class="social-button">
-              <i class="social-icon social-microsoft"></i>
-              <p class="social-text">MICROSOFT</p>
-            </b-button>
-          </div>
-        </form>
-        <p class="widget-auth-info">
-          Don't have an account? Sign up now!
-        </p>
-        <router-link class="d-block text-center" to="login">Create an Account</router-link>
-      </Widget>
-    </b-container>
-    <footer class="auth-footer">
-      2019 &copy; Sing App Vue Admin Dashboard Template.
-    </footer>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
 <script>
-import Widget from '@/components/Widget/Widget';
+// import Widget from "@/components/Widget/Widget";
+
+const API_LOGIN = "https://tranquil-everglades-67262.herokuapp.com/users/login";
 
 export default {
-  name: 'LoginPage',
-  components: { Widget },
+  name: "Login",
+  components: {  },
   data() {
     return {
-      errorMessage: null,
+      errorMessage: null
     };
   },
   methods: {
     login() {
-      const email = this.$refs.email.value;
-      const password = this.$refs.password.value;
+      let username = this.$refs.username.value;
+      let password = this.$refs.password.value;
 
-      //TODO: send post request to '/login' end point
-
-      if (email.length !== 0 && password.length !== 0) {
-        window.localStorage.setItem('authenticated', true);
-        // this.$router.push('/app/dashboard');
-      }
-    },
-  },
-  created() {
-    if (window.localStorage.getItem('authenticated') === 'true') {
-      this.$router.push('/app/main/analytics');
+      this.$http
+        .post(API_LOGIN, { username, password })
+        .then(({ data }) => {
+          data.err ? (this.errorMessage = data.err) : console.log(data);
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
-  },
+  }
 };
 </script>
+
+<style scoped>
+.background {
+  background-image: url('../assets/img/login.jpg')
+}
+
+.page-header .page-header-image {
+    position: absolute;
+    background-size: cover;
+    background-position: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.content {
+  background: transparent;
+}
+
+.page-header>.content {
+    margin-top: 10%;
+    text-align: center;
+    margin-bottom: 50px;
+}
+</style>

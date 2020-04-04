@@ -1,357 +1,179 @@
 <template>
-  <div>
+  <div class="main">
     <NavBar />
-    <template>
-      <div>
-        <b-modal ref="my-modal" hide-footer>
-          <div class="d-block text-center">
-            <h4 class="py-4">You Need To Login To add To Your Cart</h4>
-          </div>
-          <b-button to="/login" class="mt-3" variant="outline-success" block
-            >Login</b-button
-          >
-          <b-button to="/signup" class="mt-2" variant="outline-warning" block
-            >Signup</b-button
-          >
-        </b-modal>
-      </div>
-    </template>
-    <div class="p-2">
-      <b-card title="Card Title" no-body>
-        <b-card-header header-tag="nav" style="background-color: #8be2bc;">
-          <b-nav
-            card-header
-            tabs
-            justified
-            class="float-right"
-            style="background-color: #8be2bc"
-          >
-            <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
-            <b-nav-item
-              v-bind:active="tab === 1"
-              v-on:click="tab = 1"
-              @click="changeCategory"
-              to="/products"
-              exact
-              >All</b-nav-item
-            >
-            <b-nav-item
-              v-bind:active="tab === 2"
-              v-on:click="tab = 2"
-              @click="changeCategory"
-              to="/products"
-              exact
-              >Handmade</b-nav-item
-            >
-            <b-nav-item
-              v-bind:active="tab === 3"
-              v-on:click="tab = 3"
-              @click="changeCategory"
-              to="/products"
-              exact
-              >Rustic</b-nav-item
-            >
-          </b-nav>
-        </b-card-header>
-
-        <b-row>
+    <Hero />
+    <div class="section">
+      <div class="container">
+        <h2 class="section-title">Find what you need</h2>
+        <div class="row">
           <div class="col-md-3">
-                    <div class="collapse-panel">
-                        <div class="card-body">
-                            <div class="card card-refine card-plain">
-                                <h4 class="card-title">
-                                    Refine
-                                    <button class="btn btn-default btn-icon btn-neutral pull-right" rel="tooltip" title="" data-original-title="Reset Filter">
-                                        <i class="arrows-1_refresh-69 now-ui-icons"></i>
-                                    </button>
-                                </h4>
-                           <div class="card-header" role="tab" id="headingOne">
-                             <h6 class="mb-0">
-                               <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                 Price Range
+            <div class="collapse-panel">
+              <div class="card-body">
+                <div class="card card-refine card-plain">
+                  <div class="card-header" role="tab" id="headingTwo">
+                    <h6>
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#collapseTwo"
+                        href="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo"
+                      >
+                        Clothing
 
-                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
-                               </a>
-                           </h6>
-                           </div>
-
-                           <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                             <div class="card-body">
-                                 <span id="price-left" class="price-left pull-left" data-currency="€">€30</span>
-                                 <span id="price-right" class="price-right pull-right" data-currency="€">€900</span>
-                                 <div class="clearfix"></div>
-                                 <div id="sliderRefine" class="slider slider-refine noUi-target noUi-ltr noUi-horizontal"><div class="noUi-base"><div class="noUi-connects"><div class="noUi-connect" style="transform: translate(0%, 0px) scale(1, 1);"></div></div><div class="noUi-origin" style="transform: translate(-100%, 0px); z-index: 5;"><div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="30.0" aria-valuemax="900.0" aria-valuenow="30.0" aria-valuetext="30.00"><div class="noUi-touch-area"></div></div></div><div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;"><div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="30.0" aria-valuemax="900.0" aria-valuenow="900.0" aria-valuetext="900.00"><div class="noUi-touch-area"></div></div></div></div></div>
-                             </div>
-                           </div>
-                         </div>
-                         <div class="card card-refine card-plain">
-                           <div class="card-header" role="tab" id="headingTwo">
-                             <h6>
-                                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                     Clothing
-
-                                     <i class="now-ui-icons arrows-1_minimal-down"></i>
-                                   </a>
-                               </h6>
-                           </div>
-                           <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                             <div class="card-body">
-
-                                 <div class="form-check">
-                                  <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" checked="">
-                                    <span class="form-check-sign"></span>
-                                    Casual Shirts
-                                  </label>
-                                </div>
-
-                                <div class="form-check">
-                                 <label class="form-check-label">
-                                   <input class="form-check-input" type="checkbox">
-                                   <span class="form-check-sign"></span>
-                                   Formal Shirts
-                                 </label>
-                               </div>
-
-                               <div class="form-check">
-                               <label class="form-check-label">
-                                 <input class="form-check-input" type="checkbox" checked="">
-                                 <span class="form-check-sign"></span>
-                                 Jeans
-                               </label>
-                             </div>
-
-                             <div class="form-check">
-                             <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox">
-                               <span class="form-check-sign"></span>
-                               Polos
-                             </label>
-                           </div>
-
-                           <div class="form-check">
-                           <label class="form-check-label">
-                             <input class="form-check-input" type="checkbox" checked="">
-                             <span class="form-check-sign"></span>
-                             Pijamas
-                           </label>
-                         </div>
-
-                         <div class="form-check">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox">
-                            <span class="form-check-sign"></span>
-                            Shorts
-                          </label>
-                        </div>
-
-                        <div class="form-check">
-                         <label class="form-check-label">
-                           <input class="form-check-input" type="checkbox">
-                           <span class="form-check-sign"></span>
-                           Blazers
-                         </label>
-                       </div>
-                             </div>
-                           </div>
-                         </div>
-                         <div class="card card-refine card-plain">
-                           <div class="card-header" role="tab" id="headingThree">
-                             <h6>
-                               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                 Designer
-
-                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
-                               </a>
-                           </h6>
-                           </div>
-                           <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                             <div class="card-body">
-                               <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox">
-                                  <span class="form-check-sign"></span>
-                                All
-                                </label>
-                              </div>
-                              <div class="form-check">
-                               <label class="form-check-label">
-                                 <input class="form-check-input" type="checkbox">
-                                 <span class="form-check-sign"></span>
-                                 Polo Ralph Lauren
-                               </label>
-                             </div>
-
-                             <div class="form-check">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox">
-                                <span class="form-check-sign"></span>
-                                Wooyoungmi
-                              </label>
-                            </div>
-
-                            <div class="form-check">
-                             <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox">
-                               <span class="form-check-sign"></span>
-                               Alexander McQueen
-                             </label>
-                           </div>
-                           <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox">
-                              <span class="form-check-sign"></span>
-                              Tom Ford
-                            </label>
-                          </div>
-
-                          <div class="form-check">
-                           <label class="form-check-label">
-                             <input class="form-check-input" type="checkbox">
-                             <span class="form-check-sign"></span>
-                             AMI
-                           </label>
-                         </div>
-
-                         <div class="form-check">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox">
-                            <span class="form-check-sign"></span>
-                            Berena
-                          </label>
-                        </div>
-
-                        <div class="form-check">
-                         <label class="form-check-label">
-                           <input class="form-check-input" type="checkbox">
-                           <span class="form-check-sign"></span>
-                           Thom Sweeney
-                         </label>
-                       </div>
-
-                       <div class="form-check">
+                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                      </a>
+                    </h6>
+                  </div>
+                  <div
+                    id="collapseTwo"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="headingTwo"
+                  >
+                    <div class="card-body">
+                      <div class="form-check">
                         <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            checked=""
+                          />
                           <span class="form-check-sign"></span>
-                          Calvin Klein
+                          Casual Shirts
                         </label>
                       </div>
-
-
-                             </div>
-                           </div>
-                         </div>
-                         <div class="card card-refine card-plain">
-                           <div class="card-header" role="tab" id="headingfour">
-                             <h6>
-                               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-                                 Colour
-
-                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
-                               </a>
-                           </h6>
-                           </div>
-                           <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingfour">
-                             <div class="card-body">
-
-                      <div class="form-check">
-                       <label class="form-check-label">
-                         <input class="form-check-input" type="checkbox">
-                         <span class="form-check-sign"></span>
-                         Black
-                       </label>
-                     </div>
-
-                     <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox">
-                        <span class="form-check-sign"></span>
-                        Blue
-                      </label>
                     </div>
-
-                    <div class="form-check">
-                     <label class="form-check-label">
-                       <input class="form-check-input" type="checkbox">
-                       <span class="form-check-sign"></span>
-                       Brown
-                     </label>
-                   </div>
-
-                   <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox">
-                      <span class="form-check-sign"></span>
-                      Gray
-                    </label>
                   </div>
-
-                  <div class="form-check">
-                   <label class="form-check-label">
-                     <input class="form-check-input" type="checkbox">
-                     <span class="form-check-sign"></span>
-                     Green
-                   </label>
-                 </div>
-
-                 <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox">
-                    <span class="form-check-sign"></span>
-                    Purple
-                  </label>
                 </div>
+                <div class="card card-refine card-plain">
+                  <div class="card-header" role="tab" id="headingThree">
+                    <h6>
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#collapseThree"
+                        href="#collapseThree"
+                        aria-expanded="false"
+                        aria-controls="collapseThree"
+                      >
+                        Designer
 
-
-                             </div>
-                           </div>
-                         </div>
-                        </div>
+                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                      </a>
+                    </h6>
+                  </div>
+                  <div
+                    id="collapseThree"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="headingThree"
+                  >
+                    <div class="card-body">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" />
+                          <span class="form-check-sign"></span>
+                          All
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" />
+                          <span class="form-check-sign"></span>
+                          Polo Ralph Lauren
+                        </label>
+                      </div>
                     </div>
+                  </div>
                 </div>
-          <b-col lg="10">
-            <div class="pt-3">
-              <b-card
-                v-for="product in result"
-                :key="product._id"
-                :img-src="product.product_img"
-                img-alt="Image"
-                img-top
-                tag="article"
-                class="mb-4 pb-3 mx-3 main-card"
-              >
-                <b-card-title class="product-title">
-                  {{ product.name }}
-                </b-card-title>
-                <b-card-text class="product-category font">
-                  {{ product.category }}
-                </b-card-text>
-                <b-card-text class="product-description font">
-                  {{ product.description }}
-                </b-card-text>
-                <b-card-text class="product-price font">
-                  <strong>${{ product.price }}</strong>
-                </b-card-text>
-                <b-button
-                  class="mt-3 product-details font"
-                  @click="productDetails"
-                  :accesskey="product._id"
-                >
-                  <i class="fas fa-info-circle" />
-                  More Info</b-button
-                >
-                <b-button
-                  @click="addProductToCart"
-                  :accesskey="product._id"
-                  class="add-to-cart w-100 font"
-                >
-                  <i class="fas fa-cart-plus" /> Add to Cart
-                </b-button>
-              </b-card>
+                <div class="card card-refine card-plain">
+                  <div class="card-header" role="tab" id="headingfour">
+                    <h6>
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#collapsefour"
+                        href="#collapsefour"
+                        aria-expanded="false"
+                        aria-controls="collapsefour"
+                      >
+                        Colour
+
+                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                      </a>
+                    </h6>
+                  </div>
+                  <div
+                    id="collapsefour"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="headingfour"
+                  >
+                    <div class="card-body">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" />
+                          <span class="form-check-sign"></span>
+                          Black
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </b-col>
-        </b-row>
-      </b-card>
+          </div>
+
+          <div class="col-md-9">
+            <div class="row">
+              <div
+                class="col-lg-4 col-md-6"
+                v-for="product in products"
+                :key="product._id"
+              >
+                <b-link @click="productDetails" :accesskey="product._id">
+                  <div class="card card-product card-plain" :accesskey="product._id">
+                    <div class="card-image" :accesskey="product._id">
+                      <img
+                        :src="product.product_img"
+                        height="250px"
+                        alt="product_image"
+                        :accesskey="product._id"
+                      />
+                    </div>
+                    <div class="card-body" :accesskey="product._id">
+                      <h4 class="card-title product-title" :accesskey="product._id">
+                        {{ product.name }}
+                      </h4>
+                      <p class="card-description product-description" :accesskey="product._id">
+                        {{ product.description }}
+                      </p>
+                      <div class="card-footer" :accesskey="product._id">
+                        <div class="price-container">
+                          <span class="price"> € {{ product.price }} </span>
+                        </div>
+
+                        <button
+                          class="btn btn-danger btn-neutral btn-icon btn-round pull-right"
+                          rel="tooltip"
+                          title=""
+                          data-placement="left"
+                          data-original-title="Remove from wishlist"
+                        >
+                          <i class="now-ui-icons ui-2_favourite-28"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </b-link>
+                <!-- end card -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <Footer />
   </div>
@@ -360,90 +182,155 @@
 <script>
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import { mapActions } from "vuex";
-// const faker = require("faker");scts/add";
 const API_GET = "https://tranquil-everglades-67262.herokuapp.com/products";
-
 export default {
   name: "Products",
   data() {
     return {
-      result: [],
+      products: [],
+      // products: [
+      //   {
+      //     name: "Polo Ralph Lauren",
+      //     description:
+      //       "Impeccably tailored in Italy from lightweight navy wool.",
+      //     price: 300,
+      //     product_img:
+      //       "https://www.festivalclaca.cat/pics/b/2/28615_png-dress.png"
+      //   },
+      //   {
+      //     name: "Tom Ford",
+      //     description: "Immaculate tailoring is TOM FORD's forte",
+      //     price: 879,
+      //     product_img:
+      //       "https://images-na.ssl-images-amazon.com/images/I/71ZQsK4mdJL._AC_UX342_.jpg"
+      //   },
+      //   {
+      //     name: "Wooyoungmi",
+      //     description: "Dark-grey slub wool, pintucked notch lapels.",
+      //     price: 555,
+      //     product_img:
+      //       "data:image/jpeg;base64,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"
+      //   },
+      //   {
+      //     name: "Thom Sweeney",
+      //     description: "It's made from lightweight grey wool woven.",
+      //     price: 680,
+      //     product_img:
+      //       "https://images-na.ssl-images-amazon.com/images/I/51vVr2VJMWL._AC_UX569_.jpg"
+      //   },
+      //   {
+      //     name: "Kingsman",
+      //     description: "Crafted from khaki cotton and fully canvassed.",
+      //     price: 725,
+      //     product_img:
+      //       "https://www.hikoreanfashion.com/100945-thickbox_default/navyblue-100-cotton-mandarin-collar-pocket-long-sleeved-casual-shirts.jpg"
+      //   },
+      //   {
+      //     name: "Boglioli",
+      //     description: "Masterfully crafted in Northern Italy.",
+      //     price: 699,
+      //     product_img: "https://i.dlpng.com/static/png/119243_preview.png"
+      //   },
+      //   {
+      //     name: "Polo Ralph Lauren",
+      //     description:
+      //       "Impeccably tailored in Italy from lightweight navy wool.",
+      //     price: 300,
+      //     product_img:
+      //       "https://i2.wp.com/paristylebd.com/wp-content/uploads/2017/12/Untitled-1-1.jpg?fit=3544%2C3544&ssl=1"
+      //   },
+      //   {
+      //     name: "Polo Ralph Lauren",
+      //     description:
+      //       "Impeccably tailored in Italy from lightweight navy wool.",
+      //     price: 300,
+      //     product_img:
+      //       "https://pngriver.com/wp-content/uploads/2017/11/jents-Dress-Shirts-free-PNG-transparent-background-images-free-download-clipart-pics-C17DS106_GRY_1-1024x1024.png"
+      //   },
+      //   {
+      //     name: "Polo Ralph Lauren",
+      //     description:
+      //       "Impeccably tailored in Italy from lightweight navy wool.",
+      //     price: 300,
+      //     product_img:
+      //       "https://i.dlpng.com/static/png/4671568-red-sweatshirt-png-clip-art-transparent-background-clothes-cloth-png-no-background-920_1014_preview.png"
+      //   }
+      // ],
       tab: null
     };
   },
   components: {
     NavBar,
-    Footer
+    Footer,
+    Hero
   },
   methods: {
     ...mapActions(["addToCart"]),
-    addProductToCart(e) {
-      this.currentUser
-        ? this.$http
-            .get(`${API_GET}/p/${e.target.accessKey}`)
-            .then(({ data }) => {
-              this.addToCart(data.product);
-            })
-        : this.$refs["my-modal"].show();
+    addProductToCart() {
+      /**
+       * Commented to be used when finish developing ...
+       */
+      // this.currentUser
+      //   ? this.$http
+      //       .get(`${API_GET}/p/${e.target.accessKey}`)
+      //       .then(({ data }) => {
+      //         this.addToCart(data.product);
+      //       })
+      //   : this.$refs["my-modal"].show();
     },
     productDetails(e) {
       this.$router.push({ path: `/p/${e.target.accessKey}` });
     },
-    changeCategory(e) {
-      if (e.target.text === "All") {
-        this.$router.push(`products`);
-        this.$http
-          .get(API_GET)
-          .then(({ data }) => {
-            if (!data) {
-              // TODO: Show something to tell user 'There's no products'
-              return;
-            }
-            this.result = data.result;
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      } else {
-        this.$router.push(`products/${e.target.text.toLowerCase()}`);
-        this.$http
-          .get(`${API_GET}/${e.target.text.toLowerCase()}`)
-          .then(({ data }) => {
-            if (!data) {
-              // TODO: Show something to tell user 'There's no products'
-              return;
-            }
-
-            this.result = data.products;
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      }
+    changeCategory() {
+      /**
+       * Commented to be used when finish developing ...
+       */
+      // if (e.target.text === "All") {
+      //   this.$router.push(`products`);
+      //   this.$http
+      //     .get(API_GET)
+      //     .then(({ data }) => {
+      //       if (!data) {
+      //         // TODO: Show something to tell user 'There's no products'
+      //         return;
+      //       }
+      //       this.result = data.result;
+      //     })
+      //     .catch(err => {
+      //       console.error(err);
+      //     });
+      // } else {
+      //   this.$router.push(`products/${e.target.text.toLowerCase()}`);
+      //   this.$http
+      //     .get(`${API_GET}/${e.target.text.toLowerCase()}`)
+      //     .then(({ data }) => {
+      //       if (!data) {
+      //         // TODO: Show something to tell user 'There's no products'
+      //         return;
+      //       }
+      //       this.result = data.products;
+      //     })
+      //     .catch(err => {
+      //       console.error(err);
+      //     });
+      // }
     }
   },
-  mounted () {
-    // for (let i = 0; i <= 10; i++) {
-    //   let name = faker.commerce.productName();
-    //   let price = faker.commerce.price();
-    //   let description = faker.lorem.paragraph();
-    //   let category = faker.commerce.productAdjective();
-    //   let product_img = faker.image.imageUrl();
-    //   console.log(product_img);
-    //   let obj = { name, price, description, category, product_img };
-    //   this.$http.post(API_POST, obj).then(() => {
-      this.$http
-        .get(API_GET)
-        .then(data => {
-          console.log('sdfsdsf')
-          this.result = data.data.result;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    //   });
-    // }
+  mounted() {
+    /**
+     * Commented to be used when finish developing ...
+     */
+    this.$http
+      .get(API_GET)
+      .then(({ data }) => {
+        this.products = data.result;
+        console.log(this.products)
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
   computed: {
     currentUser() {
@@ -454,42 +341,16 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Montserrat:600&display=swap");
-
-.active {
-  background-color: #6ebb9a !important;
-  color: black !important;
-}
-
-.nav-tabs .nav-link {
-  color: #000 !important;
-}
-
-.nav-tabs .nav-link:hover {
-  color: rgb(87, 65, 65) !important;
-}
-
-.card-link {
-  color: #000 !important;
-}
-
-.card-link:hover {
-  color: rgb(70, 54, 54) !important;
-}
-
-.nav-tabs .nav-link {
-  margin-right: 8px;
-  margin-left: 20px;
-  border: 0 !important;
-}
-
-.font {
-  font-family: "Roboto", sans-serif;
-  word-spacing: 0;
+.content {
+  position: absolute;
+  background-size: cover;
+  background-position: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .product-title {
-  font-family: "Montserrat", sans-serif;
   width: 250px;
   white-space: nowrap;
   overflow: hidden;
@@ -503,45 +364,7 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
-
-.main-card {
-  max-width: 20rem;
-  max-height: 33.5rem;
-  float: right;
-  text-align: left;
-  padding-bottom: 20px;
-}
-
-.product-price {
-  float: right;
-  margin-top: 23px;
-}
-
-.product-details {
-  background-color: #8be2bc;
-  border: none;
-  color: black;
-}
-
-.btn-secondary {
-  color: black !important;
-  border: none;
-  background-color: #8be2bc !important;
-  box-shadow: none !important;
-}
-
-.btn-secondary:hover {
-  color: black !important;
-  border: none;
-  background-color: #85d6b3 !important;
-  box-shadow: none !important;
-}
-
-.add-to-cart {
-  background-color: #8be2bc;
-  color: black;
-  border: 0;
-  margin-top: 6px;
-  /* margin-bottom: 8px; */
+.page-header .page-header-image {
+    position: static;
 }
 </style>

@@ -22,6 +22,11 @@ import './assets/js/core/bootstrap.min.js'
 import './assets/js/now-ui-kit.min98f3.js'
 
 
+
+import Widget from './components/Widget/Widget';
+
+
+
 Vue.use(BootstrapVue)
 Vue.use(VueCookie)
 Vue.use(VueTouch)
@@ -31,6 +36,8 @@ Vue.use(Toasted, { duration: 10000 });
 
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false
+Vue.component('Widget', Widget);
+
 
 new Vue({
   render: h => h(App),

@@ -8,14 +8,13 @@
 }
 
 .widget {
-  text-align: center;
-  display: block;
-  position: relative;
-  margin-bottom: $grid-gutter-width;
-  padding: $widget-padding-vertical $widget-padding-horizontal;
-  background: $widget-bg-color;
-  border-radius: $border-radius-sm;
-  box-shadow: $widget-shadow;
+  display: block !important;
+  position: relative !important;
+  margin-bottom: $grid-gutter-width !important;
+  padding: $widget-padding-vertical $widget-padding-horizontal !important;
+  background: $widget-bg-color !important;
+  border-radius: $border-radius-sm !important;
+  box-shadow: var(--widget-shadow) !important;
 
   &.loading {
     min-height: 150px;
@@ -265,7 +264,6 @@
   }
 
   .widget-icon {
-    opacity: 0.5;
     font-size: 42px;
     height: 60px;
     line-height: 45px;

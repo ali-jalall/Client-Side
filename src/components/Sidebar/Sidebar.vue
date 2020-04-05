@@ -40,9 +40,9 @@
         index="ordermanagment"
         isHeader
         :childrenLinks="[
-          { header: 'Add New Order', link: '/app/ordermanagment/addneworder' },
-          { header: 'Orders List', link: '/app/ordermanagment/orderslist' },
-          { header: 'Shipping Page', link: '/app/ordermanagment/shippingpage' },
+          { header: 'Add New Order', link: '/app/ordermanagement/addneworder' },
+          { header: 'Orders List', link: '/app/ordermanagement/orderslist' },
+          { header: 'Shipping Page', link: '/app/ordermanagement/shippingpage' },
         ]"
       />
       <NavLink

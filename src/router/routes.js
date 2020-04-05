@@ -18,10 +18,24 @@ import AnalyticsPage from '@/pages/Dashboard/Dashboard';
 
 
 // Ui
-import IconsPage from '@/pages/Icons/Icons';
+// import IconsPage from '@/pages/Icons/Icons';
 import NotificationsPage from '@/pages/Notifications/Notifications';
 
 
+// Dashboard
+
+// Inventory Section
+import Inventory from '@/pages/Dashboard/Inventory/Inventory';
+import AddProduct from '@/pages/Dashboard/Inventory/components/AddProduct'
+import ProductsList from '../pages/Dashboard/Inventory/components/ProductsList'
+
+
+// Order Management
+import OrderManagement from '../pages/Dashboard/OrderManagement/OrderManagement';
+
+
+// Customers
+import Customers from '../pages/Dashboard/Customers/Customers'
 const routes = [
   {
     path: "/",
@@ -92,22 +106,23 @@ const routes = [
     children: [
       {
         path: 'dashboard',
-        name: 'AnalyticsPage',
+        name: 'Dashboard',
         component: AnalyticsPage,
       },
       {
         path: 'inventory',
         name: 'Inventory',
+        component: Inventory,
         children: [
           {
             path: 'addnewproduct',
-            name: 'Add Product',
-            component: TypographyPage,
+            name: 'AddProduct',
+            component: AddProduct,
           },
           {
             path: 'productslist',
-            name: 'Products List',
-            component: TypographyPage,
+            name: 'ProductsList',
+            component: ProductsList,
           },
           {
             path: 'addcategory',
@@ -122,9 +137,9 @@ const routes = [
         ]
       },
       {
-        path: 'ordermanagment',
+        path: 'ordermanagement',
         name: 'Order Managment',
-        component: TypographyPage,
+        component: OrderManagement,
         children: [
           {
             path: 'addneworder',
@@ -146,7 +161,7 @@ const routes = [
       {
         path: 'customers',
         name: 'Customers Page',
-        component: IconsPage,
+        component: Customers,
         children: [
           {
             path: 'addnewcustomer',

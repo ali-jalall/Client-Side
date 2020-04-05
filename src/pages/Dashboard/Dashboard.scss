@@ -19,3 +19,13 @@
     min-width: 65px;
   }
 }
+
+.widget {
+  display: block !important;
+  position: relative !important;
+  margin-bottom: $grid-gutter-width !important;
+  padding: $widget-padding-vertical $widget-padding-horizontal !important;
+  background: $widget-bg-color !important;
+  border-radius: 1.6rem !important;
+  box-shadow: 0 0 40px #E4E9F3 !important;
+}

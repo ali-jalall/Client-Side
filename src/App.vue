@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="ecommerce-page sidebar-collapse">
+  <div id="app" class="">
     <router-view></router-view>
   </div>
 </template>

@@ -13,33 +13,33 @@
               <th>EMAIL</th>
               <th>PRODUCT</th>
               <th>PRICE</th>
+              <th>SIZE</th>
               <th>DATE</th>
-              <th>CITY</th>
-              <th>STATUS</th>
+              <!-- <th>STATUS</th> -->
             </tr>
           </thead>
           <tbody>
-            <tr v-for="products in products" :key="products._id">
-              <td>{{ products.name }}</td>
-              <!-- <td>{{ products.email }}</td> -->
-              <td>{{ products.category }}</td>
-              <td>{{ products.description }}</td>
-              <td>{{ products.price }}</td>
-              <td>{{ products.city }}</td>
-              <td>
+            <tr v-for="product in products" :key="product._id">
+              <td>{{ product.name }}</td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.details }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.size }}</td>
+              <td>{{ product.createdAt.slice(0, 10) }}</td>
+              <!-- <td>
                 <b-button
                   :variant="
-                    products.status === 'Pending'
+                    product.status === 'Pending'
                       ? 'success'
-                      : products.status === 'Declined'
+                      : product.status === 'Declined'
                       ? 'danger'
                       : 'info'
                   "
                   class="p-1 px-3 btn-xs"
                 >
-                  {{ products.price }}
+                  {{ product.price }}
                 </b-button>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>

@@ -2,7 +2,7 @@
   <div :class="{root: true, chatOpen, sidebarClose, sidebarStatic}">
     <Sidebar />
     <div class="wrap">
-      <!-- <Header /> -->
+      <Header />
       <v-touch
         class="content"
         :swipe-options="{direction: 'horizontal'}"
@@ -25,7 +25,7 @@
 import { mapState, mapActions } from 'vuex';
 
 import Sidebar from '../../components/Sidebar/Sidebar';
-// import Header from '../../components/Header/Header';
+import Header from '../../components/Header/Header';
 // import Timeline from '../../components/Timeline/Timeline';
 
 import './Layout.scss';
@@ -34,7 +34,7 @@ export default {
   name: 'Layout',
   components: {
     Sidebar,
-    // Header,
+    Header,
     // Timeline 
   },
   methods: {

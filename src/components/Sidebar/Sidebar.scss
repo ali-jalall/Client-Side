@@ -1,20 +1,37 @@
 @import '../../styles/app';
 .sidebar {
+  position: fixed;
   width: $sidebar-width-open;
+  height: 100%;
+  background-color: #002B49;
+  color: #C2C2C2;
+  transition: $transition-base;
+}
+
+.sidebar-wrapper[data-v-e540c55a] {
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
-  background-color: #002B49;
-  color: $sidebar-color;
   overflow-y: auto;
+  overflow-x: hidden;
+  width: 224px;
+  -webkit-transition: width .3s ease-in-out,left .3s ease-in-out;
+  transition: width .3s ease-in-out,left .3s ease-in-out;
 
-  @include scroll-bar($sidebar-scrollbar-bg);
+  @include sidebar-scrollbar();
 }
 
-.collapse ul[data-v-15d90710], .collapsing ul[data-v-15d90710] {
-  background: #042338 !important;
-  padding: 1rem;
+.sidebarClose .sidebar-wrapper {
+  width: $sidebar-width-closed;
+
+  @include media-breakpoint-down(sm) {
+    width: 0;
+  }
+}
+
+.sidebarStatic .sidebar-wrapper {
+  width: $sidebar-width-open;
 }
 
 .logo {
@@ -26,15 +43,20 @@
   transition: width $sidebar-transition-time ease-in-out;
 
   a {
-    color: $gray-800;
+    color: #f6f6e9;
     padding: 0 5px;
     text-decoration: none;
     white-space: nowrap;
   }
+
+  .primary-word {
+    color: #f6f6e9;
+    font-weight: $font-weight-normal;
+  }
 }
 
 .sidebarClose .logo {
-  width: 50px;
+  width: $sidebar-width-closed;
 }
 
 .sidebarStatic .logo {
@@ -53,6 +75,8 @@
   margin: 35px 0 5px 11px;
   font-size: $font-size-larger;
   transition: opacity $sidebar-transition-time ease-in-out;
+  color: var(--sidebar-nav-title-color);
+
 
   @media (min-width: breakpoint-min(lg)) {
     opacity: 1;
@@ -109,12 +133,13 @@
 
   li > a {
     font-size: $font-size-mini;
-    color: $sidebar-color;
+    color: #C2C2C2;
     text-decoration: none;
 
     > i {
       font-size: 11px;
       vertical-align: 1px;
+      color: var(--sidebar-item-active);
       transition: margin-left $sidebar-transition-time ease-in-out;
     }
   }
@@ -157,7 +182,7 @@
 }
 
 .sidebarProgress {
-  background: lighten($sidebar-bg-color, 10%);
+  background: var(--sidebar-progress-bg-color);
 }
 
 .groupTitle {

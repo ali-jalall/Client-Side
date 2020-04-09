@@ -8,7 +8,6 @@ import Layout from '@/components/Layout/Layout'
 import Contact from '@/pages/Contact';
 import About from '@/pages/About';
 
-import TypographyPage from '@/pages/Typography/Typography';
 
 // Tables
 import TablesBasicPage from '@/pages/Tables/Basic';
@@ -41,6 +40,10 @@ import Shipping from '../pages/Dashboard/OrderManagement/components/Shipping';
 
 // Customers
 import Customers from '../pages/Dashboard/Customers/Customers'
+import AddCustomer from '../pages/Dashboard/Customers/components/AddCustomers'
+import CustomersList from '../pages/Dashboard/Customers/components/CustomersList'
+import CustomersGroup from '../pages/Dashboard/Customers/components/CustomersGroup'
+
 const routes = [
   {
     path: "/",
@@ -171,17 +174,17 @@ const routes = [
           {
             path: 'addnewcustomer',
             name: 'Add Customer',
-            component: TypographyPage,
+            component: AddCustomer,
           },
           {
             path: 'customerslist',
             name: 'Customers List',
-            component: TypographyPage,
+            component: CustomersList,
           },
           {
             path: 'cutomersgroup',
             name: 'Customers Group',
-            component: TypographyPage,
+            component: CustomersGroup,
           },
         ]
       },

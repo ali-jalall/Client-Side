@@ -53,7 +53,7 @@
 const API_GET = "https://tranquil-everglades-67262.herokuapp.com/categories";
 
 export default {
-  name: "ProductsList",
+  name: "CategoriesList",
   data() {
     return {
       categories: [],

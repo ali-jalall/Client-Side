@@ -34,6 +34,9 @@ import AddCategory from '../pages/Dashboard/Inventory/components/AddCategory'
 
 // Order Management
 import OrderManagement from '../pages/Dashboard/OrderManagement/OrderManagement';
+import AddOrder from '../pages/Dashboard/OrderManagement/components/AddOrder';
+import OrdersList from '../pages/Dashboard/OrderManagement/components/OrdersList';
+import Shipping from '../pages/Dashboard/OrderManagement/components/Shipping';
 
 
 // Customers
@@ -146,17 +149,17 @@ const routes = [
           {
             path: 'addneworder',
             name: 'Add Order',
-            component: TypographyPage,
+            component: AddOrder,
           },
           {
             path: 'orderslist',
             name: 'Orders List',
-            component: TypographyPage,
+            component: OrdersList,
           },
           {
             path: 'shippingpage',
             name: 'Shipping Page',
-            component: TypographyPage,
+            component: Shipping,
           },
         ]
       },

@@ -2,6 +2,7 @@
   <div>
     <h1 class="page-title">Order Management</h1>
     <Stats />
+    <router-view></router-view>
   </div>
 </template>
 

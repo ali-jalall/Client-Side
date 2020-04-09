@@ -5,53 +5,19 @@
       customHeader
     >
       <form class="pt-4">
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Product Name</label>
-            <input type="text" class="form-control" />
+        <div class="row pb-3">
+          <div class="col-md-6">
+            <b-form-file
+              :file-name-formatter="formatNames"
+              multiple
+              v-model="files"
+              :state="Boolean(files[0])"
+              placeholder="Choose a file or drop it here..."
+              drop-placeholder="Drop file here..."
+            ></b-form-file>
+            <br />
           </div>
-          <div class="form-group col-md-6">
-            <label>Price</label>
-            <input type="text" class="form-control" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-8">
-            <label>Details</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="form-group col-md-4">
-            <label>Category</label>
-            <select class="form-control">
-              <option>Home</option>
-              <option>Roof</option>
-              <option>...</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" /> Check me out
-              <span class="form-check-sign">
-                <span class="check"></span>
-              </span>
-            </label>
-          </div>
-        </div>
-        <div class="container">
-          <div class="large-12 medium-12 small-12 cell">
-            <label
-              >Files
-              <input
-                type="file"
-                id="files"
-                ref="files"
-                multiple
-                v-on:change="handleFileUpload()"
-              />
-            </label>
+          <div class="col-md-6">
             <div class="large-12 medium-12 small-12 cell">
               <div v-for="(file, key) in files" :key="key" class="file-listing">
                 {{ file.name }}
@@ -60,14 +26,38 @@
                 >
               </div>
             </div>
-            <br />
-            <button v-on:click="submitFile()">Submit</button>
-            <div class="large-12 medium-12 small-12 cell">
-              <button v-on:click="addFiles()">Add Files</button>
-            </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Product Name</label>
+            <input type="text" v-model="name" class="form-control" />
+          </div>
+          <div class="form-group col-md-6">
+            <label>Price</label>
+            <input type="text" v-model="price" class="form-control" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label>Details</label>
+            <input type="text" v-model="details" class="form-control" />
+          </div>
+          <div class="form-group col-md-4">
+            <label>Category</label>
+            <select class="form-control" v-model="category">
+              <option>Home</option>
+              <option>Roof</option>
+              <option>...</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" v-on:click="submitFile()" class="btn add-product">
+          Add Product
+        </button>
       </form>
     </Widget>
   </div>
@@ -78,42 +68,54 @@ export default {
   name: "AddProduct",
   data() {
     return {
+      name: "",
+      price: 0,
+      category: "",
+      details: "",
       files: [],
     };
   },
   components: {},
   methods: {
-    handleFileUpload() {
-      let uploadedFiles = this.$refs.files.files;
-
-      for (var i = 0; i < uploadedFiles.length; i++) {
-        this.files.push(uploadedFiles[i]);
-      }
-    },
     submitFile() {
       let formData = new FormData();
-      this.files.forEach((file, index) => {
-        formData.append(`files['${index}']`, file);
+      this.files.forEach((file) => {
+        formData.append(`image`, file);
       });
+      formData.append("name", this.name);
+      formData.append("price", this.price);
+      formData.append("details", this.details);
+      formData.append("category", this.category);
       this.$http
-        .post("http://localhost:5000/upload-images", formData, {
+        .post("http://localhost:5000/products/add", formData, {
           header: {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => {
-          console.log("Success");
-          this.files = '';
+        .then((res) => {
+          console.log("Success, ", res);
+          this.resetData();
         })
-        .catch(() => {
-          console.log("Failure");
+        .catch((err) => {
+          console.log("Failure", err);
         });
-    },
-    addFiles() {
-      this.$refs.files.click();
     },
     removeFile(key) {
       this.files.splice(key, 1);
+    },
+    formatNames(files) {
+      if (files.length === 1) {
+        return files[0].name;
+      } else {
+        return `${files.length} files selected`;
+      }
+    },
+    resetData() {
+      this.name = "";
+      this.category = "";
+      this.details = "";
+      this.price = 0;
+      this.files = [];
     },
   },
 };
@@ -138,13 +140,21 @@ input[type="file"] {
   top: -500px;
 }
 
-div.file-listing{
-    width: 200px;
-  }
+div.file-listing {
+  width: 200px;
+}
 
-  span.remove-file{
-    color: red;
-    cursor: pointer;
-    float: right;
-  }
+span.remove-file {
+  color: red;
+  cursor: pointer;
+  float: right;
+}
+
+.add-product {
+  background-color: #002b49;
+}
+
+.add-product:hover {
+  background-color: rgb(1, 31, 53);
+}
 </style>

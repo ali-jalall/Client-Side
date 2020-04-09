@@ -1,0 +1,76 @@
+<template>
+  <div>
+    <Widget
+      title="<h5 class='pt-3'><span class='fw-semi-bold '>Categories</span> List</h5>"
+      bodyClass="widget-table-overflow py-2"
+      customHeader
+    >
+      <div class="table-responsive">
+        <table class="table mb-0 requests-table">
+          <thead>
+            <tr class="text-muted">
+              <th>NAME</th>
+              <th></th>
+              <th>PRODUCTS</th>
+              <th></th>
+              <th>DATE</th>
+              <th></th>
+              <th>ACTIONS</th>
+              <!-- <th>STATUS</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="category in categories" :key="category._id">
+              <td>{{ category.name }}</td>
+              <td></td>
+              <td>{{ category.products.length }}</td>
+              <td></td>
+              <td>{{ category.createdAt.slice(0, 10) }}</td>
+              <td></td>
+
+              <td>
+                <b-button
+                  @click="removeProduct"
+                  variant="danger"
+                  :accesskey="category._id"
+                  class="mr-1 p-1 px-3"
+                >
+                  <i class="fas fa-minus-circle"></i>
+                </b-button>
+                <b-button variant="info" class="p-1 px-3">
+                  <i class="fas fa-edit"></i>
+                </b-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Widget>
+  </div>
+</template>
+
+<script>
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/categories";
+
+export default {
+  name: "ProductsList",
+  data() {
+    return {
+      categories: [],
+    };
+  },
+  methods: {
+    removeProduct(e) {
+      let _id = e.target.accessKey;
+      this.$http.delete(`${API_GET}/p/${_id}`).then(() => {
+        console.log({ deleted: true });
+      });
+    },
+  },
+  mounted() {
+    this.$http.get(API_GET).then(({ data }) => {
+      this.categories = data.categories
+    });
+  },
+};
+</script>

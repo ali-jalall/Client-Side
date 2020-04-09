@@ -28,6 +28,8 @@ import NotificationsPage from '@/pages/Notifications/Notifications';
 import Inventory from '@/pages/Dashboard/Inventory/Inventory';
 import AddProduct from '@/pages/Dashboard/Inventory/components/AddProduct'
 import ProductsList from '../pages/Dashboard/Inventory/components/ProductsList'
+import CategoriesList from '../pages/Dashboard/Inventory/components/CategoriesList'
+import AddCategory from '../pages/Dashboard/Inventory/components/AddCategory'
 
 
 // Order Management
@@ -127,12 +129,12 @@ const routes = [
           {
             path: 'addcategory',
             name: 'Add Category',
-            component: TypographyPage,
+            component: AddCategory,
           },
           {
             path: 'categorieslist',
             name: 'Categories List',
-            component: TypographyPage,
+            component: CategoriesList,
           },
         ]
       },

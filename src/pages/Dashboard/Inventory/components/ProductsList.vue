@@ -9,37 +9,37 @@
         <table class="table mb-0 requests-table">
           <thead>
             <tr class="text-muted">
+              <th>IMAGE</th>
               <th>NAME</th>
-              <th>EMAIL</th>
-              <th>PRODUCT</th>
+              <th>CATEGORY</th>
+              <th>DETAILS</th>
               <th>PRICE</th>
-              <th>SIZE</th>
               <th>DATE</th>
+              <th>ACTIONS</th>
               <!-- <th>STATUS</th> -->
             </tr>
           </thead>
           <tbody>
             <tr v-for="product in products" :key="product._id">
+              <td><img :src="product.product_imgs[0]" alt="product_img" /></td>
               <td>{{ product.name }}</td>
               <td>{{ product.category }}</td>
               <td>{{ product.details }}</td>
-              <td>{{ product.price }}</td>
-              <td>{{ product.size }}</td>
+              <td>$ {{ product.price }}</td>
               <td>{{ product.createdAt.slice(0, 10) }}</td>
-              <!-- <td>
+              <td>
                 <b-button
-                  :variant="
-                    product.status === 'Pending'
-                      ? 'success'
-                      : product.status === 'Declined'
-                      ? 'danger'
-                      : 'info'
-                  "
-                  class="p-1 px-3 btn-xs"
+                  @click="removeProduct"
+                  variant="danger"
+                  :accesskey="product._id"
+                  class="mr-1 p-1 px-3"
                 >
-                  {{ product.price }}
+                  <i class="fas fa-minus-circle"></i>
                 </b-button>
-              </td> -->
+                <b-button variant="info" class="p-1 px-3">
+                  <i class="fas fa-edit"></i>
+                </b-button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -55,15 +55,21 @@ export default {
   name: "ProductsList",
   data() {
     return {
-      products: []
+      products: [],
     };
   },
-  mounted () {
-    this.$http
-      .get(API_GET)
-      .then(({ data }) => {
-        this.products = data.result
-      })
-  }
+  methods: {
+    removeProduct(e) {
+      let _id = e.target.accessKey;
+      this.$http.delete(`${API_GET}/p/${_id}`).then(() => {
+        console.log({ deleted: true })
+      });
+    },
+  },
+  mounted() {
+    this.$http.get(API_GET).then(({ data }) => {
+      this.products = data.result;
+    });
+  },
 };
 </script>

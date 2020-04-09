@@ -1,9 +1,7 @@
 <template>
   <div class="signup-page sidebar-collapse">
     <div class="page-header header-filter" filter-color="black">
-      <div
-        class="page-header-image main-img"
-      ></div>
+      <div class="page-header-image main-img"></div>
       <div class="content">
         <div class="container">
           <div class="row">
@@ -63,8 +61,14 @@
                     </button>
                     <h5 class="card-description">or be classical</h5>
                   </div>
-
-                  <form class="form" method="" action="#">
+                  <b-alert
+                    class="alert-sm"
+                    variant="danger"
+                    :show="!!errorMessage"
+                  >
+                    {{ errorMessage }}
+                  </b-alert>
+                  <form class="form" @submit.prevent="submitForm">
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text"
@@ -72,10 +76,37 @@
                         ></span>
                       </div>
                       <input
+                        v-model="user.username"
                         type="text"
                         class="form-control"
-                        placeholder="First Name..."
-                        autocomplete="fullname"
+                        placeholder="Username..."
+                      />
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="now-ui-icons ui-1_email-85"></i
+                        ></span>
+                      </div>
+                      <input
+                        v-model="user.email"
+                        type="email"
+                        class="form-control"
+                        placeholder="Email..."
+                      />
+                    </div>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="now-ui-icons text_caps-small"></i
+                        ></span>
+                      </div>
+                      <input
+                        v-model="user.password"
+                        type="password"
+                        class="form-control"
+                        placeholder="Password..."
                       />
                     </div>
                     <div class="input-group">
@@ -85,43 +116,31 @@
                         ></span>
                       </div>
                       <input
-                        type="text"
+                        v-model="user.age"
+                        type="number"
                         class="form-control"
-                        placeholder="Last Name..."
-                        autocomplete="name"
+                        placeholder="Age..."
                       />
                     </div>
-
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text"
-                          ><i class="now-ui-icons ui-1_email-85"></i
+                          ><i class="now-ui-icons text_caps-small"></i
                         ></span>
                       </div>
                       <input
-                        type="text"
+                        v-model="user.phonenumber"
+                        type="number"
                         class="form-control"
-                        placeholder="Your Email..."
-                        autocomplete="email"
+                        placeholder="Phone Number..."
                       />
                     </div>
-
-                    <!-- If you want to add a checkbox to this form, uncomment this code -->
-
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" />
-                        <span class="form-check-sign"></span>
-                        I agree to the terms and
-                        <a href="#something">conditions</a>.
-                      </label>
-                    </div>
-
-                    <div class="card-footer text-center">
-                      <a href="#pablo" class="btn btn-primary btn-round btn-lg"
-                        >Get Started</a
-                      >
-                    </div>
+                    <input
+                      class="btn btn-primary"
+                      variant="primary"
+                      type="submit"
+                      value="Signup"
+                    />
                   </form>
                 </div>
               </div>
@@ -129,65 +148,34 @@
           </div>
         </div>
       </div>
-      <footer class="footer">
-        <div class=" container ">
-          <nav>
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com/">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="http://presentation.creative-tim.com/">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com/">
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright" id="copyright">
-            ©
-            Ali Jalal
-            2020, Designed by
-            <a href="https://www.invisionapp.com/" target="_blank">Invision</a>.
-            Coded by
-            <a href="https://www.creative-tim.com/" target="_blank"
-              >Creative Tim</a
-            >.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   </div>
 </template>
 
 <script>
-// import Widget from "@/components/Widget/Widget";
-
+import Footer from "../components/Footer";
 const API_SIGNUP = "https://tranquil-everglades-67262.herokuapp.com/users/add";
 
 export default {
   name: "Signup",
-  components: {},
+  components: { Footer },
   data() {
     return {
-      errorMessage: null
+      errorMessage: null,
+      user: {
+        username: "",
+        email: "",
+        password: "",
+        age: "",
+        phone_number: "",
+      },
     };
   },
   methods: {
-    signup() {
-      let userData = {
-        username: this.$refs.username.value,
-        password: this.$refs.password.value
-      };
-
+    submitForm() {
       this.$http
-        .post(API_SIGNUP, userData)
+        .post(API_SIGNUP, this.user)
         .then(({ data }) => {
           if (data.errMsg) {
             return data.errMsg.includes("Must")
@@ -199,35 +187,35 @@ export default {
           this.$cookie.set("Username", data.username);
           this.$router.push("/");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .main-img {
-  background-image:url('../assets/img/bg18.jpg')
+  background-image: url("../assets/img/bg18.jpg");
 }
 
 .page-header .page-header-image {
-    position: absolute;
-    background-size: cover;
-    background-position: 50%;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+  position: absolute;
+  background-size: cover;
+  background-position: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .content {
   background: transparent;
 }
 
-.page-header>.content {
-    margin-top: 2%;
-    text-align: center;
-    margin-bottom: -90px;
+.page-header > .content {
+  margin-top: 2%;
+  text-align: center;
+  margin-bottom: -90px;
 }
 </style>

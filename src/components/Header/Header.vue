@@ -20,7 +20,7 @@
         </a>
       </b-nav-item>
     </b-nav>
-    <b-nav>
+    <!-- <b-nav>
       <b-form class="d-sm-down-none ml-5" inline>
         <b-form-group>
           <b-input-group class="input-group-no-border">
@@ -31,7 +31,7 @@
           </b-input-group>
         </b-form-group>
       </b-form>
-    </b-nav>
+    </b-nav> -->
     <a  class="navbarBrand d-md-none">
       <i class="fa fa-circle text-primary mr-n-sm" />
       <i class="fa fa-circle text-danger" />
@@ -48,7 +48,7 @@
         right>
         <template slot="button-content">
           <span class="avatar rounded-circle thumb-sm float-left mr-2">
-            <img class="rounded-circle" src="../../assets/people/a5.jpg" alt="..." />
+            <img class="rounded-circle" src="../../assets/people/a4.jpg" alt="..." />
           </span>
           <span class="small">Philip Smith</span>
           <span class="ml-1 circle bg-primary text-white fw-bold">13</span>

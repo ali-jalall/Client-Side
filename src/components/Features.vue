@@ -42,62 +42,6 @@
                           Casual Shirts
                         </label>
                       </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Formal Shirts
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            checked=""
-                          />
-                          <span class="form-check-sign"></span>
-                          Jeans
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Polos
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            checked=""
-                          />
-                          <span class="form-check-sign"></span>
-                          Pijamas
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Shorts
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Blazers
-                        </label>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -139,61 +83,6 @@
                           Polo Ralph Lauren
                         </label>
                       </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Wooyoungmi
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Alexander McQueen
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Tom Ford
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          AMI
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Berena
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Thom Sweeney
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Calvin Klein
-                        </label>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -228,46 +117,6 @@
                           Black
                         </label>
                       </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Blue
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Brown
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Gray
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Green
-                        </label>
-                      </div>
-
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Purple
-                        </label>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -279,7 +128,7 @@
             <div class="row">
               <div
                 class="col-lg-4 col-md-6"
-                v-for="product in products"
+                v-for="product in products.slice(0, 6)"
                 :key="product._id"
               >
                 <b-link @click="productDetails" :accesskey="product._id">
@@ -354,19 +203,19 @@ export default {
   name: "Features",
   data() {
     return {
-      products: []
+      products: [],
     };
   },
   methods: {
     productDetails(e) {
       this.$router.push({ path: `/p/${e.target.accessKey}` });
-    }
+    },
   },
   mounted() {
     this.$http.get(API_GET).then(({ data }) => {
       this.products = data.result;
     });
-  }
+  },
 };
 </script>
 

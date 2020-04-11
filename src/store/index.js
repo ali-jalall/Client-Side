@@ -33,7 +33,7 @@ const mutations = {
     Object.assign(state, getDefaultState())
   },
   [types.REMOVE_ITEM_FROM_CART] (state, id) {
-    state.cart = state.cart.filter(p => p.id !== Number(id))
+    state.cart = state.cart.filter(p => p.id !== id)
     console.log(state.cart)
   }
 };

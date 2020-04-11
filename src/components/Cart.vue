@@ -11,14 +11,15 @@
       <router-link class="ml-3" to="/products">Go shopping</router-link>
     </div>
     <table
-      class="table table-borderless table-striped font"
+      class="table"
       v-show="products.length"
     >
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Price</td>
-          <td>Quantity</td>
+          <td><b>NAME</b></td>
+          <td><b>PRICE</b></td>
+          <td><b>QUANTITY</b></td>
+          <td><b>ACTIONS</b></td>
         </tr>
       </thead>
       <tbody>
@@ -26,18 +27,19 @@
           <td>{{ p.name }}</td>
           <td>${{ p.price }}</td>
           <td>{{ p.quantity }}</td>
-          <b-button
+          <td><b-button
             @click="removeProductById"
             :accessKey="p.id"
-            class="remove-item"
+            class="remove-item "
           >
             <i class="fas fa-trash" />
-          </b-button>
+          </b-button></td>
         </tr>
         <tr>
           <td><b>Total:</b></td>
           <td></td>
-          <td>
+          <td></td>
+          <td class="pl-3">
             <b>${{ total }}</b>
           </td>
         </tr>
@@ -47,11 +49,11 @@
       <b-button
         v-show="products.length"
         class="button is-primary font"
-        @click="checkout"
+        to="/checkout"
       >
         Checkout
       </b-button>
-      <b-button v-show="products.length" class="clear-state font" @click="clearState">
+      <b-button v-show="products.length" class="clear-state font" @click="resetState()">
         Empty Cart
       </b-button>
     </p>
@@ -73,14 +75,8 @@ export default {
   },
   methods: {
     ...mapActions([ 'resetState', 'removeProduct' ]),
-    checkout() {
-      alert("Pay us $" + this.total);
-    },
     removeProductById (e) {
       this.removeProduct(e.target.accessKey)
-    },
-    clearState () {
-      this.resetState()
     }
   }
 };
@@ -127,7 +123,8 @@ td {
 .remove-item {
   background: transparent !important;
   color: rgb(255, 71, 71) !important;
-  margin-top: 6px;
+  padding-top: 14px;
+  font-size: 12pt;
 }
 
 .remove-item:hover {

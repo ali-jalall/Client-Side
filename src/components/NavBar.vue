@@ -31,7 +31,9 @@
           <span class="navbar-toggler-bar bottom-bar"></span>
         </button>
       </div>
-
+      <b-modal id="cartModel" title="Cart Products" ok-only>
+        <Cart />
+      </b-modal>
       <div
         class="collapse navbar-collapse show"
         data-color="orange"
@@ -69,6 +71,22 @@
               <p>Login</p>
             </b-link>
           </li>
+          <li class="nav-item m-auto" v-if="currentUser">
+            <b-link class="nav-link nav-links" @click="showCart">
+              <p>
+                <span style="font-size: 16pt;">{{ itemsInCart }}</span>
+                <i
+                  class="fas fa-shopping-cart"
+                  style="margin: 0 10px; font-size: 18pt;"
+                />
+              </p>
+            </b-link>
+          </li>
+          <li class="nav-item" v-if="currentUser">
+            <b-link class="nav-link btn btn-danger" to="/login">
+              <p>logout</p>
+            </b-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -76,15 +94,15 @@
 </template>
 
 <script>
-// import Cart from "../components/Cart";
+import Cart from "@/components/Cart";
 export default {
   name: "NavBar",
   components: {
-    // Cart
+    Cart,
   },
   data() {
     return {
-      currentUser: null
+      currentUser: null,
     };
   },
   mounted() {
@@ -97,21 +115,21 @@ export default {
       this.$cookie.delete("auth");
       this.$cookie.delete("Username");
       this.currentUser = null;
-    }
+    },
+    showCart() {
+      this.$bvModal.show("cartModel");
+    },
   },
   computed: {
     itemsInCart() {
       let cart = this.$store.getters.cartProducts;
       return cart.reduce((accum, item) => accum + item.quantity, 0);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-/* .navbar-dark .navbar-nav .nav-link {
-  color: black !important;
-} */
 .logout:hover {
   color: red !important;
 }
@@ -119,5 +137,10 @@ export default {
 .nav-links {
   margin: 0 10px;
   font-size: 10pt !important;
+}
+
+.modal-content  {
+  border-bottom: none !important;
+  padding: 16px !important;
 }
 </style>

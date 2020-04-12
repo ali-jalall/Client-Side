@@ -53,7 +53,7 @@
           <span class="small">Philip Smith</span>
           <span class="ml-1 circle bg-primary text-white fw-bold">13</span>
         </template>
-        <Notifications />
+        <!-- <Notifications /> -->
       </b-nav-item-dropdown>
       <b-nav-item-dropdown id="v-step-2" class="settingsDropdown d-sm-down-none" no-caret right>
         <template slot="button-content">

@@ -27,6 +27,7 @@
                       ></span>
                     </div>
                     <input
+                      required
                       ref="email"
                       type="email"
                       class="form-control"
@@ -40,6 +41,7 @@
                       ></span>
                     </div>
                     <input
+                      required
                       ref="password"
                       type="password"
                       class="form-control"
@@ -99,16 +101,17 @@ export default {
       this.$http
         .post(API_LOGIN, { email, password })
         .then(({ data }) => {
-          data.err
-          ?
-            this.errorMessage = data.err
-          :
+          if ( data.auth ) {
             this.$cookie.set("X-auth", data.token);
             this.$cookie.set("auth", true);
             this.$cookie.set("Username", data.username);
             this.$router.push("/");
+          } else {
+            this.errorMessage = 'Please Enter Valid Data!';
+          } 
         })
         .catch((err) => {
+          this.errorMessage = err.message
           console.error(err);
         });
     },

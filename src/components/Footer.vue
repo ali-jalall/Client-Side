@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer fixed">
     <div class=" container ">
       <nav>
         <ul>

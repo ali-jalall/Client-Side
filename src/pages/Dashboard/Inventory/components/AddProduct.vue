@@ -87,16 +87,18 @@ export default {
       formData.append("details", this.details);
       formData.append("category", this.category);
       this.$http
-        .post("http://localhost:5000/products/add", formData, {
+        .post("https://tranquil-everglades-67262.herokuapp.com/products/add", formData, {
           header: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then((res) => {
+          // TODO: Show loading while receiving a response
           console.log("Success, ", res);
           this.resetData();
         })
         .catch((err) => {
+          // TODO: Show loading while receiving a response
           console.log("Failure", err);
         });
     },

@@ -74,7 +74,7 @@ export default {
     submitFile() {
       this.userData.age = Number(this.userData.age)
       this.$http
-        .post("http://localhost:5000/users/add", this.userData)
+        .post("https://tranquil-everglades-67262.herokuapp.com/users/add", this.userData)
         .then((res) => {
           console.log("Success, ", res);
           this.resetData();

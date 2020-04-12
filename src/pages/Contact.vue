@@ -1,8 +1,8 @@
 <template>
   <div
-    class="contactus-1 section-image contact-img"
+    class="contactus-1 section-image contact-img main"
   >
-  <NavBar />
+  <NavBar :fixedTop='true'/>
     <div class="container mt-3">
       <div class="row">
         <div class="col-md-5">

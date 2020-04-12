@@ -38,7 +38,7 @@ export default {
     submitForm() {
       
       this.$http
-        .post("http://localhost:5000/categories/add", this.data)
+        .post("https://tranquil-everglades-67262.herokuapp.com/categories/add", this.data)
         .then((res) => {
           console.log("Success, ", res);
           this.name = "";

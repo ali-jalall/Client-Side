@@ -93,6 +93,7 @@
       <i class="now-ui-icons arrows-1_minimal-right"></i>
     </a>
   </div>
+  
 </template>
 
 <script>

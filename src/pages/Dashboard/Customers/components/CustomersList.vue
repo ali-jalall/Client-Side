@@ -46,7 +46,7 @@
 </template>
 
 <script>
-const API_GET = "http://localhost:5000/users";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/users";
 export default {
   name: "OrdersList",
   data() {

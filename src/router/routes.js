@@ -7,18 +7,11 @@ import Cart from "@/components/Cart";
 import Layout from '@/components/Layout/Layout'
 import Contact from '@/pages/Contact';
 import About from '@/pages/About';
-
-
-// Tables
-import TablesBasicPage from '@/pages/Tables/Basic';
+import Checkout from '@/pages/Checkout';
 
 // Main
 import AnalyticsPage from '@/pages/Dashboard/Dashboard';
 
-
-// Ui
-// import IconsPage from '@/pages/Icons/Icons';
-import NotificationsPage from '@/pages/Notifications/Notifications';
 
 
 // Dashboard
@@ -56,14 +49,6 @@ const routes = [
     component: Cart
   },
   {
-    path: "/signup",
-    name: "Signup",
-    component: Signup,
-    meta: {
-      guest: true
-    }
-  },
-  {
     path: "/contact",
     name: "Contact Us",
     component: Contact,
@@ -88,6 +73,14 @@ const routes = [
     }
   },
   {
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
+    meta: {
+      guest: true
+    }
+  },
+  {
     path: "/products",
     name: "Products",
     component: Products,
@@ -107,6 +100,13 @@ const routes = [
     name: "Product",
     component: Product
   },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout
+  },
+
+  // Admin Dashboard
   {
     path: '/app',
     name: 'Layout',
@@ -188,16 +188,6 @@ const routes = [
           },
         ]
       },
-      {
-        path: 'notifications',
-        name: 'NotificationsPage',
-        component: NotificationsPage,
-      },
-      {
-        path: 'tables',
-        name: 'TablesBasicPage',
-        component: TablesBasicPage,
-      }
     ],
   },
 ];

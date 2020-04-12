@@ -76,6 +76,7 @@
                         ></span>
                       </div>
                       <input
+                        required
                         v-model="user.username"
                         type="text"
                         class="form-control"
@@ -89,6 +90,7 @@
                         ></span>
                       </div>
                       <input
+                        required
                         v-model="user.email"
                         type="email"
                         class="form-control"
@@ -103,6 +105,7 @@
                         ></span>
                       </div>
                       <input
+                        required
                         v-model="user.password"
                         type="password"
                         class="form-control"
@@ -116,6 +119,7 @@
                         ></span>
                       </div>
                       <input
+                        required
                         v-model="user.age"
                         type="number"
                         class="form-control"

@@ -85,7 +85,7 @@
               </b-link>
             </li>
             <li class="nav-item" v-if="currentUser">
-              <b-link class="nav-link btn btn-danger" to="/login">
+              <b-link class="nav-link btn btn-danger" @click="logout">
                 <p>logout</p>
               </b-link>
             </li>

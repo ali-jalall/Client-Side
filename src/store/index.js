@@ -16,11 +16,12 @@ const getDefaultState = () => {
 
 // Mutations
 const mutations = {
-  [types.ADD_TO_CART] (state, { id, name, price }) {
-    const record = state.cart.find(p => p.id === id);
+  [types.ADD_TO_CART] (state, { _id, name, price }) {
+    console.log(_id)
+    const record = state.cart.find(p => p.id === _id);
     if (!record) {
       state.cart.push({
-        id,
+        _id,
         name,
         price,
         quantity: 1
@@ -44,10 +45,10 @@ const state = getDefaultState()
 const getters = {
   getNumberOfCartProducts: state => (state.cart ? state.cart.length : 0),
   cartProducts: state => {
-    return state.cart.map(({ id, name, price, quantity }) => {
+    return state.cart.map(({ _id, name, price, quantity }) => {
       // const product = state.all.find(p => p.id === id);
       return {
-        id,
+        _id,
         name,
         price,
         quantity
@@ -58,8 +59,8 @@ const getters = {
 
 // actions
 const actions = {
-  addToCart({ commit }, { id, name, price }) {
-    commit(types.ADD_TO_CART, { id, name, price });
+  addToCart({ commit }, { _id, name, price }) {
+    commit(types.ADD_TO_CART, { _id, name, price });
   },
   resetState({ commit }) {
     commit(types.RESET_STATE)

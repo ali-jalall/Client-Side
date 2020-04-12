@@ -3,7 +3,7 @@
     <NavBar />
     <template>
       <div>
-        <b-modal ref="my-modal" hide-footer>
+        <b-modal ref="loginWarning" hide-footer>
           <div class="d-block text-center">
             <h4 class="py-4">You Need To Login To add To Your Cart</h4>
           </div>
@@ -215,8 +215,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="row justify-content-end">
-                  <button @click="addProductToCart" class="btn btn-primary mr-3">
+                <div class="row justify-content-end row">
+                  <button @click="checkOutNow" class="col-md-8 btn btn-primary mr-3">
+                    Buy Now &nbsp;<i class="fas fa-dollar-sign"></i>
+                  </button>
+                  <button @click="addProductToCart" class="col-md-3 btn btn-outline-primary mr-3">
                     Add to Cart &nbsp;<i
                       class="now-ui-icons shopping_cart-simple"
                     ></i>
@@ -267,9 +270,18 @@ export default {
   methods: {
     ...mapActions(["addToCart"]),
     addProductToCart() {
+      console.log(this.product)
       this.currentUser
         ? this.addToCart(this.product)
-        : this.$refs["my-modal"].show();
+        : this.$refs["loginWarning"].show();
+    },
+    checkOutNow () {
+      if ( this.currentUser ) {
+        this.addToCart(this.product)
+        this.$router.push({ path: '/checkout' })
+      } else {
+        this.$refs["loginWarning"].show();
+      }
     }
   }
 };

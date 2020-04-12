@@ -64,7 +64,6 @@ export default {
   },
   mounted() {
     this.$http.get(API_GET).then(({ data }) => {
-      console.log(data);
       this.users = data.users;
     });
   },

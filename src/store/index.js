@@ -17,7 +17,6 @@ const getDefaultState = () => {
 // Mutations
 const mutations = {
   [types.ADD_TO_CART] (state, { _id, name, price }) {
-    console.log(_id)
     const record = state.cart.find(p => p.id === _id);
     if (!record) {
       state.cart.push({

@@ -301,7 +301,6 @@ export default {
       .get(API_GET)
       .then(({ data }) => {
         this.products = data.result;
-        console.log(this.products);
       })
       .catch(err => {
         console.log(err);

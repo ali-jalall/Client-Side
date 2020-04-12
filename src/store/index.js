@@ -34,7 +34,6 @@ const mutations = {
   },
   [types.REMOVE_ITEM_FROM_CART] (state, id) {
     state.cart = state.cart.filter(p => p.id !== id)
-    console.log(state.cart)
   }
 };
 

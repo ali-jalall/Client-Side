@@ -112,7 +112,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$props.fixedTop)
     let user = this.$cookie.get("Username");
     user ? (this.currentUser = user) : null;
   },

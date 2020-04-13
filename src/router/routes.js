@@ -29,6 +29,7 @@ import OrderManagement from '../pages/Dashboard/OrderManagement/OrderManagement'
 import AddOrder from '../pages/Dashboard/OrderManagement/components/AddOrder';
 import OrdersList from '../pages/Dashboard/OrderManagement/components/OrdersList';
 import Shipping from '../pages/Dashboard/OrderManagement/components/Shipping';
+import Order from '../pages/Dashboard/OrderManagement/Order';
 
 
 // Customers
@@ -158,6 +159,11 @@ const routes = [
             path: 'orderslist',
             name: 'Orders List',
             component: OrdersList,
+          },
+          {
+            path: ':id',
+            name: 'Order',
+            component: Order
           },
           {
             path: 'shippingpage',

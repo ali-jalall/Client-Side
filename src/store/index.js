@@ -17,7 +17,7 @@ const getDefaultState = () => {
 // Mutations
 const mutations = {
   [types.ADD_TO_CART] (state, { _id, name, price }) {
-    const record = state.cart.find(p => p.id === _id);
+    const record = state.cart.find(p => p._id === _id);
     if (!record) {
       state.cart.push({
         _id,
@@ -33,7 +33,7 @@ const mutations = {
     Object.assign(state, getDefaultState())
   },
   [types.REMOVE_ITEM_FROM_CART] (state, id) {
-    state.cart = state.cart.filter(p => p.id !== id)
+    state.cart = state.cart.filter(p => p._id !== id)
   }
 };
 

@@ -14,7 +14,7 @@
   padding: $widget-padding-vertical $widget-padding-horizontal !important;
   background: $widget-bg-color !important;
   border-radius: $border-radius-sm !important;
-  box-shadow: var(--widget-shadow) !important;
+  box-shadow: 4px 4px 30px rgba(75, 102, 171, 0.2) !important;
 
   &.loading {
     min-height: 150px;

@@ -22,8 +22,9 @@
           </thead>
           <tbody>
             <tr v-for="order in orders" :key="order._id">
+              
               <td>{{ order.username }}</td>
-              <td>{{ order.products_id.length }}</td>
+              <td>{{ order.products_ids.length }}</td>
               <td>$ {{ order.total_price }}</td>
               <td>{{ order.createdAt.slice(0, 10) }}</td>
               <!-- <td></td> -->
@@ -50,10 +51,16 @@
                 >
                   <i class="fas fa-minus-circle"></i>
                 </b-button>
-                <b-button variant="info" class="p-1 px-3">
+                <b-button
+                  @click="orderDetails"
+                  :accesskey="order._id"
+                  variant="info"
+                  class="p-1 px-3"
+                >
                   <i class="fas fa-edit"></i>
                 </b-button>
               </td>
+              
             </tr>
           </tbody>
         </table>
@@ -77,6 +84,9 @@ export default {
         .then(() => console.log({ deleted: true }))
         .catch((err) => console.log(err));
     },
+    orderDetails (e) {
+      this.$router.push({ path: `${e.target.accessKey}` })
+    }
   },
   mounted() {
     this.$http.get(API_GET).then(({ data }) => {

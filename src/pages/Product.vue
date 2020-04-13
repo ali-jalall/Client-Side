@@ -52,21 +52,22 @@
                   ></li>
                   <li data-target="#productCarousel" data-slide-to="3"></li>
                 </ol>
-                <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item">
+                <div class="carousel-inner" role="listbox" >
+                  <div class="carousel-item active" v-for="image in product.product_imgs" :key="image">
                     <img
                       class="d-block img-raised"
-                      :src="product.product_img"
+                      :src="image"
                       alt="First slide"
                     />
                   </div>
-                  <div class="carousel-item">
+                  <!-- <div class="carousel-item">
                     <img
                       class="d-block img-raised"
-                      src="../assets/img/pp-2.jpg"
+                      :src="image"
                       alt="Second slide"
                     />
-                  </div>
+                  </div> -->
+                  <!--
                   <div class="carousel-item active">
                     <img
                       class="d-block img-raised"
@@ -80,7 +81,7 @@
                       src="../assets/img/pp-4.jpg"
                       alt="Third slide"
                     />
-                  </div>
+                  </div> -->
                 </div>
                 <a
                   class="carousel-control-prev"
@@ -152,7 +153,7 @@
                   >
                     <div class="card-body">
                       <p>
-                        {{ product.description }}
+                        {{ product.details }}
                       </p>
                     </div>
                   </div>
@@ -257,6 +258,7 @@ export default {
       .get(`${API_GET}/p/${this.$route.params.id}`)
       .then(({ data }) => {
         this.product = data.product;
+        console.log(this.product.product_imgs)
       })
       .catch(err => {
         console.error(err);
@@ -290,7 +292,7 @@ export default {
 <style scoped>
 .page-header:after,
 .page-header:before {
-  background-image: url("../assets/img/pp-cov.jpg");
+  background-image: url("../assets/img/bg26.jpg");
   position: absolute;
   position: absolute;
   background-size: cover;

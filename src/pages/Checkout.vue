@@ -84,6 +84,8 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { mapGetters, mapActions } from "vuex";
 
+const API_POST = "https://tranquil-everglades-67262.herokuapp.com/orders";
+
 export default {
   name: "Checkout",
   components: {
@@ -99,6 +101,11 @@ export default {
       return this.products.reduce((total, p) => {
         return total + p.price * p.quantity;
       }, 0);
+    },
+    products_ids () {
+      return this.products.map((product) => {
+        return product._id
+      })
     }
   },
   mounted () {
@@ -110,11 +117,27 @@ export default {
       this.removeProduct(e.target.accessKey);
     },
     orderNow () {
-      /**
-       * TODO: Order has (user_id, username, products_ids, total_price, status='Pending')
-       * user_id & username fetched from cookies
-       * 
-       */
+      const username = this.$cookie.get("Username");
+      const user_id = this.$cookie.get("user_id");
+      const products_ids = this.products_ids;
+      const total_price = this.total;
+
+      this.$http
+        .post(API_POST + '/add', { username, user_id, products_ids, total_price })
+        .then(() => {
+          this.resetState();
+          // this.$router.push({ path: '/products' })
+          /**
+           * TODO: Show model to confirm sending the order and redirect to products page || Home
+           */
+        })
+        .then((err) => {
+          /**
+           * TODO: Show model to decline order with err
+           */
+          console.log(err)
+        })
+
     }
   }
 };

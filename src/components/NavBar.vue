@@ -120,6 +120,7 @@ export default {
       this.$cookie.delete("X-auth");
       this.$cookie.delete("auth");
       this.$cookie.delete("Username");
+      this.$cookie.delete("user_id");
       this.currentUser = null;
     },
     showCart() {

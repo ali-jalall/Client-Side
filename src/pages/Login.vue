@@ -105,6 +105,7 @@ export default {
             this.$cookie.set("X-auth", data.token);
             this.$cookie.set("auth", true);
             this.$cookie.set("Username", data.username);
+            this.$cookie.set("user_id", data.user_id);
             this.$router.push("/");
           } else {
             this.errorMessage = 'Please Enter Valid Data!';

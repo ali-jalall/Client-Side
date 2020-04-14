@@ -5,14 +5,19 @@
       bodyClass="widget-table-overflow py-2"
       customHeader
     >
-      <div class=" row">
+      <div class="row" v-if="products.length">
         <div class="col-md-11 m-auto text-right">
-          <b-button @click="removeOrder" :accesskey="order._id" variant="danger" class="ml-3 p-2 px-3">
+          <b-button
+            @click="removeOrder"
+            :accesskey="order._id"
+            variant="danger"
+            class="ml-3 p-2 px-3"
+          >
             X
           </b-button>
           <br />
           <strong style="font-size: 14pt;">Status</strong>
-          
+
           <b-button
             :variant="
               order.status === 'Pending'
@@ -27,7 +32,7 @@
           </b-button>
         </div>
       </div>
-      <div class="row m-auto text-center">
+      <div class="row m-auto text-center" v-if="products.length">
         <div class="col-md-4 text-center user_img">
           <div class="text-center p-2" style="font-size: 16pt;">
             User <strong>Profile</strong>
@@ -79,7 +84,9 @@
                   <b-button
                     @click="removeProduct"
                     variant="danger"
+                    :id="index"
                     :accesskey="product._id"
+                    :name="order.quantities[index]"
                     class="mr-1 p-1 px-3"
                   >
                     <i class="fas fa-minus-circle"></i>
@@ -100,12 +107,14 @@
           </table>
         </div>
       </div>
+      <div v-else>
+        <h2 class="text-center">404 NotFound</h2>
+      </div>
     </Widget>
   </div>
 </template>
 <script>
 const API_GET = "http://localhost:5000/orders";
-
 
 export default {
   name: "Order",
@@ -122,7 +131,7 @@ export default {
       this.$http
         .put(`${API_GET}/${this.$route.params.id}`)
         .then(({ data }) => {
-          this.user = data
+          this.user = data;
         })
         .catch(err => {
           console.error(err);
@@ -138,41 +147,46 @@ export default {
           console.error(err);
         });
     },
-    getOrder () {
+    getOrder() {
       this.$http
-      .get(`${API_GET}/${this.$route.params.id}`)
-      .then(({ data }) => {
-        this.order = data.order;
-        this.quantities = data.order.quantities
-        console.log(this.order);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+        .get(`${API_GET}/${this.$route.params.id}`)
+        .then(({ data }) => {
+          this.order = data.order;
+          this.quantities = data.order.quantities;
+        })
+        .catch(err => {
+          console.error(err);
+        });
     },
     removeProduct(e) {
-      console.log(e.target.accessKey)
       this.$http
-        .patch(`${API_GET}/${this.$route.params.id}`, { id: e.target.accessKey })
-        .then(({ data }) => {
-          this.$set(this.order, this.order, data.order)
-          console.log(data.order)
+        .patch(`${API_GET}/${this.$route.params.id}`, {
+          id: e.target.accessKey,
+          quantity: e.target.name
         })
-        .catch((err) => console.log(err));
+        .then(({ data }) => {
+          if (data.deleted) {
+            this.products.splice(e.target.id, 1);
+            this.order.total_price = data.order_price;
+          } else {
+            console.log(data.order);
+          }
+        })
+        .catch(err => console.log(err));
     },
     removeOrder(e) {
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
         .then(() => {
-          this.$router.go(-1)
+          this.$router.go(-1);
         })
-        .catch((err) => console.log(err));
-    },
+        .catch(err => console.log(err));
+    }
   },
-  mounted() {
-    this.getOrder()
-    this.getProductsByOrder();
-    this.getUserByOrder();
+  async mounted() {
+    await this.getOrder();
+    await this.getProductsByOrder();
+    await this.getUserByOrder();
   }
 };
 </script>

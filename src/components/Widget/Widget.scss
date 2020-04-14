@@ -10,7 +10,7 @@
 .widget {
   display: block !important;
   position: relative !important;
-  margin-bottom: $grid-gutter-width !important;
+  // margin-bottom: $grid-gutter-width !important;
   padding: $widget-padding-vertical $widget-padding-horizontal !important;
   background: $widget-bg-color !important;
   border-radius: $border-radius-sm !important;

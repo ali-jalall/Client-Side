@@ -71,7 +71,7 @@
             class="btn btn-outline-danger float-right"
             @click="resetState()"
           >
-           <i class="fas fa-trash"></i> Clear Cart 
+            <i class="fas fa-trash"></i> Clear Cart
           </b-button>
         </div>
       </Widget>
@@ -84,7 +84,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { mapGetters, mapActions } from "vuex";
 
-const API_POST = "https://tranquil-everglades-67262.herokuapp.com/orders";
+const API_POST = "http://localhost:5000/orders";
 
 export default {
   name: "Checkout",
@@ -102,28 +102,40 @@ export default {
         return total + p.price * p.quantity;
       }, 0);
     },
-    products_ids () {
-      return this.products.map((product) => {
-        return product._id
+    products_ids() {
+      return this.products.map(product => {
+        return product._id;
+      });
+    },
+    quantities () {
+      return this.products.map(product => {
+        return product.quantity
       })
     }
   },
-  mounted () {
-    console.log(this.products)
+  mounted() {
+    console.log(this.products);
   },
   methods: {
     ...mapActions(["resetState", "removeProduct"]),
     removeProductById(e) {
       this.removeProduct(e.target.accessKey);
     },
-    orderNow () {
+    orderNow() {
       const username = this.$cookie.get("Username");
       const user_id = this.$cookie.get("user_id");
       const products_ids = this.products_ids;
+      const quantities = this.quantities;
       const total_price = this.total;
 
       this.$http
-        .post(API_POST + '/add', { username, user_id, products_ids, total_price })
+        .post(API_POST + "/add", {
+          username,
+          user_id,
+          products_ids,
+          total_price,
+          quantities
+        })
         .then(() => {
           this.resetState();
           // this.$router.push({ path: '/products' })
@@ -131,13 +143,12 @@ export default {
            * TODO: Show model to confirm sending the order and redirect to products page || Home
            */
         })
-        .then((err) => {
+        .then(err => {
           /**
            * TODO: Show model to decline order with err
            */
-          console.log(err)
-        })
-
+          console.log(err);
+        });
     }
   }
 };

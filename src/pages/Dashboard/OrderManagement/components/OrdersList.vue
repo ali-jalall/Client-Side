@@ -10,19 +10,15 @@
           <thead>
             <tr class="text-muted">
               <th>USERNAME</th>
-              <!-- <th>NAME</th> -->
               <th>PRODUCTS</th>
               <th>TOTAL PRICE</th>
-              <!-- <th>PRICE</th> -->
               <th>DATE</th>
               <th>STATUS</th>
               <th>ACTIONS</th>
-              <!-- <th>STATUS</th> -->
             </tr>
           </thead>
           <tbody>
-            <tr v-for="order in orders" :key="order._id">
-              
+            <tr v-for="(order, index) in orders" :key="order._id">
               <td>{{ order.username }}</td>
               <td>{{ order.products_ids.length }}</td>
               <td>$ {{ order.total_price }}</td>
@@ -46,6 +42,7 @@
                 <b-button
                   @click="removeOrder"
                   variant="danger"
+                  :id="index"
                   :accesskey="order._id"
                   class="mr-1 p-1 px-3"
                 >
@@ -60,7 +57,6 @@
                   <i class="fas fa-edit"></i>
                 </b-button>
               </td>
-              
             </tr>
           </tbody>
         </table>
@@ -69,29 +65,34 @@
   </div>
 </template>
 <script>
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/orders";
+const API_GET = "http://localhost:5000/orders";
 export default {
   name: "OrdersList",
   data() {
     return {
-      orders: [],
+      orders: []
     };
   },
   methods: {
     removeOrder(e) {
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
-        .then(() => console.log({ deleted: true }))
-        .catch((err) => console.log(err));
+        .then(({ data }) => {
+          data.deleted
+            ? this.orders.splice(e.target.id, 1)
+            : // TODO: Order not deleted! so something
+              console.log(data);
+        })
+        .catch(err => console.log(err));
     },
-    orderDetails (e) {
-      this.$router.push({ path: `${e.target.accessKey}` })
+    orderDetails(e) {
+      this.$router.push({ path: `${e.target.accessKey}` });
     }
   },
   mounted() {
     this.$http.get(API_GET).then(({ data }) => {
       this.orders = data.orders;
     });
-  },
+  }
 };
 </script>

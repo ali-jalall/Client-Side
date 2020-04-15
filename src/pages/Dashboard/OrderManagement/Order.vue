@@ -120,7 +120,7 @@
   </div>
 </template>
 <script>
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/orders";
+const API_GET = "http://localhost:5000/orders";
 
 export default {
   name: "Order",
@@ -133,7 +133,7 @@ export default {
     };
   },
   methods: {
-    switchClasses (value) {
+    switchClasses(value) {
       value === "Completed"
         ? (this.$refs.dropdown.className = "bg-success")
         : value === "Pending"
@@ -141,13 +141,16 @@ export default {
         : (this.$refs.dropdown.className = "bg-danger");
     },
     changeStatus(e) {
-      this.switchClasses(e.target.value);
       this.$http
-        .put(`${API_GET}/edit/${this.$route.params.id}`, { status: e.target.value })
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-        
-        
+        .put(`${API_GET}/edit/${this.$route.params.id}`, {
+          status: e.target.value
+        })
+        .then(({ data }) => {
+          data.updated 
+          ? this.switchClasses(e.target.value)
+          : console.log(data)
+        })
+        .catch(err => console.log(err));
     },
     getUserByOrder() {
       this.$http

@@ -120,7 +120,7 @@
   </div>
 </template>
 <script>
-const API_GET = "http://localhost:5000/orders";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/orders";
 
 export default {
   name: "Order",
@@ -146,9 +146,22 @@ export default {
           status: e.target.value
         })
         .then(({ data }) => {
-          data.updated 
-          ? this.switchClasses(e.target.value)
-          : console.log(data)
+          if (data.updated) {
+            this.switchClasses(e.target.value);
+
+            this.$toasted.success('Order Status has been changed', {
+              duration: 3000,
+              position: 'top-center',
+              action: {
+                text: "Ok",
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                }
+              }
+            });
+          } else {
+            console.log(data);
+          }
         })
         .catch(err => console.log(err));
     },

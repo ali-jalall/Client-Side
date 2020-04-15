@@ -34,7 +34,12 @@
                 >
                   <i class="fas fa-minus-circle"></i>
                 </b-button>
-                <b-button variant="info" class="p-1 px-3">
+                <b-button
+                  @click="userProfile"
+                  :accesskey="user._id"
+                  variant="info"
+                  class="p-1 px-3"
+                >
                   <i class="fas fa-edit"></i>
                 </b-button>
               </td>
@@ -47,7 +52,7 @@
 </template>
 
 <script>
-const API_GET = "http://localhost:5000/users";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/users";
 export default {
   name: "OrdersList",
   data() {
@@ -60,12 +65,15 @@ export default {
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
         .then(({ data }) => {
-          console.log(data)
+          console.log(data);
           data.deleted
             ? this.users.splice(e.target.id, 1)
             : console.log({ deleted: true });
         })
         .catch(err => console.log(err));
+    },
+    userProfile (e) {
+      this.$router.push({ path: `${e.target.accessKey}` });
     }
   },
   mounted() {

@@ -18,7 +18,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="user in users" :key="user._id">
+            <tr v-for="(user, index) in users" :key="user._id">
               <td>{{ user.username }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.phone_number }}</td>
@@ -28,6 +28,7 @@
                 <b-button
                   @click="removeCustomer"
                   variant="danger"
+                  :id="index"
                   :accesskey="user._id"
                   class="mr-1 p-1 px-3"
                 >
@@ -46,26 +47,31 @@
 </template>
 
 <script>
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/users";
+const API_GET = "http://localhost:5000/users";
 export default {
   name: "OrdersList",
   data() {
     return {
-      users: [],
+      users: []
     };
   },
   methods: {
     removeCustomer(e) {
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
-        .then(() => console.log({ deleted: true }))
-        .catch((err) => console.log(err));
-    },
+        .then(({ data }) => {
+          console.log(data)
+          data.deleted
+            ? this.users.splice(e.target.id, 1)
+            : console.log({ deleted: true });
+        })
+        .catch(err => console.log(err));
+    }
   },
   mounted() {
     this.$http.get(API_GET).then(({ data }) => {
       this.users = data.users;
     });
-  },
+  }
 };
 </script>

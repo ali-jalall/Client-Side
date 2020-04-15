@@ -20,8 +20,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="product in products" :key="product._id">
-              <td><img :src="product.product_imgs[0]" alt="product_img" /></td>
+            <tr v-for="(product, index) in products" :key="product._id">
+              <td>
+                <img
+                  :src="product.product_imgs[0]"
+                  alt="product_img"
+                  width="200px"
+                />
+              </td>
               <td>{{ product.name }}</td>
               <td>{{ product.category }}</td>
               <td>{{ product.details }}</td>
@@ -31,6 +37,7 @@
                 <b-button
                   @click="removeProduct"
                   variant="danger"
+                  :id="index"
                   :accesskey="product._id"
                   class="mr-1 p-1 px-3"
                 >
@@ -49,27 +56,27 @@
 </template>
 
 <script>
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/products";
+const API_GET = "http://localhost:5000/products";
 
 export default {
   name: "ProductsList",
   data() {
     return {
-      products: [],
+      products: []
     };
   },
   methods: {
     removeProduct(e) {
       let _id = e.target.accessKey;
-      this.$http.delete(`${API_GET}/p/${_id}`).then(() => {
-        console.log({ deleted: true })
+      this.$http.delete(`${API_GET}/p/${_id}`).then(({ data }) => {
+        data.deleted ? this.products.splice(e.target.id, 1) : console.log(data)
       });
-    },
+    }
   },
   mounted() {
     this.$http.get(API_GET).then(({ data }) => {
       this.products = data.result;
     });
-  },
+  }
 };
 </script>

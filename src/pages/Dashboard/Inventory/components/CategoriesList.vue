@@ -20,7 +20,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="category in categories" :key="category._id">
+            <tr v-for="(category, index) in categories" :key="category._id">
               <td>{{ category.name }}</td>
               <td></td>
               <td>{{ category.products.length }}</td>
@@ -32,6 +32,7 @@
                 <b-button
                   @click="removeProduct"
                   variant="danger"
+                  :id="index"
                   :accesskey="category._id"
                   class="mr-1 p-1 px-3"
                 >
@@ -50,27 +51,30 @@
 </template>
 
 <script>
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/categories";
+const API_GET = "http://localhost:5000/categories";
 
 export default {
   name: "CategoriesList",
   data() {
     return {
-      categories: [],
+      categories: []
     };
   },
   methods: {
     removeProduct(e) {
       let _id = e.target.accessKey;
-      this.$http.delete(`${API_GET}/p/${_id}`).then(() => {
-        console.log({ deleted: true });
+      this.$http.delete(`${API_GET}/${_id}`).then(({ data }) => {
+        console.log(data)
+        data.deleted
+          ? this.categories.splice(e.target.id, 1)
+          : console.log({ deleted: true });
       });
-    },
+    }
   },
   mounted() {
     this.$http.get(API_GET).then(({ data }) => {
-      this.categories = data.categories
+      this.categories = data.categories;
     });
-  },
+  }
 };
 </script>

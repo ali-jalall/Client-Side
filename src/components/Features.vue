@@ -138,7 +138,8 @@
                   >
                     <div class="card-image" :accesskey="product._id">
                       <img
-                        :src="product.product_img"
+                        :accesskey="product._id"
+                        :src="product.product_imgs[0]"
                         height="250px"
                         alt="product_image"
                       />
@@ -155,7 +156,7 @@
                         class="card-description product-description"
                         :accesskey="product._id"
                       >
-                        {{ product.description }}
+                        {{ product.details }}
                       </p>
                       <div class="card-footer" :accesskey="product._id">
                         <div class="price-container">

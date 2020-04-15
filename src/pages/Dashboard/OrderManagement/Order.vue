@@ -18,18 +18,24 @@
           <br />
           <strong style="font-size: 14pt;">Status</strong>
 
-          <b-button
-            :variant="
+          <select
+            @change="changeStatus"
+            ref="dropdown"
+            name="dropdown"
+            style="padding: 4px 6px; border: 0; border-radius: .2rem; color: white; margin-left: 12px"
+            :class="
               order.status === 'Pending'
-                ? 'info'
-                : order.status === 'Completed'
-                ? 'success'
-                : 'danger'
+                ? 'bg-info'
+                : order.status === 'Declined'
+                ? 'bg-danger'
+                : 'bg-success'
             "
-            class="ml-3 p-2 px-3"
+            :value="order.status"
           >
-            {{ order.status }}
-          </b-button>
+            <option class="bg-success">Completed</option>
+            <option class="bg-info">Pending</option>
+            <option class="bg-danger">Declined</option>
+          </select>
         </div>
       </div>
       <div class="row m-auto text-center" v-if="products.length">
@@ -114,7 +120,7 @@
   </div>
 </template>
 <script>
-const API_GET = "http://localhost:5000/orders";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/orders";
 
 export default {
   name: "Order",
@@ -127,6 +133,22 @@ export default {
     };
   },
   methods: {
+    switchClasses (value) {
+      value === "Completed"
+        ? (this.$refs.dropdown.className = "bg-success")
+        : value === "Pending"
+        ? (this.$refs.dropdown.className = "bg-info")
+        : (this.$refs.dropdown.className = "bg-danger");
+    },
+    changeStatus(e) {
+      this.switchClasses(e.target.value);
+      this.$http
+        .put(`${API_GET}/edit/${this.$route.params.id}`, { status: e.target.value })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+        
+        
+    },
     getUserByOrder() {
       this.$http
         .put(`${API_GET}/${this.$route.params.id}`)
@@ -159,8 +181,9 @@ export default {
         });
     },
     removeProduct(e) {
+      let _order_id = this.$route.params.id;
       this.$http
-        .patch(`${API_GET}/${this.$route.params.id}`, {
+        .patch(`${API_GET}/${_order_id}`, {
           id: e.target.accessKey,
           quantity: e.target.name
         })
@@ -168,9 +191,15 @@ export default {
           if (data.deleted) {
             this.products.splice(e.target.id, 1);
             this.order.total_price = data.order_price;
+            if (this.products.length === 0) {
+              return this.$http.delete(`${API_GET}/${e.target.accessKey}`);
+            }
           } else {
             console.log(data.order);
           }
+        })
+        .then(() => {
+          this.$router.push("orderslist");
         })
         .catch(err => console.log(err));
     },
@@ -178,7 +207,7 @@ export default {
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
         .then(() => {
-          this.$router.go(-1);
+          this.$router.push("orderlist");
         })
         .catch(err => console.log(err));
     }
@@ -195,5 +224,16 @@ export default {
   border-radius: 50%;
   padding: 14px 32px;
   width: 100%;
+}
+
+option {
+  height: 500px;
+}
+
+select:focus {
+  background-color: #fff;
+  outline: none;
+  border: none;
+  box-shadow: none;
 }
 </style>

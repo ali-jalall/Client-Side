@@ -4,7 +4,9 @@
       title="<h5 class='pt-3'><span class='fw-semi-bold '>Orders</span> List</h5>"
       bodyClass="widget-table-overflow py-2"
       customHeader
+      
     >
+
       <div class="table-responsive">
         <table class="table mb-0 requests-table">
           <thead>

@@ -37,6 +37,7 @@ import Customers from '../pages/Dashboard/Customers/Customers'
 import AddCustomer from '../pages/Dashboard/Customers/components/AddCustomers'
 import CustomersList from '../pages/Dashboard/Customers/components/CustomersList'
 import CustomersGroup from '../pages/Dashboard/Customers/components/CustomersGroup'
+import Customer from '../pages/Dashboard/Customers/Customer'
 
 const routes = [
   {
@@ -186,6 +187,11 @@ const routes = [
             path: 'customerslist',
             name: 'Customers List',
             component: CustomersList,
+          },
+          {
+            path: ':id',
+            name: 'Customers Profile',
+            component: Customer,
           },
           {
             path: 'cutomersgroup',

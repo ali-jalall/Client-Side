@@ -84,7 +84,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { mapGetters, mapActions } from "vuex";
 
-const API_POST = "http://localhost:5000/orders";
+const API_POST = "https://tranquil-everglades-67262.herokuapp.com/orders";
 
 export default {
   name: "Checkout",

@@ -180,6 +180,7 @@ export default {
         this.orders = data.orders;
         this.user = data.user;
         loader.hide();
+        console.log(this.orders)
       })
       .catch(() => {
         loader.hide()
@@ -192,7 +193,7 @@ export default {
   computed: {
     ordersCompleted() {
       return this.orders.reduce((acc, order) => {
-        return order.status === "Completed" ? ++acc : 0;
+        return order.status === "Completed" ? ++acc : acc;
       }, 0);
     },
   },

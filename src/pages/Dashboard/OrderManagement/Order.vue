@@ -5,7 +5,7 @@
       bodyClass="widget-table-overflow py-2"
       customHeader
     >
-      <div class="row" v-if="products.length">
+      <div class="row" ref="order" v-if="products.length">
         <div class="col-md-11 m-auto text-right">
           <b-button
             @click="removeOrder"
@@ -38,7 +38,7 @@
           </select>
         </div>
       </div>
-      <div class="row m-auto text-center" ref="order" v-if="products.length">
+      <div class="row m-auto text-center" v-if="products.length">
         <div class="col-md-4 text-center user_img">
           <div class="text-center p-2" style="font-size: 16pt;">
             User <strong>Profile</strong>
@@ -130,6 +130,7 @@ export default {
       user: {},
       products: [],
       quantities: [],
+      fullPage: false
     };
   },
   methods: {
@@ -154,9 +155,6 @@ export default {
               position: "top-center",
               action: {
                 text: "Ok",
-                onClick: (e, toastObject) => {
-                  toastObject.goAway(0);
-                },
               },
             });
           } else {
@@ -184,21 +182,19 @@ export default {
         })
         .then(({ data }) => {
           if (data.deleted) {
-            loader.hide()
+            loader.hide();
             this.products.splice(e.target.id, 1);
             this.order.total_price = data.order_price;
             if (this.products.length === 0) {
-              return this.removeOrder(e);
+              this.order = {};
+              this.$router.go(-1)
             }
           } else {
             console.log(data.order);
           }
         })
-        .then(() => {
-          this.$router.go(-1);
-        })
         .catch(() => {
-          loader.hide()
+          loader.hide();
           this.$toasted.error("Sorry it seems like there's an issue!", {
             duration: 3000,
             position: "top-center",
@@ -209,7 +205,8 @@ export default {
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
         .then(() => {
-          this.$router.go(-2);
+          this.order = {}
+          this.$router.go(-1);
         })
         .catch(() => {
           this.$toasted.error("Sorry it seems like there's an issue!", {
@@ -229,16 +226,9 @@ export default {
         this.products = data.products;
         this.user = data.user;
       })
-      .catch(() => {
-        loader.hide();
-        this.$toasted.error("Sorry it seems like there's an issue!", {
-          duration: 3000,
-          position: "top-center",
-        });
-      });
-
-    this.$http
-      .get(`${API_GET}/${this.$route.params.id}`)
+      .then(() => {
+        return this.$http.get(`${API_GET}/${this.$route.params.id}`);
+      })
       .then(({ data }) => {
         this.order = data.order;
         this.quantities = data.order.quantities;
@@ -251,8 +241,6 @@ export default {
           position: "top-center",
         });
       });
-    // await this.getOrder();
-    // await this.getUserAndProductsByOrder();
   },
 };
 </script>

@@ -48,10 +48,17 @@ export default {
         )
         .then(() => {
           this.data.name = "";
-          loader.hide()
+          loader.hide();
+          this.$toasted.success("Category Added", {
+            duration: 3000,
+            position: "top-center",
+            action: {
+              text: "Ok",
+            },
+          });
         })
         .catch(() => {
-          loader.hide()
+          loader.hide();
           this.$toasted.error("Sorry it seems like there's an issue!", {
             duration: 3000,
             position: "top-center",

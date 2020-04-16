@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="section">
+    <div class="section" ref="features">
       <div class="container">
         <h2 class="section-title">Find what you need</h2>
         <div class="row">
@@ -213,9 +213,22 @@ export default {
     },
   },
   mounted() {
-    this.$http.get(API_GET).then(({ data }) => {
-      this.products = data.result;
+    let loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.features,
     });
+    this.$http
+      .get(API_GET)
+      .then(({ data }) => {
+        this.products = data.result;
+        loader.hide();
+      })
+      .catch(() => {
+        loader.hide();
+        this.$toasted.error("Sorry it seems like there's an issue!", {
+            duration: 3000,
+            position: "top-center",
+          });
+      });
   },
 };
 </script>

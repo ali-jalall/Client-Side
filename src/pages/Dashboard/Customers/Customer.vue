@@ -179,10 +179,14 @@ export default {
         this.products = data.products;
         this.orders = data.orders;
         this.user = data.user;
-        loader.hide()
+        loader.hide();
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        loader.hide()
+        this.$toasted.error("Sorry it seems like there's an issue!", {
+          duration: 3000,
+          position: "top-center",
+        });
       });
   },
   computed: {

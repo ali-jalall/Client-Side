@@ -163,11 +163,19 @@ export default {
             console.log(data);
           }
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          this.$toasted.error("Sorry it seems like there's an issue!", {
+            duration: 3000,
+            position: "top-center",
+          });
+        });
     },
     getUserAndProductsByOrder() {},
     getOrder() {},
     removeProduct(e) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.order,
+      });
       let _order_id = this.$route.params.id;
       this.$http
         .patch(`${API_GET}/${_order_id}`, {
@@ -176,6 +184,7 @@ export default {
         })
         .then(({ data }) => {
           if (data.deleted) {
+            loader.hide()
             this.products.splice(e.target.id, 1);
             this.order.total_price = data.order_price;
             if (this.products.length === 0) {
@@ -188,7 +197,13 @@ export default {
         .then(() => {
           this.$router.go(-1);
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          loader.hide()
+          this.$toasted.error("Sorry it seems like there's an issue!", {
+            duration: 3000,
+            position: "top-center",
+          });
+        });
     },
     removeOrder(e) {
       this.$http
@@ -196,7 +211,12 @@ export default {
         .then(() => {
           this.$router.go(-2);
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          this.$toasted.error("Sorry it seems like there's an issue!", {
+            duration: 3000,
+            position: "top-center",
+          });
+        });
     },
   },
   async mounted() {
@@ -209,8 +229,12 @@ export default {
         this.products = data.products;
         this.user = data.user;
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
+        loader.hide();
+        this.$toasted.error("Sorry it seems like there's an issue!", {
+          duration: 3000,
+          position: "top-center",
+        });
       });
 
     this.$http
@@ -218,14 +242,17 @@ export default {
       .then(({ data }) => {
         this.order = data.order;
         this.quantities = data.order.quantities;
-         loader.hide();
+        loader.hide();
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
+        loader.hide();
+        this.$toasted.error("Sorry it seems like there's an issue!", {
+          duration: 3000,
+          position: "top-center",
+        });
       });
     // await this.getOrder();
     // await this.getUserAndProductsByOrder();
-   
   },
 };
 </script>

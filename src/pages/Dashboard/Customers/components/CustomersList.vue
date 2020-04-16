@@ -1,7 +1,7 @@
 <template>
   <div>
     <Widget
-      title="<h5 class='pt-3'><span class='fw-semi-bold '>Orders</span> List</h5>"
+      title="<h5 class='pt-3'><span class='fw-semi-bold '>Customers </span> List</h5>"
       bodyClass="widget-table-overflow py-2"
       customHeader
     >
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/users";
+const API_GET = "http://localhost:5000/users";
 export default {
   name: "OrdersList",
   data() {
@@ -62,15 +62,24 @@ export default {
   },
   methods: {
     removeCustomer(e) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.customersList,
+      });
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
         .then(({ data }) => {
-          console.log(data);
-          data.deleted
-            ? this.users.splice(e.target.id, 1)
-            : console.log({ deleted: true });
+          if (data.deleted) {
+            this.users.splice(e.target.id, 1);
+            loader.hide();
+          }
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          loader.hide();
+          this.$toasted.error("Sorry it seems like there's an issue!", {
+            duration: 3000,
+            position: "top-center",
+          });
+        });
     },
     userProfile(e) {
       this.$router.push({ path: `${e.target.accessKey}` });
@@ -80,10 +89,19 @@ export default {
     let loader = this.$loading.show({
       container: this.fullPage ? null : this.$refs.customersList,
     });
-    this.$http.get(API_GET).then(({ data }) => {
-      this.users = data.users;
-      loader.hide();
-    });
+    this.$http
+      .get(API_GET)
+      .then(({ data }) => {
+        this.users = data.users;
+        loader.hide();
+      })
+      .catch(() => {
+        loader.hide();
+        this.$toasted.error("Sorry it seems like there's an issue!", {
+          duration: 3000,
+          position: "top-center",
+        });
+      });
   },
 };
 </script>

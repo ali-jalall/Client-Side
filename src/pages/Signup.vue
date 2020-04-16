@@ -188,14 +188,14 @@ export default {
           console.log(data);
           if (data.errMsg) {
             if (data.errMsg.includes("Must")) {
-              loader.hide()
+              loader.hide();
               this.errorMessage = data.errMsg;
             } else {
-              loader.hide()
+              loader.hide();
               // TODO: show error notification
             }
           }
-          loader.hide()
+          loader.hide();
           this.$cookie.set("X-auth", data.token);
           this.$cookie.set("auth", true);
           this.$cookie.set("Username", data.username);
@@ -203,8 +203,11 @@ export default {
 
           this.$router.push("/");
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          this.$toasted.error("Sorry it seems like there's an issue!", {
+            duration: 3000,
+            position: "top-center",
+          });
         });
     },
   },

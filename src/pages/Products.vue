@@ -312,8 +312,12 @@ export default {
         this.products = data.result;
         loader.hide()
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        loader.hide()
+        this.$toasted.error("Sorry it seems like there's an issue!", {
+          duration: 3000,
+          position: "top-center",
+        });
       });
   },
   computed: {

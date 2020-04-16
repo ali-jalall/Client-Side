@@ -100,10 +100,13 @@ export default {
           this.resetData();
           loader.hide()
         })
-        .catch((err) => {
+        .catch(() => {
           // TODO: Show loading while receiving a response
           loader.hide()
-          console.log("Failure", err);
+          this.$toasted.error("Sorry it seems like there's an issue!", {
+            duration: 3000,
+            position: "top-center",
+          });
         });
     },
     removeFile(key) {

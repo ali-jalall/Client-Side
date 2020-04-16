@@ -75,10 +75,19 @@ export default {
     let loader = this.$loading.show({
       container: this.fullPage ? null : this.$refs.categoryList,
     });
-    this.$http.get(API_GET).then(({ data }) => {
-      this.categories = data.categories;
-      loader.hide();
-    });
+    this.$http
+      .get(API_GET)
+      .then(({ data }) => {
+        this.categories = data.categories;
+        loader.hide();
+      })
+      .catch(() => {
+        loader.hide();
+        this.$toasted.error("Sorry it seems like there's an issue!", {
+          duration: 3000,
+          position: "top-center",
+        });
+      });
   },
 };
 </script>

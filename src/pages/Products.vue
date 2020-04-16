@@ -2,126 +2,31 @@
   <div>
     <NavBar />
     <Hero />
-    <div class="section" >
+    <div class="section">
       <div class="container" ref="formContainer">
         <h2 class="section-title">Find what you need</h2>
         <div class="row">
           <div class="col-md-3">
             <div class="collapse-panel">
-              <div class="card-body">
-                <div class="card card-refine card-plain">
-                  <div class="card-header" role="tab" id="headingTwo">
-                    <h6>
-                      <a
-                        class="collapsed"
-                        data-toggle="collapse"
-                        data-parent="#collapseTwo"
-                        href="#collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="collapseTwo"
-                      >
-                        Clothing
-
-                        <i class="now-ui-icons arrows-1_minimal-down"></i>
-                      </a>
-                    </h6>
-                  </div>
-                  <div
-                    id="collapseTwo"
-                    class="collapse"
-                    role="tabpanel"
-                    aria-labelledby="headingTwo"
+              <div class="card-body pl-0" style="padding-top: 50px;">
+                <div
+                  class="card card-refine card-plain"
+                  @click="changeCategory"
+                  v-for="(category, index) in categories"
+                  :key="index"
+                >
+                  <b-link
+                    :to="category.name"
+                    :replace="$route.path !== '/products'"
+                    :append="$route.path === '/products'"
+                    :active="$route.path === `/products/${category.name}`"
+                    class="text-primary text-left"
+                    style="font-size: 14pt;"
+                    >{{ category.name }}</b-link
                   >
-                    <div class="card-body">
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            checked=""
-                          />
-                          <span class="form-check-sign"></span>
-                          Casual Shirts
-                        </label>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                <div class="card card-refine card-plain">
-                  <div class="card-header" role="tab" id="headingThree">
-                    <h6>
-                      <a
-                        class="collapsed"
-                        data-toggle="collapse"
-                        data-parent="#collapseThree"
-                        href="#collapseThree"
-                        aria-expanded="false"
-                        aria-controls="collapseThree"
-                      >
-                        Designer
-
-                        <i class="now-ui-icons arrows-1_minimal-down"></i>
-                      </a>
-                    </h6>
-                  </div>
-                  <div
-                    id="collapseThree"
-                    class="collapse"
-                    role="tabpanel"
-                    aria-labelledby="headingThree"
-                  >
-                    <div class="card-body">
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          All
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Polo Ralph Lauren
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card card-refine card-plain">
-                  <div class="card-header" role="tab" id="headingfour">
-                    <h6>
-                      <a
-                        class="collapsed"
-                        data-toggle="collapse"
-                        data-parent="#collapsefour"
-                        href="#collapsefour"
-                        aria-expanded="false"
-                        aria-controls="collapsefour"
-                      >
-                        Colour
-
-                        <i class="now-ui-icons arrows-1_minimal-down"></i>
-                      </a>
-                    </h6>
-                  </div>
-                  <div
-                    id="collapsefour"
-                    class="collapse"
-                    role="tabpanel"
-                    aria-labelledby="headingfour"
-                  >
-                    <div class="card-body">
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
-                          <span class="form-check-sign"></span>
-                          Black
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <!-- <div class="card card-refine card-plain"> <b-link class="text-primary text-left" style="font-size: 14pt;"> Travel </b-link></div> -->
+                <!-- <div class="card card-refine card-plain"> <b-link class="text-primary text-left" style="font-size: 14pt;"> Accessories </b-link></div> -->
               </div>
             </div>
           </div>
@@ -140,8 +45,8 @@
             <div class="row">
               <div
                 class="col-lg-4 col-md-6"
-                v-for="product in products"
-                :key="product._id"
+                v-for="(product, index) in products"
+                :key="index"
               >
                 <b-link @click="showProductDetails" :accesskey="product._id">
                   <div
@@ -222,7 +127,8 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { mapActions } from "vuex";
 
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/products";
+const API_GET = "http://localhost:5000/products";
+const API_GET_CATEGORIES = "http://localhost:5000/categories";
 
 export default {
   name: "Products",
@@ -230,8 +136,7 @@ export default {
     return {
       products: [],
       tab: null,
-      isLoading: true,
-      fullPage: false,
+      categories: [],
     };
   },
   components: {
@@ -241,15 +146,6 @@ export default {
   },
   methods: {
     ...mapActions(["addToCart"]),
-    // addProductToCart(e) {
-    //   this.currentUser
-    //     ? this.$http
-    //         .get(`${API_GET}/p/${e.target.accessKey}`)
-    //         .then(({ data }) => {
-    //           this.addToCart(data.product);
-    //         })
-    //     : this.$refs["loginWarning"].show();
-    // },
     addProductToCart(e) {
       this.currentUser
         ? this.$http
@@ -262,58 +158,53 @@ export default {
     showProductDetails(e) {
       this.$router.push({ path: `/p/${e.target.accessKey}` });
     },
-    changeCategory() {
-      /**
-       * Commented to be used when finish developing ...
-       */
-      // if (e.target.text === "All") {
-      //   this.$router.push(`products`);
-      //   this.$http
-      //     .get(API_GET)
-      //     .then(({ data }) => {
-      //       if (!data) {
-      //         // TODO: Show something to tell user 'There's no products'
-      //         return;
-      //       }
-      //       this.result = data.result;
-      //     })
-      //     .catch(err => {
-      //       console.error(err);
-      //     });
-      // } else {
-      //   this.$router.push(`products/${e.target.text.toLowerCase()}`);
-      //   this.$http
-      //     .get(`${API_GET}/${e.target.text.toLowerCase()}`)
-      //     .then(({ data }) => {
-      //       if (!data) {
-      //         // TODO: Show something to tell user 'There's no products'
-      //         return;
-      //       }
-      //       this.result = data.products;
-      //     })
-      //     .catch(err => {
-      //       console.error(err);
-      //     });
-      // }
+    changeCategory(e) {
+      if (e.target.text === "All") {
+        this.$http
+          .get(API_GET)
+          .then(({ data }) => {
+            if (!data) {
+              // TODO: Show something to tell user 'There's no products'
+              return;
+            }
+            this.products = data.products;
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      } else {
+        this.$http
+          .get(`${API_GET}/${e.target.text}`)
+          .then(({ data }) => {
+            console.log(data);
+            if (!data) {
+              // TODO: Show something to tell user 'There's no products'
+              return;
+            }
+            this.products = data.products;
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     },
   },
   mounted() {
-    /**
-     * Commented to be used when finish developing ...
-     */
     let loader = this.$loading.show({
-      // Optional parameters
       container: this.fullPage ? null : this.$refs.formContainer,
-      canCancel: false,
     });
     this.$http
       .get(API_GET)
       .then(({ data }) => {
         this.products = data.result;
-        loader.hide()
+        return this.$http.get(API_GET_CATEGORIES);
+      })
+      .then(({ data }) => {
+        this.categories = data.categories;
+        loader.hide();
       })
       .catch(() => {
-        loader.hide()
+        loader.hide();
         this.$toasted.error("Sorry it seems like there's an issue!", {
           duration: 3000,
           position: "top-center",
@@ -354,5 +245,11 @@ export default {
 }
 .page-header .page-header-image {
   position: static;
+}
+
+.active {
+  color: white !important;
+  background-color: #f96332 !important;
+  padding: 6px 40px 6px 12px;
 }
 </style>

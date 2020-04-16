@@ -103,6 +103,11 @@ const routes = [
     component: Product
   },
   {
+    path: "/u/:id",
+    name: "UserProfile",
+    component: Customer
+  },
+  {
     path: '/checkout',
     name: 'Checkout',
     component: Checkout

@@ -7,6 +7,7 @@ import layoutMixin from './mixins/layout';
 import Toasted from 'vue-toasted';
 import VueCookie from 'vue-cookie'
 import VueTouch from 'vue-touch'
+import Vuelidate from 'vuelidate'
 import { BootstrapVue } from 'bootstrap-vue';
 
 import '@fortawesome/fontawesome-free/css/all.css'
@@ -31,6 +32,7 @@ Vue.use(VueCookie)
 Vue.use(VueTouch)
 Vue.mixin(layoutMixin)
 Vue.use(Toasted, { duration: 10000 });
+Vue.use(Vuelidate)
 
 
 Vue.prototype.$http = Axios;

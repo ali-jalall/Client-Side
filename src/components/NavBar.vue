@@ -79,9 +79,14 @@
                   <span style="font-size: 16pt;">{{ itemsInCart }}</span>
                   <i
                     class="fas fa-shopping-cart"
-                    style="margin: 0 10px; font-size: 18pt;"
+                    style="font-size: 18pt;"
                   />
                 </p>
+              </b-link>
+            </li>
+            <li class="nav-item m-auto" v-if="currentUser">
+              <b-link class="nav-link nav-links text-center" @click="userProfile">
+                <i class="fas fa-user" style="font-size: 18pt;"></i>
               </b-link>
             </li>
             <li class="nav-item" v-if="currentUser">
@@ -125,6 +130,11 @@ export default {
     },
     showCart() {
       this.$bvModal.show("cartModel");
+    },
+    userProfile () {
+      let user_id = this.$cookie.get('user_id');
+      this.$router.push({ path: `u/${user_id}` })
+
     }
   },
   computed: {

@@ -120,7 +120,7 @@
   </div>
 </template>
 <script>
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/orders";
+const API_GET = "http://localhost:5000/orders";
 
 export default {
   name: "Order",
@@ -165,21 +165,12 @@ export default {
         })
         .catch(err => console.log(err));
     },
-    getUserByOrder() {
+    getUserAndProductsByOrder() {
       this.$http
         .put(`${API_GET}/${this.$route.params.id}`)
         .then(({ data }) => {
-          this.user = data;
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    },
-    getProductsByOrder() {
-      this.$http
-        .post(`${API_GET}/${this.$route.params.id}`)
-        .then(({ data }) => {
-          this.products = data.products;
+          this.products = data.products
+          this.user = data.user;
         })
         .catch(err => {
           console.error(err);
@@ -208,14 +199,14 @@ export default {
             this.products.splice(e.target.id, 1);
             this.order.total_price = data.order_price;
             if (this.products.length === 0) {
-              return this.$http.delete(`${API_GET}/${e.target.accessKey}`);
+              return this.removeOrder(e)
             }
           } else {
             console.log(data.order);
           }
         })
         .then(() => {
-          this.$router.push("orderslist");
+          this.$router.go(-1);
         })
         .catch(err => console.log(err));
     },
@@ -223,15 +214,14 @@ export default {
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
         .then(() => {
-          this.$router.push("orderlist");
+          this.$router.go(-2);
         })
         .catch(err => console.log(err));
     }
   },
   async mounted() {
     await this.getOrder();
-    await this.getProductsByOrder();
-    await this.getUserByOrder();
+    await this.getUserAndProductsByOrder();
   }
 };
 </script>

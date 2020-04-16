@@ -133,7 +133,7 @@
                         ></span>
                       </div>
                       <input
-                        v-model="user.phonenumber"
+                        v-model="user.phone_number"
                         type="number"
                         class="form-control"
                         placeholder="Phone Number..."
@@ -159,7 +159,7 @@
 
 <script>
 import Footer from "../components/Footer";
-const API_SIGNUP = "https://tranquil-everglades-67262.herokuapp.com/users/add";
+const API_SIGNUP = "http://localhost:5000/users/add";
 
 export default {
   name: "Signup",
@@ -172,8 +172,8 @@ export default {
         email: "",
         password: "",
         age: "",
-        phone_number: "",
-      },
+        phone_number: ""
+      }
     };
   },
   methods: {
@@ -181,6 +181,7 @@ export default {
       this.$http
         .post(API_SIGNUP, this.user)
         .then(({ data }) => {
+          console.log(data)
           if (data.errMsg) {
             return data.errMsg.includes("Must")
               ? (this.errorMessage = data.errMsg)
@@ -189,13 +190,15 @@ export default {
           this.$cookie.set("X-auth", data.token);
           this.$cookie.set("auth", true);
           this.$cookie.set("Username", data.username);
+          this.$cookie.set("user_id", data.user_id);
+
           this.$router.push("/");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

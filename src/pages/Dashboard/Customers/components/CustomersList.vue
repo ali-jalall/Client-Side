@@ -5,7 +5,7 @@
       bodyClass="widget-table-overflow py-2"
       customHeader
     >
-      <div class="table-responsive">
+      <div class="table-responsive" ref="customersList">
         <table class="table mb-0 requests-table">
           <thead>
             <tr class="text-muted">
@@ -57,7 +57,7 @@ export default {
   name: "OrdersList",
   data() {
     return {
-      users: []
+      users: [],
     };
   },
   methods: {
@@ -70,16 +70,20 @@ export default {
             ? this.users.splice(e.target.id, 1)
             : console.log({ deleted: true });
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
-    userProfile (e) {
+    userProfile(e) {
       this.$router.push({ path: `${e.target.accessKey}` });
-    }
+    },
   },
   mounted() {
+    let loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.customersList,
+    });
     this.$http.get(API_GET).then(({ data }) => {
       this.users = data.users;
+      loader.hide();
     });
-  }
+  },
 };
 </script>

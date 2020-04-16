@@ -5,7 +5,7 @@
       bodyClass="widget-table-overflow py-2"
       customHeader
     >
-      <div class="table-responsive">
+      <div class="table-responsive" ref="productList">
         <table class="table mb-0 requests-table">
           <thead>
             <tr class="text-muted">
@@ -74,8 +74,12 @@ export default {
     }
   },
   mounted() {
+    let loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.productList,
+    });
     this.$http.get(API_GET).then(({ data }) => {
       this.products = data.result;
+      loader.hide()
     });
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-page sidebar-collapse">
+  <div class="profile-page sidebar-collapse" ref="userProfile">
     <div class="wrapper">
       <div
         class="page-header clear-filter page-header-small"
@@ -166,28 +166,32 @@ export default {
     return {
       user: {},
       products: [],
-      orders: []
+      orders: [],
     };
   },
-  created() {
+  mounted() {
+    let loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.userProfile,
+    });
     this.$http
       .put(`${API_GET}/${this.$route.params.id}`)
       .then(({ data }) => {
         this.products = data.products;
         this.orders = data.orders;
-        this.user = data.user
+        this.user = data.user;
+        loader.hide()
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
   computed: {
-    ordersCompleted () {
+    ordersCompleted() {
       return this.orders.reduce((acc, order) => {
-        return order.status === 'Completed' ? ++acc : 0;
-      }, 0)
-    }
-  }
+        return order.status === "Completed" ? ++acc : 0;
+      }, 0);
+    },
+  },
 };
 </script>
 <style scoped>

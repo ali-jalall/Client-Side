@@ -95,24 +95,30 @@ export default {
   },
   methods: {
     submitForm() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.productContainer,
+      });
       let email = this.$refs.email.value;
       let password = this.$refs.password.value;
 
       this.$http
         .post(API_LOGIN, { email, password })
         .then(({ data }) => {
-          if ( data.auth ) {
+          if (data.auth) {
+            loader.hide();
             this.$cookie.set("X-auth", data.token);
             this.$cookie.set("auth", true);
             this.$cookie.set("Username", data.username);
             this.$cookie.set("user_id", data.user_id);
             this.$router.push("/");
           } else {
-            this.errorMessage = 'Please Enter Valid Data!';
-          } 
+            loader.hide();
+            this.errorMessage = "Please Enter Valid Data!";
+          }
         })
         .catch((err) => {
-          this.errorMessage = err.message
+          loader.hide();
+          this.errorMessage = err.message;
           console.error(err);
         });
     },

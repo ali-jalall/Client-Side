@@ -4,20 +4,22 @@
       title="<h5 class='pt-3'><span class='fw-semi-bold '>Add</span> Category <i class='fas fa-plus'/></h5>"
       customHeader
     >
-      <form class="pt-4">
+      <form class="pt-4" ref="categoryForm">
         <div class="form-row ">
           <div class="form-group col-md-6">
             <label>Category Name</label>
             <input type="text" v-model="data.name" class="form-control" />
           </div>
           <div class="col-md-6 m-auto pt-3 text-center">
-            <button type="submit" v-on:click="submitForm()" class="btn add-category">
-          Add Category
-        </button>
+            <button
+              type="submit"
+              v-on:click="submitForm()"
+              class="btn add-category"
+            >
+              Add Category
+            </button>
           </div>
         </div>
-        
-
       </form>
     </Widget>
   </div>
@@ -29,21 +31,27 @@ export default {
   data() {
     return {
       data: {
-        name: ""
-      }
+        name: "",
+      },
     };
   },
   components: {},
   methods: {
     submitForm() {
-      
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.categoryForm,
+      });
       this.$http
-        .post("https://tranquil-everglades-67262.herokuapp.com/categories/add", this.data)
-        .then((res) => {
-          console.log("Success, ", res);
-          this.name = "";
+        .post(
+          "https://tranquil-everglades-67262.herokuapp.com/categories/add",
+          this.data
+        )
+        .then(() => {
+          this.data.name = "";
+          loader.hide()
         })
         .catch((err) => {
+          loader.hide()
           console.log("Failure", err);
         });
     },

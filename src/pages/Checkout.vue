@@ -10,7 +10,7 @@
       ok-title="Cancel"
       no-close-on-backdrop
     >
-      <form @submit.prevent="submitData">
+      <form @submit.prevent="submitData" ref="dataContainer">
         <div
           class="form-group"
           :class="$v.phone.$error ? 'has-danger' : 'has-success'"
@@ -77,6 +77,7 @@
     </div>
     <div class="p-5 m-auto ">
       <Widget
+        ref="orders"
         title="<h5 class='pt-3'><span class='fw-semi-bold '>Cart</span> Items</h5>"
         bodyClass="widget-table-overflow py-2"
         customHeader
@@ -195,15 +196,15 @@ export default {
       });
     },
   },
-  mounted() {
-    console.log(this.products);
-  },
   methods: {
     ...mapActions(["resetState", "removeProduct"]),
     removeProductById(e) {
       this.removeProduct(e.target.accessKey);
     },
     async submitData() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.dataContainer,
+      });
       try {
         const user_id = this.$cookie.get("user_id");
         const products_ids = this.products_ids;
@@ -233,6 +234,7 @@ export default {
           quantities,
         });
 
+        loader.hide()
         this.$toasted.success("Your Order has been sent", {
           duration: 3000,
           position: "top-center",
@@ -259,17 +261,22 @@ export default {
       }
     },
     orderNow() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.orders,
+      });
       const user_id = this.$cookie.get("user_id");
 
       this.$bvModal.show("locationModal");
       this.$http
         .get(`${API_GET}/${user_id}`)
         .then(({ data }) => {
+          loader.hide()
           this.phone = data.user.phone_number;
           this.city = data.user.city;
           this.address = data.user.address;
         })
         .catch(() => {
+          loader.hide()
           this.$toasted.error("Sorry it seems like there's an issue!", {
             position: "top-center",
           });

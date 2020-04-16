@@ -4,10 +4,8 @@
       title="<h5 class='pt-3'><span class='fw-semi-bold '>Orders</span> List</h5>"
       bodyClass="widget-table-overflow py-2"
       customHeader
-      
     >
-
-      <div class="table-responsive">
+      <div class="table-responsive" ref="ordersList">
         <table class="table mb-0 requests-table">
           <thead>
             <tr class="text-muted">
@@ -67,37 +65,55 @@
   </div>
 </template>
 <script>
-
 const API_GET = "https://tranquil-everglades-67262.herokuapp.com/orders";
 
 export default {
   name: "OrdersList",
   data() {
     return {
-      orders: []
+      orders: [],
     };
   },
 
   methods: {
     removeOrder(e) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.ordersList,
+      });
       this.$http
         .delete(`${API_GET}/${e.target.accessKey}`)
         .then(({ data }) => {
-          data.deleted
-            ? this.orders.splice(e.target.id, 1)
-            : // TODO: Order not deleted! so something
-              console.log(data);
+          if (data.deleted) {
+            this.orders.splice(e.target.id, 1);
+            loader.hide();
+          } else {
+            loader.hide();
+            console.log(data);
+          }
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+          loader.hide();
+          console.log(err);
+        });
     },
     orderDetails(e) {
       this.$router.push({ path: `${e.target.accessKey}` });
-    }
+    },
   },
   mounted() {
-    this.$http.get(API_GET).then(({ data }) => {
-      this.orders = data.orders;
+    let loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.ordersList,
     });
-  }
+    this.$http
+      .get(API_GET)
+      .then(({ data }) => {
+        this.orders = data.orders;
+        loader.hide();
+      })
+      .catch((err) => {
+        console.log(err);
+        loader.hide();
+      });
+  },
 };
 </script>

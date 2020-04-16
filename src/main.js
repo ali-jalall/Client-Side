@@ -8,6 +8,7 @@ import Toasted from 'vue-toasted';
 import VueCookie from 'vue-cookie'
 import VueTouch from 'vue-touch'
 import Vuelidate from 'vuelidate'
+import Loading from "vue-loading-overlay";
 import { BootstrapVue } from 'bootstrap-vue';
 
 import '@fortawesome/fontawesome-free/css/all.css'
@@ -21,6 +22,7 @@ import './assets/js/core/popper.min.js'
 import './assets/js/core/bootstrap.min.js'
 import './assets/js/now-ui-kit.min98f3.js'
 
+import "vue-loading-overlay/dist/vue-loading.css";
 
 
 import Widget from './components/Widget/Widget';
@@ -33,6 +35,7 @@ Vue.use(VueTouch)
 Vue.mixin(layoutMixin)
 Vue.use(Toasted, { duration: 10000 });
 Vue.use(Vuelidate)
+Vue.use(Loading)
 
 
 Vue.prototype.$http = Axios;

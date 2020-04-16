@@ -38,7 +38,7 @@
           </select>
         </div>
       </div>
-      <div class="row m-auto text-center" v-if="products.length">
+      <div class="row m-auto text-center" ref="order" v-if="products.length">
         <div class="col-md-4 text-center user_img">
           <div class="text-center p-2" style="font-size: 16pt;">
             User <strong>Profile</strong>
@@ -129,7 +129,7 @@ export default {
       order: {},
       user: {},
       products: [],
-      quantities: []
+      quantities: [],
     };
   },
   methods: {
@@ -143,63 +143,43 @@ export default {
     changeStatus(e) {
       this.$http
         .put(`${API_GET}/edit/${this.$route.params.id}`, {
-          status: e.target.value
+          status: e.target.value,
         })
         .then(({ data }) => {
           if (data.updated) {
             this.switchClasses(e.target.value);
 
-            this.$toasted.success('Order Status has been changed', {
+            this.$toasted.success("Order Status has been changed", {
               duration: 3000,
-              position: 'top-center',
+              position: "top-center",
               action: {
                 text: "Ok",
                 onClick: (e, toastObject) => {
                   toastObject.goAway(0);
-                }
-              }
+                },
+              },
             });
           } else {
             console.log(data);
           }
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
-    getUserAndProductsByOrder() {
-      this.$http
-        .put(`${API_GET}/${this.$route.params.id}`)
-        .then(({ data }) => {
-          this.products = data.products
-          this.user = data.user;
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    },
-    getOrder() {
-      this.$http
-        .get(`${API_GET}/${this.$route.params.id}`)
-        .then(({ data }) => {
-          this.order = data.order;
-          this.quantities = data.order.quantities;
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    },
+    getUserAndProductsByOrder() {},
+    getOrder() {},
     removeProduct(e) {
       let _order_id = this.$route.params.id;
       this.$http
         .patch(`${API_GET}/${_order_id}`, {
           id: e.target.accessKey,
-          quantity: e.target.name
+          quantity: e.target.name,
         })
         .then(({ data }) => {
           if (data.deleted) {
             this.products.splice(e.target.id, 1);
             this.order.total_price = data.order_price;
             if (this.products.length === 0) {
-              return this.removeOrder(e)
+              return this.removeOrder(e);
             }
           } else {
             console.log(data.order);
@@ -208,7 +188,7 @@ export default {
         .then(() => {
           this.$router.go(-1);
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
     removeOrder(e) {
       this.$http
@@ -216,13 +196,37 @@ export default {
         .then(() => {
           this.$router.go(-2);
         })
-        .catch(err => console.log(err));
-    }
+        .catch((err) => console.log(err));
+    },
   },
   async mounted() {
-    await this.getOrder();
-    await this.getUserAndProductsByOrder();
-  }
+    let loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.order,
+    });
+    this.$http
+      .put(`${API_GET}/${this.$route.params.id}`)
+      .then(({ data }) => {
+        this.products = data.products;
+        this.user = data.user;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    this.$http
+      .get(`${API_GET}/${this.$route.params.id}`)
+      .then(({ data }) => {
+        this.order = data.order;
+        this.quantities = data.order.quantities;
+         loader.hide();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    // await this.getOrder();
+    // await this.getUserAndProductsByOrder();
+   
+  },
 };
 </script>
 <style scoped>

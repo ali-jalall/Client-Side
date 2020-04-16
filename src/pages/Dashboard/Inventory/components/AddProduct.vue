@@ -4,7 +4,7 @@
       title="<h5 class='pt-3'><span class='fw-semi-bold '>Add</span> Product <i class='fas fa-plus'/></h5>"
       customHeader
     >
-      <form class="pt-4">
+      <form class="pt-4" ref="productForm">
         <div class="row pb-3">
           <div class="col-md-6">
             <b-form-file
@@ -78,6 +78,9 @@ export default {
   components: {},
   methods: {
     submitFile() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.productForm,
+      });
       let formData = new FormData();
       this.files.forEach((file) => {
         formData.append(`image`, file);
@@ -87,18 +90,19 @@ export default {
       formData.append("details", this.details);
       formData.append("category", this.category);
       this.$http
-        .post("https://tranquil-everglades-67262.herokuapp.com/products/add", formData, {
+        .post("http://localhost:5000/products/add", formData, {
           header: {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then((res) => {
+        .then(() => {
           // TODO: Show loading while receiving a response
-          console.log("Success, ", res);
           this.resetData();
+          loader.hide()
         })
         .catch((err) => {
           // TODO: Show loading while receiving a response
+          loader.hide()
           console.log("Failure", err);
         });
     },

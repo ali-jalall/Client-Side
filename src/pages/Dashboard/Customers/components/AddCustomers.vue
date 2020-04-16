@@ -1,6 +1,7 @@
 <template>
   <div>
     <Widget
+      ref="userForm"
       title="<h5 class='pt-3'><span class='fw-semi-bold '>Add</span> Customer <i class='fas fa-plus'/></h5>"
       customHeader
     >
@@ -72,14 +73,18 @@ export default {
   components: {},
   methods: {
     submitFile() {
+      let loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.userForm,
+    });
       this.userData.age = Number(this.userData.age)
       this.$http
         .post("https://tranquil-everglades-67262.herokuapp.com/users/add", this.userData)
-        .then((res) => {
-          console.log("Success, ", res);
+        .then(() => {
           this.resetData();
+          loader.hide()
         })
         .catch((err) => {
+          loader.hide()
           console.log("Failure", err);
         });
     },

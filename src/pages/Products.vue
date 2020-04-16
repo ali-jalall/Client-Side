@@ -2,8 +2,8 @@
   <div>
     <NavBar />
     <Hero />
-    <div class="section">
-      <div class="container">
+    <div class="section" >
+      <div class="container" ref="formContainer">
         <h2 class="section-title">Find what you need</h2>
         <div class="row">
           <div class="col-md-3">
@@ -221,19 +221,23 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { mapActions } from "vuex";
+
 const API_GET = "https://tranquil-everglades-67262.herokuapp.com/products";
+
 export default {
   name: "Products",
   data() {
     return {
       products: [],
-      tab: null
+      tab: null,
+      isLoading: true,
+      fullPage: false,
     };
   },
   components: {
     NavBar,
     Footer,
-    Hero
+    Hero,
   },
   methods: {
     ...mapActions(["addToCart"]),
@@ -291,26 +295,32 @@ export default {
       //       console.error(err);
       //     });
       // }
-    }
+    },
   },
   mounted() {
     /**
      * Commented to be used when finish developing ...
      */
+    let loader = this.$loading.show({
+      // Optional parameters
+      container: this.fullPage ? null : this.$refs.formContainer,
+      canCancel: false,
+    });
     this.$http
       .get(API_GET)
       .then(({ data }) => {
         this.products = data.result;
+        loader.hide()
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
   computed: {
     currentUser() {
       return this.$cookie.get("Username") ? true : false;
-    }
-  }
+    },
+  },
 };
 </script>
 

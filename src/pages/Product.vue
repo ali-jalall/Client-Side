@@ -16,7 +16,7 @@
         </b-modal>
       </div>
     </template>
-    <div class="wrapper">
+    <div class="wrapper" ref="productContainer">
       <div class="page-header page-header-mini">
         <div
           class="page-header-image product-header"
@@ -250,15 +250,20 @@ export default {
   },
   data() {
     return {
-      product: {}
+      product: {},
+      fullPage: false,
     };
   },
   mounted() {
+    let loader = this.$loading.show({
+      // Optional parameters
+      container: this.fullPage ? null : this.$refs.productContainer,
+    });
     this.$http
       .get(`${API_GET}/p/${this.$route.params.id}`)
       .then(({ data }) => {
         this.product = data.product;
-        console.log(this.product.product_imgs)
+        loader.hide()
       })
       .catch(err => {
         console.error(err);

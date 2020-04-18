@@ -9,13 +9,25 @@
           <div class="col-md-3">
             <div class="collapse-panel">
               <div class="card-body pl-0" style="padding-top: 50px;">
+                <div class="card card-refine card-plain">
+                  <b-link
+                    @click="changeCategory"
+                    to="/products"
+                    :replace="$route.path !== '/products'"
+                    :append="$route.path === '/products'"
+                    :class="$route.path === `/products` ? 'active-link' : ''"
+                    class="text-primary text-left"
+                    style="font-size: 14pt;"
+                    >All</b-link
+                  >
+                </div>
                 <div
                   class="card card-refine card-plain"
-                  @click="changeCategory"
                   v-for="(category, index) in categories"
                   :key="index"
                 >
                   <b-link
+                    @click="changeCategory"
                     :to="category.name"
                     :replace="$route.path !== '/products'"
                     :append="$route.path === '/products'"
@@ -29,8 +41,6 @@
                     >{{ category.name }}</b-link
                   >
                 </div>
-                <!-- <div class="card card-refine card-plain"> <b-link class="text-primary text-left" style="font-size: 14pt;"> Travel </b-link></div> -->
-                <!-- <div class="card card-refine card-plain"> <b-link class="text-primary text-left" style="font-size: 14pt;"> Accessories </b-link></div> -->
               </div>
             </div>
           </div>
@@ -46,7 +56,7 @@
             >
           </b-modal>
           <div class="col-md-9">
-            <div class="row">
+            <div class="row" ref="products" v-if="products.length">
               <div
                 class="col-lg-4 col-md-6"
                 v-for="(product, index) in paginatedData"
@@ -116,13 +126,25 @@
                 </b-link>
               </div>
             </div>
-            <div class="text-center">
-            <button class="mr-2 btn btn-round btn-outline-primary" :disabled="pageNumber==0" @click="prevPage">
-              <i class="fas fa-arrow-left" />
-            </button>
-            <button class="ml-2 btn btn-round btn-outline-primary" :disabled="pageCount === this.paginatedData.length" @click="nextPage">
-              <i class="fas fa-arrow-right" />
-            </button>
+            <div class="text-center" v-if="products.length">
+              <button
+                class="mr-2 btn btn-round btn-outline-primary"
+                :disabled="pageNumber == 0"
+                @click="prevPage"
+              >
+                <i class="fas fa-arrow-left" />
+              </button>
+              <button
+                class="ml-2 btn btn-round btn-outline-primary"
+                :disabled="this.paginatedData.length < 6"
+                @click="nextPage"
+              >
+                <i class="fas fa-arrow-right" />
+              </button>
+            </div>
+            <div class="text-center" v-else>
+              <img src="../assets/img/packet.png" alt="empty-box" /> <br />
+              <h3><strong class="text-center">No Products</strong></h3>
             </div>
           </div>
         </div>
@@ -152,17 +174,6 @@ export default {
       pageNumber: 0,
     };
   },
-  props: {
-    listData: {
-      type: Array,
-      required: true,
-    },
-    size: {
-      type: Number,
-      required: false,
-      default: 10,
-    },
-  },
   components: {
     NavBar,
     Footer,
@@ -171,10 +182,18 @@ export default {
   methods: {
     ...mapActions(["addToCart"]),
     nextPage() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.products,
+      });
       this.pageNumber++;
+      loader.hide()
     },
     prevPage() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.products,
+      });
       this.pageNumber--;
+      loader.hide()
     },
     addProductToCart(e) {
       this.currentUser
@@ -189,32 +208,46 @@ export default {
       this.$router.push({ path: `/p/${e.target.accessKey}` });
     },
     changeCategory(e) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.products,
+      });
       if (e.target.text === "All") {
         this.$http
           .get(API_GET)
           .then(({ data }) => {
-            if (!data) {
-              // TODO: Show something to tell user 'There's no products'
-              return;
+            if (data.errMsg === "No Products") {
+              loader.hide();
+              return (this.products = []);
             }
-            this.products = data.products;
+            this.pageNumber = 0;
+            this.products = data.result;
+            loader.hide();
           })
-          .catch((err) => {
-            console.error(err);
+          .catch(() => {
+            loader.hide();
+            this.$toasted.error("Sorry it seems like there's an issue!", {
+              duration: 3000,
+              position: "top-center",
+            });
           });
       } else {
         this.$http
           .get(`${API_GET}/${e.target.text}`)
           .then(({ data }) => {
-            console.log(data);
-            if (!data) {
-              // TODO: Show something to tell user 'There's no products'
-              return;
+            if (data.errMsg === "No Products") {
+              loader.hide();
+              return (this.products = []);
             }
+            this.pageNumber = 0;
             this.products = data.products;
+            loader.hide();
           })
-          .catch((err) => {
-            console.error(err);
+          .catch(() => {
+            loader.hide();
+            this.$toasted.error("Sorry it seems like there's an issue!", {
+              duration: 3000,
+              position: "top-center",
+            });
           });
       }
     },

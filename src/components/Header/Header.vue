@@ -9,34 +9,15 @@
           <i class="la la-bars la-lg" />
         </a>
       </b-nav-item>
-      <b-nav-item class="d-md-down-none">
-        <a href="#" class="px-2">
-          <i class="la la-refresh la-lg" />
-        </a>
-      </b-nav-item>
-      <b-nav-item class="d-md-down-none">
-        <a href="#" class="px-2">
-          <i class="la la-times la-lg" />
-        </a>
-      </b-nav-item>
+      
+      
     </b-nav>
-    <!-- <b-nav>
-      <b-form class="d-sm-down-none ml-5" inline>
-        <b-form-group>
-          <b-input-group class="input-group-no-border">
-            <template v-slot:prepend>
-              <b-input-group-text><i class="la la-search"/></b-input-group-text>
-            </template>
-            <b-form-input id="search-input" placeholder="Search Dashboard" />
-          </b-input-group>
-        </b-form-group>
-      </b-form>
-    </b-nav> -->
+
     <a  class="navbarBrand d-md-none">
       <i class="fa fa-circle text-primary mr-n-sm" />
       <i class="fa fa-circle text-danger" />
       &nbsp;
-      sing
+      App
       &nbsp;
       <i class="fa fa-circle text-danger mr-n-sm" />
       <i class="fa fa-circle text-primary" />
@@ -50,22 +31,15 @@
           <span class="avatar rounded-circle thumb-sm float-left mr-2">
             <img class="rounded-circle" src="../../assets/people/a4.jpg" alt="..." />
           </span>
-          <span class="small">Philip Smith</span>
-          <span class="ml-1 circle bg-primary text-white fw-bold">13</span>
+          <span class="small">Admin</span>
         </template>
-        <!-- <Notifications /> -->
+        
       </b-nav-item-dropdown>
       <b-nav-item-dropdown id="v-step-2" class="settingsDropdown d-sm-down-none" no-caret right>
         <template slot="button-content">
           <i class="la la-cog px-2" />
         </template>
-        <b-dropdown-item><i class="la la-user" /> My Account</b-dropdown-item>
-        <b-dropdown-divider />
-        <b-dropdown-item>Calendar</b-dropdown-item>
-        <b-dropdown-item>
-          Inbox &nbsp;&nbsp;<b-badge variant="danger" pill class="animated bounceIn">9</b-badge>
-        </b-dropdown-item>
-        <b-dropdown-divider />
+       
         <b-dropdown-item-button @click="logout">
           <i class="la la-sign-out" /> Log Out
         </b-dropdown-item-button>
@@ -85,7 +59,7 @@ export default {
     ...mapState('layout', ['sidebarClose', 'sidebarStatic']),
   },
   methods: {
-    ...mapActions('layout', ['toggleSidebar', 'switchSidebar', 'changeSidebarActive']),
+    ...mapActions('layout', ['toggleSidebar', 'switchSidebar', 'changeSidebarActive', 'resetState']),
     switchSidebarMethod() {
       if (!this.sidebarClose) {
         this.switchSidebar(true);
@@ -109,8 +83,12 @@ export default {
       }
     },
     logout() {
-      window.localStorage.setItem('authenticated', false);
-      this.$router.push('/login');
+      this.$cookie.delete("X-auth");
+      this.$cookie.delete("auth");
+      this.$cookie.delete("Username");
+      this.$cookie.delete("user_id");
+      this.currentUser = null;
+      this.resetState()
     },
   }
 };

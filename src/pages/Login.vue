@@ -1,5 +1,6 @@
 <template>
   <div class="login-page sidebar-collapse">
+    <NavBar />
     <div class="page-header header-filter" filter-color="orange">
       <div class="page-header-image background"></div>
       <div class="content">
@@ -82,12 +83,13 @@
 
 <script>
 import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
 
 const API_LOGIN = "https://tranquil-everglades-67262.herokuapp.com/users/login";
 
 export default {
   name: "Login",
-  components: { Footer },
+  components: { Footer, NavBar },
   data() {
     return {
       errorMessage: null,

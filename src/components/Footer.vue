@@ -4,13 +4,13 @@
       <nav>
         <ul>
           <li>
-            <a href="https://www.creative-tim.com/">
-              Creative Tim
+            <a href="https://github.com/ali-jalall">
+              Github
             </a>
           </li>
           <li>
-            <a href="http://presentation.creative-tim.com/">
-              About Us
+            <a href="https://www.linkedin.com/in/ali-jalal-8202081a3/">
+              LinkedIn
             </a>
           </li>
           <li>
@@ -23,11 +23,7 @@
       <div class="copyright" id="copyright">
         ©
         Ali Jalal
-        2020, Designed by
-        <a href="https://www.invisionapp.com/" target="_blank">Invision</a>.
-        Coded by
-        <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a
-        >.
+        2020, 
       </div>
     </div>
   </footer>

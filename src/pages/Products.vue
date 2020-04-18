@@ -312,12 +312,6 @@ export default {
   z-index: -1;
 }
 
-.product-title {
-  width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .product-description {
   overflow: hidden;

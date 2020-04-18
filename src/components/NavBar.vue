@@ -14,11 +14,8 @@
           <a
             class="navbar-brand"
             href=""
-            rel="tooltip"
             title=""
             data-placement="bottom"
-            target="_blank"
-            data-original-title="Designed by Invision. Coded by Creative Tim"
           >
             Beta Vibes
           </a>
@@ -73,7 +70,7 @@
               </b-link>
             </li>
             <li class="nav-item" v-if="!currentUser">
-              <b-link class="nav-link btn btn-primary" to="/login">
+              <b-link class="nav-link btn login" to="/login">
                 <p>Login</p>
               </b-link>
             </li>
@@ -163,5 +160,17 @@ export default {
 .modal-content {
   border-bottom: none !important;
   padding: 16px !important;
+}
+
+.login {
+  border: 3px solid #F96B3D;
+  padding: 8px 20px !important;
+  background-color: transparent;
+}
+
+.login:hover {
+  border: 3px solid transparent;
+  padding: 8px 20px !important;
+  background-color: #F96B3D;
 }
 </style>

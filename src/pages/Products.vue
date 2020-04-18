@@ -19,7 +19,11 @@
                     :to="category.name"
                     :replace="$route.path !== '/products'"
                     :append="$route.path === '/products'"
-                    :active="$route.path === `/products/${category.name}`"
+                    :class="
+                      $route.path === `/products/${category.name}`
+                        ? 'active-link'
+                        : ''
+                    "
                     class="text-primary text-left"
                     style="font-size: 14pt;"
                     >{{ category.name }}</b-link
@@ -45,7 +49,7 @@
             <div class="row">
               <div
                 class="col-lg-4 col-md-6"
-                v-for="(product, index) in products"
+                v-for="(product, index) in paginatedData"
                 :key="index"
               >
                 <b-link @click="showProductDetails" :accesskey="product._id">
@@ -110,13 +114,21 @@
                     </div>
                   </div>
                 </b-link>
-                <!-- end card -->
               </div>
+            </div>
+            <div class="text-center">
+            <button class="mr-2 btn btn-round btn-outline-primary" :disabled="pageNumber==0" @click="prevPage">
+              <i class="fas fa-arrow-left" />
+            </button>
+            <button class="ml-2 btn btn-round btn-outline-primary" :disabled="pageCount === this.paginatedData.length" @click="nextPage">
+              <i class="fas fa-arrow-right" />
+            </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <Footer />
   </div>
 </template>
@@ -137,7 +149,19 @@ export default {
       products: [],
       tab: null,
       categories: [],
+      pageNumber: 0,
     };
+  },
+  props: {
+    listData: {
+      type: Array,
+      required: true,
+    },
+    size: {
+      type: Number,
+      required: false,
+      default: 10,
+    },
   },
   components: {
     NavBar,
@@ -146,6 +170,12 @@ export default {
   },
   methods: {
     ...mapActions(["addToCart"]),
+    nextPage() {
+      this.pageNumber++;
+    },
+    prevPage() {
+      this.pageNumber--;
+    },
     addProductToCart(e) {
       this.currentUser
         ? this.$http
@@ -215,6 +245,16 @@ export default {
     currentUser() {
       return this.$cookie.get("Username") ? true : false;
     },
+    pageCount() {
+      let l = this.products.length,
+        s = 6;
+      return Math.ceil(l / s);
+    },
+    paginatedData() {
+      const start = this.pageNumber * 6,
+        end = start + 6;
+      return this.products.slice(start, end);
+    },
   },
 };
 </script>
@@ -247,9 +287,15 @@ export default {
   position: static;
 }
 
-.active {
+.active-link {
   color: white !important;
   background-color: #f96332 !important;
   padding: 6px 40px 6px 12px;
+}
+
+.active {
+  background-color: #888;
+  border-color: #888;
+  color: #fff;
 }
 </style>

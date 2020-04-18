@@ -3,17 +3,27 @@
     <NavBar />
     <template>
       <div>
-        <b-modal ref="loginWarning" hide-footer>
-          <div class="d-block text-center">
-            <h4 class="py-4">You Need To Login To add To Your Cart</h4>
-          </div>
-          <b-button to="/login" class="mt-3" variant="outline-success" block
-            >Login</b-button
+        <b-modal
+            title="Cart"
+            ref="loginWarning"
+            ok-only
+            ok-variant="secondary"
+            ok-title="Cancel"
           >
-          <b-button to="/signup" class="mt-2" variant="outline-warning" block
-            >Signup</b-button
-          >
-        </b-modal>
+            <div class="d-block text-center">
+              <h4 class="py-3">You need to Register</h4>
+            </div>
+            <div class="text-center">
+              <b-button
+                to="/login"
+                class="mt-2 mr-3 btn btn-round btn-outline-primary"
+                >Login</b-button
+              >
+              <b-button to="/signup" class="mt-2 ml-3 btn btn-round btn-primary"
+                >Signup</b-button
+              >
+            </div>
+          </b-modal>
       </div>
     </template>
     <div class="wrapper" ref="productContainer">
@@ -60,28 +70,6 @@
                       alt="First slide"
                     />
                   </div>
-                  <!-- <div class="carousel-item">
-                    <img
-                      class="d-block img-raised"
-                      :src="image"
-                      alt="Second slide"
-                    />
-                  </div> -->
-                  <!--
-                  <div class="carousel-item active">
-                    <img
-                      class="d-block img-raised"
-                      src="../assets/img/pp-3.jpg"
-                      alt="Third slide"
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="d-block img-raised"
-                      src="../assets/img/pp-4.jpg"
-                      alt="Third slide"
-                    />
-                  </div> -->
                 </div>
                 <a
                   class="carousel-control-prev"

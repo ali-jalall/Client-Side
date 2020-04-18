@@ -51,15 +51,15 @@
                   <h4 class="card-title text-center">Register</h4>
                   <div class="social text-center">
                     <button class="btn btn-icon btn-round btn-twitter">
-                      <i class="fab fa-twitter"></i>
+                      
                     </button>
                     <button class="btn btn-icon btn-round btn-dribbble">
-                      <i class="fab fa-dribbble"></i>
+                      
                     </button>
                     <button class="btn btn-icon btn-round btn-facebook">
-                      <i class="fab fa-facebook"> </i>
+                      
                     </button>
-                    <h5 class="card-description">or be classical</h5>
+                   
                   </div>
                   <b-alert
                     class="alert-sm"

@@ -2,7 +2,11 @@
   <div class="main">
     <nav
       class=""
-      :class="fixedTop ? 'fixed-top navbar navbar-expand-lg bg-white navbar-transparent' : 'navbar navbar-expand-lg bg-white navbar-absolute navbar-transparent'"
+      :class="
+        fixedTop
+          ? 'fixed-top navbar navbar-expand-lg bg-white navbar-transparent'
+          : 'navbar navbar-expand-lg bg-white navbar-absolute navbar-transparent'
+      "
       color-on-scroll="500"
     >
       <div class="container">
@@ -77,15 +81,15 @@
               <b-link class="nav-link nav-links" @click="showCart">
                 <p>
                   <span style="font-size: 16pt;">{{ itemsInCart }}</span>
-                  <i
-                    class="fas fa-shopping-cart"
-                    style="font-size: 18pt;"
-                  />
+                  <i class="fas fa-shopping-cart" style="font-size: 18pt;" />
                 </p>
               </b-link>
             </li>
             <li class="nav-item m-auto" v-if="currentUser">
-              <b-link class="nav-link nav-links text-center" @click="userProfile">
+              <b-link
+                class="nav-link nav-links text-center"
+                @click="userProfile"
+              >
                 <i class="fas fa-user" style="font-size: 18pt;"></i>
               </b-link>
             </li>
@@ -103,17 +107,16 @@
 
 <script>
 import Cart from "@/components/Cart";
+import { mapActions } from "vuex";
 export default {
   name: "NavBar",
   components: {
-    Cart
+    Cart,
   },
-  props: [
-    'fixedTop'
-  ],
+  props: ["fixedTop"],
   data() {
     return {
-      currentUser: null
+      currentUser: null,
     };
   },
   mounted() {
@@ -121,28 +124,29 @@ export default {
     user ? (this.currentUser = user) : null;
   },
   methods: {
+    ...mapActions([ 'resetState' ]),
     logout() {
       this.$cookie.delete("X-auth");
       this.$cookie.delete("auth");
       this.$cookie.delete("Username");
       this.$cookie.delete("user_id");
       this.currentUser = null;
+      this.resetState()
     },
     showCart() {
       this.$bvModal.show("cartModel");
     },
-    userProfile () {
-      let user_id = this.$cookie.get('user_id');
-      this.$router.push({ path: `u/${user_id}` })
-
-    }
+    userProfile() {
+      let user_id = this.$cookie.get("user_id");
+      this.$router.replace({ path: `/u/${user_id}` });
+    },
   },
   computed: {
     itemsInCart() {
       let cart = this.$store.getters.cartProducts;
       return cart.reduce((accum, item) => accum + item.quantity, 0);
-    }
-  }
+    },
+  },
 };
 </script>
 

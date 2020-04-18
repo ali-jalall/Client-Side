@@ -72,33 +72,33 @@
                 v-for="(product, index) in paginatedData"
                 :key="index"
               >
-                <b-link @click="showProductDetails" :accesskey="product._id">
+                <b-link >
                   <div
                     class="card card-product card-plain"
-                    :accesskey="product._id"
+                    
                   >
-                    <div class="card-image" :accesskey="product._id">
+                    <div class="card-image" >
                       <img
                         :src="product.product_imgs[0]"
                         height="250px"
                         alt="product_image"
-                        :accesskey="product._id"
+                        
                       />
                     </div>
-                    <div class="card-body" :accesskey="product._id">
+                    <div class="card-body" >
                       <h4
                         class="card-title product-title"
-                        :accesskey="product._id"
+                        
                       >
                         {{ product.name }}
                       </h4>
                       <p
                         class="card-description product-description"
-                        :accesskey="product._id"
+                        
                       >
                         {{ product.details }}
                       </p>
-                      <div class="card-footer" :accesskey="product._id">
+                      <div class="card-footer" >
                         <div class="price-container">
                           <span class="price"> € {{ product.price }} </span>
                         </div>

@@ -49,7 +49,7 @@
           <div class="col-md-5 user_products">
             <h3 class="text-center">User<strong> Products</strong></h3>
             <div class="table-responsive px-4 m-auto text-center">
-              <table class="table mb-0 requests-table" v-if="products.length">
+              <table class="table mb-5 requests-table" v-if="products.length">
                 <thead>
                   <tr class="text-muted">
                     <th>IMAGE</th>

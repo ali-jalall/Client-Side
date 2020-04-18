@@ -8,6 +8,7 @@ import Layout from '@/components/Layout/Layout'
 import Contact from '@/pages/Contact';
 import About from '@/pages/About';
 import Checkout from '@/pages/Checkout';
+import ProfilePage from '@/pages/ProfilePage';
 
 // Main
 import AnalyticsPage from '@/pages/Dashboard/Dashboard';
@@ -105,7 +106,7 @@ const routes = [
   {
     path: "/u/:id",
     name: "UserProfile",
-    component: Customer
+    component: ProfilePage
   },
   {
     path: '/checkout',

@@ -202,6 +202,10 @@ export default {
       this.removeProduct(e.target.accessKey);
     },
     async submitData() {
+      // Validate data entered
+      this.$v.$touch();
+      // if !Valid ? return
+      if (this.$v.$error) return;
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.dataContainer,
       });
@@ -211,10 +215,6 @@ export default {
         const quantities = this.quantities;
         const total_price = this.total;
 
-        // Validate data entered
-        this.$v.$touch();
-        // if !Valid ? return
-        if (this.$v.$error) return;
         // We Assume that user changes his data eg: address, city, phone_number
         // We send request to update user
         const {
@@ -234,7 +234,7 @@ export default {
           quantities,
         });
 
-        loader.hide()
+        loader.hide();
         this.$toasted.success("Your Order has been sent", {
           duration: 3000,
           position: "top-center",
@@ -270,13 +270,13 @@ export default {
       this.$http
         .get(`${API_GET}/${user_id}`)
         .then(({ data }) => {
-          loader.hide()
+          loader.hide();
           this.phone = data.user.phone_number;
           this.city = data.user.city;
           this.address = data.user.address;
         })
         .catch(() => {
-          loader.hide()
+          loader.hide();
           this.$toasted.error("Sorry it seems like there's an issue!", {
             position: "top-center",
           });

@@ -8,7 +8,12 @@
         <div class="form-row ">
           <div class="form-group col-md-6">
             <label>Category Name</label>
-            <input type="text" v-model="data.name" class="form-control" />
+            <input
+              required
+              type="text"
+              v-model="data.name"
+              class="form-control"
+            />
           </div>
           <div class="col-md-6 m-auto pt-3 text-center">
             <button
@@ -38,6 +43,7 @@ export default {
   components: {},
   methods: {
     submitForm() {
+      if (this.data.name === "") return;
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.categoryForm,
       });

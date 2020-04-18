@@ -32,22 +32,27 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Product Name</label>
-            <input type="text" v-model="name" class="form-control" />
+            <input required type="text" v-model="name" class="form-control" />
           </div>
           <div class="form-group col-md-6">
             <label>Price</label>
-            <input type="text" v-model="price" class="form-control" />
+            <input required type="text" v-model="price" class="form-control" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-8">
             <label>Details</label>
-            <input type="text" v-model="details" class="form-control" />
+            <input
+              required
+              type="text"
+              v-model="details"
+              class="form-control"
+            />
           </div>
           <div class="form-group col-md-4">
             <label>Category</label>
-            <select class="form-control" v-model="category">
+            <select required class="form-control" v-model="category">
               <option>Home</option>
               <option>Roof</option>
               <option>...</option>
@@ -78,6 +83,7 @@ export default {
   components: {},
   methods: {
     submitFile() {
+      if (!this.checkData()) return 
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.productForm,
       });
@@ -90,7 +96,7 @@ export default {
       formData.append("details", this.details);
       formData.append("category", this.category);
       this.$http
-        .post("http://localhost:5000/products/add", formData, {
+        .post("https://tranquil-everglades-67262.herokuapp.com/products/add", formData, {
           header: {
             "Content-Type": "multipart/form-data",
           },
@@ -133,6 +139,13 @@ export default {
       this.price = 0;
       this.files = [];
     },
+    checkData () {
+      if (this.name === '' || this.category === ""||
+      this.details === ""||
+      this.price === 0||
+      this.files === []) return false
+      return true
+    }
   },
 };
 </script>

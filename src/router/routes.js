@@ -167,15 +167,16 @@ const routes = [
             component: OrdersList,
           },
           {
-            path: ':id',
-            name: 'Order',
-            component: Order
-          },
-          {
             path: 'shippingpage',
             name: 'Shipping Page',
             component: Shipping,
           },
+          {
+            path: ':id',
+            name: 'Order',
+            component: Order
+          },
+          
         ]
       },
       {
@@ -194,14 +195,14 @@ const routes = [
             component: CustomersList,
           },
           {
-            path: ':id',
-            name: 'Customers Profile',
-            component: Customer,
-          },
-          {
             path: 'cutomersgroup',
             name: 'Customers Group',
             component: CustomersGroup,
+          },
+          {
+            path: ':id',
+            name: 'Customers Profile',
+            component: Customer,
           },
         ]
       },

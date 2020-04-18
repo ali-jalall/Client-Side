@@ -16,7 +16,7 @@
             target="_blank"
             data-original-title="Designed by Invision. Coded by Creative Tim"
           >
-            Now Ui Kit Pro
+            Beta Vibes
           </a>
 
           <button

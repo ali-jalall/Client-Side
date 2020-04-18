@@ -145,8 +145,8 @@ import Footer from "@/components/Footer";
 import { mapGetters, mapActions } from "vuex";
 import { required, minLength } from "vuelidate/lib/validators";
 
-const API_POST = "http://localhost:5000/orders";
-const API_GET = "http://localhost:5000/users";
+const API_POST = "https://tranquil-everglades-67262.herokuapp.com/orders";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/users";
 
 export default {
   name: "Checkout",

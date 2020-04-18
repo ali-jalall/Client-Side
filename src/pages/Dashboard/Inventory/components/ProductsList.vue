@@ -16,7 +16,6 @@
               <th>PRICE</th>
               <th>DATE</th>
               <th>ACTIONS</th>
-              <!-- <th>STATUS</th> -->
             </tr>
           </thead>
           <tbody>
@@ -25,7 +24,7 @@
                 <img
                   :src="product.product_imgs[0]"
                   alt="product_img"
-                  width="200px"
+                  width="100px"
                 />
               </td>
               <td>{{ product.name }}</td>

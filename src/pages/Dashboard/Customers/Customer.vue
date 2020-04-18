@@ -9,7 +9,11 @@
 
         <div class="container">
           <div class="photo-container">
-            <img src="../../../assets/img/ryan.jpg" alt="" />
+            <img
+              src="../../../assets/people/user.png"
+              class="bg-white"
+              alt=""
+            />
           </div>
 
           <h3 class="title my-auto">{{ user.username }}</h3>
@@ -34,41 +38,18 @@
 
       <div class="section">
         <div class="container">
-          <div class="button-container">
-            <a href="#button" class="btn btn-primary btn-round btn-lg"
-              >Follow</a
-            >
-            <a
-              href="#button"
-              class="btn btn-default btn-round btn-lg btn-icon"
-              rel="tooltip"
-              title=""
-              data-original-title="Follow me on Twitter"
-            >
-            </a>
-            <a
-              href="#button"
-              class="btn btn-default btn-round btn-lg btn-icon"
-              rel="tooltip"
-              title=""
-              data-original-title="Follow me on Instagram"
-            >
-            </a>
-          </div>
-
           <h3 class="title">About me</h3>
           <h5 class="description text-center">
-            An artist of considerable range, Ryan — the name taken by
-            Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and
-            records all of his own music, giving it a warm, intimate feel with a
-            solid groove structure. An artist of considerable range.
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s,
           </h5>
         </div>
         <div class="row">
           <div class="col-md-5 user_products">
             <h3 class="text-center">User<strong> Products</strong></h3>
             <div class="table-responsive px-4 m-auto text-center">
-              <table class="table mb-0 requests-table">
+              <table class="table mb-0 requests-table" v-if="products.length">
                 <thead>
                   <tr class="text-muted">
                     <th>IMAGE</th>
@@ -92,12 +73,17 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="text-center" v-else>
+                <img src="../../../assets/img/packet.png" alt="empty-box" />
+                <br />
+                <h3><strong class="text-center">No Products</strong></h3>
+              </div>
             </div>
           </div>
           <div class="col-md-7 user_orders">
             <h3 class="text-center">User<strong> Orders</strong></h3>
             <div class="table-responsive px-4 m-auto text-center">
-              <table class="table mb-0 requests-table">
+              <table class="table mb-0 requests-table" v-if="orders.length">
                 <thead>
                   <tr class="text-muted">
                     <th>USERNAME</th>
@@ -150,6 +136,11 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="text-center" v-else>
+                <img src="../../../assets/img/packet.png" alt="empty-box" />
+                <br />
+                <h3><strong class="text-center">No Orders</strong></h3>
+              </div>
             </div>
           </div>
         </div>
@@ -158,7 +149,7 @@
   </div>
 </template>
 <script>
-const API_GET = "http://localhost:5000/users";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/users";
 
 export default {
   name: "CustomerPage",
@@ -180,10 +171,10 @@ export default {
         this.orders = data.orders;
         this.user = data.user;
         loader.hide();
-        console.log(this.orders)
+        console.log(this.orders);
       })
       .catch(() => {
-        loader.hide()
+        loader.hide();
         this.$toasted.error("Sorry it seems like there's an issue!", {
           duration: 3000,
           position: "top-center",

@@ -44,16 +44,26 @@
               </div>
             </div>
           </div>
-          <b-modal ref="loginWarning" hide-footer>
+          <b-modal
+            title="Cart"
+            ref="loginWarning"
+            ok-only
+            ok-variant="secondary"
+            ok-title="Cancel"
+          >
             <div class="d-block text-center">
-              <h4 class="py-4">You Need To Login To add To Your Cart</h4>
+              <h4 class="py-3">You need to Register</h4>
             </div>
-            <b-button to="/login" class="mt-3" variant="outline-success" block
-              >Login</b-button
-            >
-            <b-button to="/signup" class="mt-2" variant="outline-warning" block
-              >Signup</b-button
-            >
+            <div class="text-center">
+              <b-button
+                to="/login"
+                class="mt-2 mr-3 btn btn-round btn-outline-primary"
+                >Login</b-button
+              >
+              <b-button to="/signup" class="mt-2 ml-3 btn btn-round btn-primary"
+                >Signup</b-button
+              >
+            </div>
           </b-modal>
           <div class="col-md-9">
             <div class="row" ref="products" v-if="products.length">
@@ -106,7 +116,7 @@
                       <div class="text-center mt-3">
                         <button
                           :accesskey="product._id"
-                          @click="addProductToCart"
+                          @click="addProduct"
                           class="btn btn-primary mr-3"
                         >
                           Add to Cart &nbsp;<i
@@ -116,7 +126,7 @@
                         <b-button
                           :accesskey="product._id"
                           class="btn btn-outline-primary text-center"
-                          @click="showProductDetails"
+                          @click="showDetails"
                         >
                           Details
                         </b-button>
@@ -136,7 +146,7 @@
               </button>
               <button
                 class="ml-2 btn btn-round btn-outline-primary"
-                :disabled="this.paginatedData.length <= 6"
+                :disabled="this.paginatedData.length < 6"
                 @click="nextPage"
               >
                 <i class="fas fa-arrow-right" />
@@ -161,8 +171,8 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { mapActions } from "vuex";
 
-const API_GET = "http://localhost:5000/products";
-const API_GET_CATEGORIES = "http://localhost:5000/categories";
+const API_GET = "https://tranquil-everglades-67262.herokuapp.com/products";
+const API_GET_CATEGORIES = "https://tranquil-everglades-67262.herokuapp.com/categories";
 
 export default {
   name: "Products",
@@ -186,16 +196,16 @@ export default {
         container: this.fullPage ? null : this.$refs.products,
       });
       this.pageNumber++;
-      loader.hide()
+      loader.hide();
     },
     prevPage() {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.products,
       });
       this.pageNumber--;
-      loader.hide()
+      loader.hide();
     },
-    addProductToCart(e) {
+    addProduct(e) {
       this.currentUser
         ? this.$http
             .get(`${API_GET}/p/${e.target.accessKey}`)
@@ -204,7 +214,7 @@ export default {
             })
         : this.$refs["loginWarning"].show();
     },
-    showProductDetails(e) {
+    showDetails(e) {
       this.$router.push({ path: `/p/${e.target.accessKey}` });
     },
     changeCategory(e) {
@@ -331,4 +341,6 @@ export default {
   border-color: #888;
   color: #fff;
 }
+
+
 </style>

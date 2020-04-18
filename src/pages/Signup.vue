@@ -192,7 +192,7 @@
 import Footer from "@/components/Footer";
 import { required, minLength, email, between } from "vuelidate/lib/validators";
 
-const API_SIGNUP = "http://localhost:5000/users/add";
+const API_SIGNUP = "https://tranquil-everglades-67262.herokuapp.com/users/add";
 
 export default {
   name: "Signup",

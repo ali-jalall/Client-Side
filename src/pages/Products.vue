@@ -136,7 +136,7 @@
               </button>
               <button
                 class="ml-2 btn btn-round btn-outline-primary"
-                :disabled="this.paginatedData.length < 6"
+                :disabled="this.paginatedData.length <= 6"
                 @click="nextPage"
               >
                 <i class="fas fa-arrow-right" />

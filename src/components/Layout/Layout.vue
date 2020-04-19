@@ -1,20 +1,26 @@
 <template>
-  <div :class="{root: true, chatOpen, sidebarClose, sidebarStatic}">
+  <div :class="{ root: true, chatOpen, sidebarClose, sidebarStatic }">
     <Sidebar />
     <div class="wrap">
       <Header />
       <v-touch
         class="content"
-        :swipe-options="{direction: 'horizontal'}"
+        :swipe-options="{ direction: 'horizontal' }"
         @swipe="handleSwipe"
       >
+        <h1 class="page-title">Dashboard</h1>
+
+        <Stats />
         <router-view />
+
         <footer class="contentFooter">
-          Sing Vue Version - Made by <a
+          Sing Vue Version - Made by
+          <a
             href="https://flatlogic.com"
             rel="nofollow noopener noreferrer"
             target="_blank"
-          >The Fifth Team</a>
+            >The Fifth Team</a
+          >
         </footer>
       </v-touch>
     </div>
@@ -22,35 +28,39 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from "vuex";
 
-import Sidebar from '../../components/Sidebar/Sidebar';
-import Header from '../../components/Header/Header';
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Header from "../../components/Header/Header";
+import Stats from "../../components/Stats";
 // import Timeline from '../../components/Timeline/Timeline';
 
-import './Layout.scss';
+import "./Layout.scss";
 
 export default {
-  name: 'Layout',
+  name: "Layout",
   components: {
     Sidebar,
     Header,
-    // Timeline 
+    Stats,
+    // Timeline
   },
   methods: {
-    ...mapActions(
-      'layout', ['switchSidebar', 'handleSwipe', 'changeSidebarActive'],
-    ),
+    ...mapActions("layout", [
+      "switchSidebar",
+      "handleSwipe",
+      "changeSidebarActive",
+    ]),
   },
   computed: {
-    ...mapState('layout', {
-      sidebarClose: state => state.sidebarClose,
-      sidebarStatic: state => state.sidebarStatic,
-      chatOpen: state => state.chatOpen,
+    ...mapState("layout", {
+      sidebarClose: (state) => state.sidebarClose,
+      sidebarStatic: (state) => state.sidebarStatic,
+      chatOpen: (state) => state.chatOpen,
     }),
   },
   created() {
-    const staticSidebar = JSON.parse(localStorage.getItem('sidebarStatic'));
+    const staticSidebar = JSON.parse(localStorage.getItem("sidebarStatic"));
 
     if (staticSidebar) {
       this.$store.state.layout.sidebarStatic = true;

@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row ref="stats">
     <b-col lg="3" sm="6" xs="12">
       <div class="pb-xlg h-100">
         <Widget class="h-100 mb-0">
@@ -170,13 +170,14 @@ export default {
     },
   },
   mounted() {
-    // let loader = this.$loading.show({
-    //   container: this.fullPage ? null : this.$refs.products,
-    // });
+    let loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.stats,
+    });
     this.productsLength()
     this.customersLength()
     this.ordersLength()
     this.categoriesLength()
+    loader.hide()
   },
 };
 </script>

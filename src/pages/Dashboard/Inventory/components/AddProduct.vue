@@ -102,7 +102,6 @@ export default {
           },
         })
         .then(() => {
-          // TODO: Show loading while receiving a response
           this.resetData();
           loader.hide();
           this.$toasted.success("Product Added", {
@@ -114,7 +113,6 @@ export default {
           });
         })
         .catch(() => {
-          // TODO: Show loading while receiving a response
           loader.hide();
           this.$toasted.error("Sorry it seems like there's an issue!", {
             duration: 3000,

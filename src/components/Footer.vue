@@ -13,11 +13,6 @@
               LinkedIn
             </a>
           </li>
-          <li>
-            <a href="http://blog.creative-tim.com/">
-              Blog
-            </a>
-          </li>
         </ul>
       </nav>
       <div class="copyright" id="copyright">

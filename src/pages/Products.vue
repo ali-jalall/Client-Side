@@ -319,12 +319,6 @@ export default {
   padding: 6px 40px 6px 12px;
 }
 
-.active {
-  background-color: #888;
-  border-color: #888;
-  color: #fff;
-}
-
 a.text-primary:hover {
   color: #f96332 !important;
   border-bottom: 2px solid #f96332 !important;
@@ -332,7 +326,6 @@ a.text-primary:hover {
 
 a.text-primary:focus {
   color: white !important;
-
 }
 
 .card

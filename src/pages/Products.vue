@@ -72,33 +72,23 @@
                 v-for="(product, index) in paginatedData"
                 :key="index"
               >
-                <b-link >
-                  <div
-                    class="card card-product card-plain"
-                    
-                  >
-                    <div class="card-image" >
+                <b-link>
+                  <div class="card card-product card-plain">
+                    <div class="card-image">
                       <img
                         :src="product.product_imgs[0]"
                         height="250px"
                         alt="product_image"
-                        
                       />
                     </div>
-                    <div class="card-body" >
-                      <h4
-                        class="card-title product-title"
-                        
-                      >
+                    <div class="card-body">
+                      <h4 class="card-title product-title">
                         {{ product.name }}
                       </h4>
-                      <p
-                        class="card-description product-description"
-                        
-                      >
+                      <p class="card-description product-description">
                         {{ product.details }}
                       </p>
-                      <div class="card-footer" >
+                      <div class="card-footer">
                         <div class="price-container">
                           <span class="price"> € {{ product.price }} </span>
                         </div>
@@ -312,7 +302,6 @@ export default {
   z-index: -1;
 }
 
-
 .product-description {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -336,5 +325,20 @@ export default {
   color: #fff;
 }
 
+a.text-primary:hover {
+  color: #f96332 !important;
+  border-bottom: 2px solid #f96332 !important;
+}
 
+a.text-primary:focus {
+  color: white !important;
+
+}
+
+.card
+  a:not(.btn):not(.nav-link):not([data-toggle="collapse"]):not(.footer-link):focus,
+.card
+  a:not(.btn):not(.nav-link):not([data-toggle="collapse"]):not(.footer-link):hover {
+  border-color: transparent;
+}
 </style>

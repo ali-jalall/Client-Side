@@ -49,7 +49,7 @@ export default {
       });
       this.$http
         .post(
-          "https://tranquil-everglades-67262.herokuapp.com/categories/add",
+          "http://localhost:5000/categories/add",
           this.data
         )
         .then(() => {

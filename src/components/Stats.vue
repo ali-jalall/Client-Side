@@ -118,12 +118,12 @@
 
 <script>
 const API_GET_PRODUCTS =
-  "https://tranquil-everglades-67262.herokuapp.com/products";
+  "http://localhost:5000/products";
 const API_GET_CATEGORIES =
-  "https://tranquil-everglades-67262.herokuapp.com/categories";
+  "http://localhost:5000/categories";
 const API_GET_CUSTOMERS =
-  "https://tranquil-everglades-67262.herokuapp.com/users";
-const API_GET_ORDERS = "https://tranquil-everglades-67262.herokuapp.com/orders";
+  "http://localhost:5000/users";
+const API_GET_ORDERS = "http://localhost:5000/orders";
 export default {
   name: "AdminStats",
   data() {

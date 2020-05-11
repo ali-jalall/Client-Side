@@ -85,7 +85,7 @@
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 
-const API_LOGIN = "https://tranquil-everglades-67262.herokuapp.com/users/login";
+const API_LOGIN = "http://localhost:5000/users/login";
 
 export default {
   name: "Login",

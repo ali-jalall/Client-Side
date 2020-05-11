@@ -94,7 +94,7 @@ export default {
       this.userData.age = Number(this.userData.age);
       this.$http
         .post(
-          "https://tranquil-everglades-67262.herokuapp.com/users/add",
+          "http://localhost:5000/users/add",
           this.userData
         )
         .then(() => {

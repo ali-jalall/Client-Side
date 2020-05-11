@@ -171,8 +171,8 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { mapActions } from "vuex";
 
-const API_GET = "https://tranquil-everglades-67262.herokuapp.com/products";
-const API_GET_CATEGORIES = "https://tranquil-everglades-67262.herokuapp.com/categories";
+const API_GET = "http://localhost:5000/products";
+const API_GET_CATEGORIES = "http://localhost:5000/categories";
 
 export default {
   name: "Products",

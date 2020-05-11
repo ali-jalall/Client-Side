@@ -96,7 +96,7 @@ export default {
       formData.append("details", this.details);
       formData.append("category", this.category);
       this.$http
-        .post("https://tranquil-everglades-67262.herokuapp.com/products/add", formData, {
+        .post("http://localhost:5000/products/add", formData, {
           header: {
             "Content-Type": "multipart/form-data",
           },

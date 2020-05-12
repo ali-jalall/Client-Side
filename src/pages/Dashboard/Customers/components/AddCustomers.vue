@@ -74,6 +74,7 @@ export default {
   name: "AddProduct",
   data() {
     return {
+      fullPage: 'null',
       userData: {
         username: "",
         email: "",
@@ -97,7 +98,8 @@ export default {
           "http://localhost:5000/users/add",
           this.userData
         )
-        .then(() => {
+        .then((data) => {
+          console.log(data)
           this.resetData();
           loader.hide();
           this.$toasted.success("Customer Added", {
